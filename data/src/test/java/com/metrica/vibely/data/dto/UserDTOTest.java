@@ -20,13 +20,6 @@ import com.metrica.vibely.data.model.enumerator.PrivacyType;
 import com.metrica.vibely.data.model.enumerator.UserState;
 import com.metrica.vibely.data.model.enumerator.UserStatus;
 
-/**
- * <h1>User DTO Test</h1>
- *
- * @since 2023-11-20
- * @version 1.0
- * @author Adri
- */
 class UserDTOTest {
 
     // <<-CONSTANTS->>

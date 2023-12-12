@@ -94,5 +94,55 @@ class AdminDTOTest {
         assertEquals(likes,          admin.getLikes());
         assertEquals(saves,          admin.getSaves());
     }
+    @Test
+    @Tag("Constructors")
+    void fullArgsConstructorTest() {
+        UUID adminId = UUID.randomUUID();
+        Set<UUID> followers = new HashSet<>();
+        Set<UUID> following = new HashSet<>();
+        Set<UUID> posts     = new HashSet<>();
+        Set<UUID> chats     = new HashSet<>();
+        Set<UUID> likes     = new HashSet<>();
+        Set<UUID> saves     = new HashSet<>();
 
+        AdminDTO user = new AdminDTO(
+                adminId,
+                NICKNAME,
+                USERNAME,
+                PASSWORD,
+                EMAIL,
+                APIKEY,
+                STATE,
+                PRIVACY,
+                LOGINS,
+                STATUS,
+                LAST_CONN_DATE,
+                BLOCKED_DATE,
+                followers,
+                following,
+                posts,
+                chats,
+                likes,
+                saves);
+
+        assertEquals(adminId,        user.getUserId());
+        assertEquals(NICKNAME,       user.getNickname());
+        assertEquals(USERNAME,       user.getUsername());
+        assertEquals(PASSWORD,       user.getPassword());
+        assertEquals(EMAIL,          user.getEmail());
+        assertEquals(APIKEY,         user.getApikey());
+        assertEquals(STATE,          user.getState());
+        assertEquals(PRIVACY,        user.getPrivacy());
+        assertEquals(STATUS,         user.getStatus());
+        assertEquals(LOGINS,         user.getLogins());
+        assertEquals(LAST_CONN_DATE, user.getLastConnDate());
+        assertEquals(BLOCKED_DATE,   user.getBlockedDate());
+        assertEquals(followers,      user.getFollowers());
+        assertEquals(following,      user.getFollowing());
+        assertEquals(posts,          user.getPosts());
+        assertEquals(chats,          user.getChats());
+        assertEquals(likes,          user.getChats());
+        assertEquals(saves,          user.getChats());
+
+    }
 }

@@ -156,4 +156,27 @@ class PostDTOTest {
         assertEquals(post1, post2);
         assertEquals(post1.hashCode(), post2.hashCode());
     }
+
+
+    @Test
+    @Tag("Equality")
+    void inequalityByFieldsTest() {
+        PostDTO post1 = new PostDTO();
+        PostDTO post2 = new PostDTO();
+
+        // Not the same ID
+        post1.setPostId(UUID.randomUUID());
+        post1.setPostDate(POST_DATE);
+        post1.setContent(CONTENT);
+        post1.setStatus(STATUS);
+        post1.setVisibility(VISIBILITY);
+
+        post2.setPostId(UUID.randomUUID());
+        post2.setPostDate(POST_DATE);
+        post2.setContent(CONTENT);
+        post2.setStatus(STATUS);
+        post2.setVisibility(VISIBILITY);
+
+        assertNotEquals(post1, post2);
+    }
 }

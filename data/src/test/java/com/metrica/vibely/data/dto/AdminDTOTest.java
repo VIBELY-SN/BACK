@@ -41,4 +41,58 @@ class AdminDTOTest {
     private static final Integer LOGINS = 0;
     private static final LocalDateTime LAST_CONN_DATE = LocalDateTime.now();
     private static final LocalDate BLOCKED_DATE = LocalDate.now();
+
+    // <<-METHODS->>
+    @Test
+    @Tag("Constructors")
+    void voidConstructorTest() {
+        UUID adminId = UUID.randomUUID();
+        Set<UUID> followers = new HashSet<>();
+        Set<UUID> following = new HashSet<>();
+        Set<UUID> posts     = new HashSet<>();
+        Set<UUID> chats     = new HashSet<>();
+        Set<UUID> likes     = new HashSet<>();
+        Set<UUID> saves     = new HashSet<>();
+
+        AdminDTO admin = new AdminDTO();
+
+        admin.setUserId      (adminId);
+        admin.setNickname    (NICKNAME);
+        admin.setUsername    (USERNAME);
+        admin.setPassword    (PASSWORD);
+        admin.setEmail       (EMAIL);
+        admin.setApikey      (APIKEY);
+        admin.setState       (STATE);
+        admin.setPrivacy     (PRIVACY);
+        admin.setStatus      (STATUS);
+        admin.setLogins      (LOGINS);
+        admin.setLastConnDate(LAST_CONN_DATE);
+        admin.setBlockedDate (BLOCKED_DATE);
+        admin.setFollowers   (followers);
+        admin.setFollowing   (following);
+        admin.setPosts       (posts);
+        admin.setChats       (chats);
+        admin.setLikes       (likes);
+        admin.setSaves       (saves);
+
+        assertEquals(adminId,        admin.getUserId());
+        assertEquals(NICKNAME,       admin.getNickname());
+        assertEquals(USERNAME,       admin.getUsername());
+        assertEquals(PASSWORD,       admin.getPassword());
+        assertEquals(EMAIL,          admin.getEmail());
+        assertEquals(APIKEY,         admin.getApikey());
+        assertEquals(STATE,          admin.getState());
+        assertEquals(PRIVACY,        admin.getPrivacy());
+        assertEquals(STATUS,         admin.getStatus());
+        assertEquals(LOGINS,         admin.getLogins());
+        assertEquals(LAST_CONN_DATE, admin.getLastConnDate());
+        assertEquals(BLOCKED_DATE,   admin.getBlockedDate());
+        assertEquals(followers,      admin.getFollowers());
+        assertEquals(following,      admin.getFollowing());
+        assertEquals(posts,          admin.getPosts());
+        assertEquals(chats,          admin.getChats());
+        assertEquals(likes,          admin.getLikes());
+        assertEquals(saves,          admin.getSaves());
+    }
+
 }

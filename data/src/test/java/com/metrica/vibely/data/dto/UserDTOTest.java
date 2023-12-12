@@ -184,5 +184,25 @@ class UserDTOTest {
         assertEquals(user1.hashCode(), user2.hashCode());
     }
 
+    @Test
+    @Tag("Equality")
+    void inequalityByFieldsTest() {
+        UserDTO user1 = new UserDTO();
+        UserDTO user2 = new UserDTO();
 
+        // Not the same ID
+        user1.setUserId(UUID.randomUUID());
+        user1.setUsername(USERNAME);
+        user1.setPassword(PASSWORD);
+        user1.setNickname(NICKNAME);
+        user1.setEmail   (EMAIL);
+
+        user2.setUserId(UUID.randomUUID());
+        user2.setUsername(USERNAME);
+        user2.setPassword(PASSWORD);
+        user2.setNickname(NICKNAME);
+        user2.setEmail   (EMAIL);
+
+        assertNotEquals(user1, user2);
+    }
 }

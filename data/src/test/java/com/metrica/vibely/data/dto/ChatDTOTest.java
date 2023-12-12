@@ -162,5 +162,15 @@ class ChatDTOTest {
         assertTrue(chat.addParticipant(participant));
 
     }
+    @Test
+    @Tag("Participant")
+    void removeParticipantTest() {
+        ChatDTO chat = new ChatDTO();
+        UUID participant = UUID.randomUUID();
+        chat.setParticipants(new HashSet<>());
 
+        chat.addParticipant(participant);
+
+        assertTrue(chat.removeParticipant(participant));
+    }
 }

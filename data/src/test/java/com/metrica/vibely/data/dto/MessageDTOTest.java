@@ -107,5 +107,23 @@ class MessageDTOTest {
         assertEquals(message1.hashCode(), message2.hashCode());
     }
 
+    @Test
+    void inequalityByFieldsTest() {
+        MessageDTO message1 = new MessageDTO();
+        MessageDTO message2 = new MessageDTO();
 
+        message1.setMessageId(UUID.randomUUID());
+        message1.setCreationTimestamp(CREATION_TIMESTAMP);
+        message1.setStatus(STATUS);
+        message1.setState(STATE);
+        message1.setContent(CONTENT);
+
+        message2.setMessageId(UUID.randomUUID());
+        message2.setCreationTimestamp(CREATION_TIMESTAMP);
+        message2.setStatus(STATUS);
+        message2.setState(STATE);
+        message2.setContent(CONTENT);
+
+        assertNotEquals(message1, message2);
+    }
 }

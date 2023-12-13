@@ -15,5 +15,105 @@ public class AdminEntityTest {
     private static final LocalDateTime LAST_CONN_DATE = LocalDateTime.now();
     private static final LocalDate     BLOCKED_DATE   = LocalDate.now();
     
+ // <<-METHODS->>
+    @Test
+    @Tag("Constructors")
+    void voidConstructorTest() {
+        UUID adminId = UUID.randomUUID();
+        Set<User> followers = new HashSet<>();
+        Set<User> following = new HashSet<>();
+        Set<Post> posts     = new HashSet<>();
+        Set<Chat> chats     = new HashSet<>();
+        Set<Post> likes     = new HashSet<>();
+        Set<Post> saves     = new HashSet<>();
+        
+        Admin admin = new Admin();
+
+        admin.setUserId      (adminId);
+        admin.setUsername    (USERNAME);
+        admin.setPassword    (PASSWORD);
+        admin.setNickname    (NICKNAME);
+        admin.setEmail       (EMAIL);
+        admin.setState       (STATE);
+        admin.setPrivacy     (PRIVACY);
+        admin.setStatus      (STATUS);
+        admin.setLogins      (LOGINS);
+        admin.setLastConnDate(LAST_CONN_DATE);
+        admin.setBlockedDate (BLOCKED_DATE);
+        admin.setFollowers   (followers);
+        admin.setFollowing   (following);
+        admin.setPosts       (posts);
+        admin.setChats       (chats);
+        admin.setLikes       (likes);
+        admin.setSaves       (saves);
+
+        assertEquals(adminId,        admin.getUserId());
+        assertEquals(USERNAME,       admin.getUsername());
+        assertEquals(PASSWORD,       admin.getPassword());
+        assertEquals(NICKNAME,       admin.getNickname());
+        assertEquals(EMAIL,          admin.getEmail());
+        assertEquals(STATE,          admin.getState());
+        assertEquals(PRIVACY,        admin.getPrivacy());
+        assertEquals(STATUS,         admin.getStatus());
+        assertEquals(LOGINS,         admin.getLogins());
+        assertEquals(LAST_CONN_DATE, admin.getLastConnDate());
+        assertEquals(BLOCKED_DATE,   admin.getBlockedDate());
+        assertEquals(followers,      admin.getFollowers());
+        assertEquals(following,      admin.getFollowing());
+        assertEquals(posts,          admin.getPosts());
+        assertEquals(chats,          admin.getChats());
+        assertEquals(likes,          admin.getLikes());
+        assertEquals(saves,          admin.getSaves());
+    }
+    
+    @Test
+    @Tag("Constructors")
+    void fullArgsConstructorTest() {
+        UUID adminId = UUID.randomUUID();
+        Set<User> followers = new HashSet<>();
+        Set<User> following = new HashSet<>();
+        Set<Post> posts     = new HashSet<>();
+        Set<Chat> chats     = new HashSet<>();
+        Set<Post> likes     = new HashSet<>();
+        Set<Post> saves     = new HashSet<>();
+        
+        Admin user = new Admin(
+                adminId,
+                USERNAME,
+                PASSWORD,
+                NICKNAME,
+                EMAIL,
+                APIKEY,
+                STATE,
+                PRIVACY,
+                LOGINS,
+                STATUS,
+                LAST_CONN_DATE,
+                BLOCKED_DATE,
+                followers,
+                following,
+                posts,
+                chats,
+                likes,
+                saves);
+
+        assertEquals(adminId,        user.getUserId());
+        assertEquals(USERNAME,       user.getUsername());
+        assertEquals(PASSWORD,       user.getPassword());
+        assertEquals(NICKNAME,       user.getNickname());
+        assertEquals(EMAIL,          user.getEmail());
+        assertEquals(STATE,          user.getState());
+        assertEquals(PRIVACY,        user.getPrivacy());
+        assertEquals(STATUS,         user.getStatus());
+        assertEquals(LOGINS,         user.getLogins());
+        assertEquals(LAST_CONN_DATE, user.getLastConnDate());
+        assertEquals(BLOCKED_DATE,   user.getBlockedDate());
+        assertEquals(followers,      user.getFollowers());
+        assertEquals(following,      user.getFollowing());
+        assertEquals(posts,          user.getPosts());
+        assertEquals(chats,          user.getChats());
+        assertEquals(likes,          user.getLikes());
+        assertEquals(saves,          user.getSaves());
+    }
 	
 }

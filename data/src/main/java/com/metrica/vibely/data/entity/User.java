@@ -35,7 +35,6 @@ import java.util.UUID;
 public class User implements Copyable<User> {
 
     // <<-FIELDS->>
-
     // Basic
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -164,6 +163,195 @@ public class User implements Copyable<User> {
             return false;
         User other = (User) obj;
         return Objects.equals(this.userId, other.userId);
+    }
+
+    // <<-GETTERS & SETTERS->>
+    public UUID getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(final UUID userId) {
+        if (userId == null) {
+            this.userId = UUID.randomUUID();
+        } else {
+            this.userId = userId;
+        }
+        // Another way
+        // this.userId = (userId == null) ? UUID.randomUUID() : userId;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(final String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public String getNickname() {
+        return this.nickname;
+    }
+
+    public void setNickname(final String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public String getApikey() {
+        return this.apikey;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
+    }
+
+    public UserState getState() {
+        return this.state;
+    }
+
+    public void setState(final UserState state) {
+        if (state == null) {
+            this.state = UserState.ENABLED;
+        } else {
+            this.state = state;
+        }
+    }
+
+    public PrivacyType getPrivacy() {
+        return this.privacy;
+    }
+
+    public void setPrivacy(final PrivacyType privacy) {
+        if (privacy == null) {
+            this.privacy = PrivacyType.PUBLIC;
+        } else {
+            this.privacy = privacy;
+        }
+    }
+
+    public Integer getLogins() {
+        return this.logins;
+    }
+
+    public void setLogins(final Integer logins) {
+        if (logins == null) {
+            this.logins = 0;
+        } else {
+            this.logins = logins;
+        }
+    }
+
+    public UserStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(final UserStatus status) {
+        if (status == null) {
+            this.status = UserStatus.OFFLINE;
+        } else {
+            this.status = status;
+        }
+    }
+
+    public LocalDateTime getLastConnDate() {
+        return this.lastConnDate;
+    }
+
+    public void setLastConnDate(final LocalDateTime lastConnDate) {
+        if (lastConnDate == null) {
+            this.lastConnDate = LocalDateTime.now();
+        } else {
+            this.lastConnDate = lastConnDate;
+        }
+    }
+
+    public LocalDate getBlockedDate() {
+        return this.blockedDate;
+    }
+
+    public void setBlockedDate(final LocalDate blockedDate) {
+        this.blockedDate = blockedDate;
+    }
+
+    public Set<User> getFollowers() {
+        return DeepCopyGenerator.generateCopy(this.followers);
+    }
+
+    public void setFollowers(final Set<User> followers) {
+        this.followers = new HashSet<>();
+        if (followers != null) {
+            this.followers.addAll(DeepCopyGenerator.generateCopy(followers));
+        }
+    }
+
+    public Set<User> getFollowing() {
+        return DeepCopyGenerator.generateCopy(this.following);
+    }
+
+    public void setFollowing(final Set<User> following) {
+        this.following = new HashSet<>();
+        if (following != null) {
+            this.following.addAll(DeepCopyGenerator.generateCopy(following));
+        }
+    }
+
+    public Set<Post> getPosts() {
+        return DeepCopyGenerator.generateCopy(this.posts);
+    }
+
+    public void setPosts(final Set<Post> posts) {
+        this.posts = new Post.TreePost();
+        if (posts != null) {
+            this.posts.addAll(DeepCopyGenerator.generateCopy(posts));
+        }
+    }
+
+    public Set<Chat> getChats() {
+        return DeepCopyGenerator.generateCopy(this.chats);
+    }
+
+    public void setChats(final Set<Chat> chats) {
+        this.chats = new HashSet<>();
+        if (chats != null) {
+            this.chats.addAll(DeepCopyGenerator.generateCopy(chats));
+        }
+    }
+
+    public Set<Post> getLikes() {
+        return DeepCopyGenerator.generateCopy(this.likes);
+    }
+
+    public void setLikes(final Set<Post> likes) {
+        this.likes = new HashSet<>();
+        if (likes != null) {
+            this.chats.addAll(DeepCopyGenerator.generateCopy(chats));
+        }
+    }
+
+    public Set<Post> getSaves() {
+        return DeepCopyGenerator.generateCopy(this.likes);
+    }
+
+    public void setSaves(final Set<Post> saves) {
+        this.saves = new HashSet<>();
+        if (saves != null) {
+            this.chats.addAll(DeepCopyGenerator.generateCopy(chats));
+        }
     }
 
 }

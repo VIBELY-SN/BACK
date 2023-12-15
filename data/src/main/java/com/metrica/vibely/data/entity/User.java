@@ -79,4 +79,91 @@ public class User implements Copyable<User> {
     private Set<Post> likes;
     @ManyToMany(mappedBy = "savedBy")
     private Set<Post> saves;
+
+    // <<-CONSTRUCTORS->>
+    public User() {
+        this.setUserId   (null);
+        this.setFollowers(null);
+        this.setFollowing(null);
+        this.setPosts    (null);
+        this.setChats    (null);
+        this.setLikes    (null);
+        this.setSaves    (null);
+    }
+
+    public User(
+            UUID userId,
+            String username,
+            String password,
+            String nickname,
+            String email,
+            String apikey,
+            UserState state,
+            PrivacyType privacy,
+            Integer logins,
+            UserStatus status,
+            LocalDateTime lastConnDate,
+            LocalDate blockedDate,
+            Set<User> followers,
+            Set<User> following,
+            Set<Post> posts,
+            Set<Chat> chats,
+            Set<Post> likes,
+            Set<Post> saves) {
+        this.setUserId      (userId);
+        this.setUsername    (username);
+        this.setPassword    (password);
+        this.setNickname    (nickname);
+        this.setEmail       (email);
+        this.setApikey      (apikey);
+        this.setState       (state);
+        this.setPrivacy     (privacy);
+        this.setLogins      (logins);
+        this.setStatus      (status);
+        this.setLastConnDate(lastConnDate);
+        this.setBlockedDate (blockedDate);
+        this.setFollowers   (followers);
+        this.setFollowing   (following);
+        this.setPosts       (posts);
+        this.setChats       (chats);
+        this.setLikes       (likes);
+        this.setSaves       (saves);
+    }
+
+    // <<-METHODS->>
+    @Override
+    public User deepCopy() {
+        User copy = new User();
+
+        copy.setUserId      (this.userId);
+        copy.setUsername    (this.username);
+        copy.setPassword    (this.password);
+        copy.setNickname    (this.nickname);
+        copy.setEmail       (this.email);
+        copy.setState       (this.state);
+        copy.setPrivacy     (this.privacy);
+        copy.setLogins      (this.logins);
+        copy.setStatus      (this.status);
+        copy.setLastConnDate(this.lastConnDate);
+        copy.setBlockedDate (this.blockedDate);
+
+        return copy;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.userId);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        return Objects.equals(this.userId, other.userId);
+    }
+
 }

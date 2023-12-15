@@ -42,6 +42,7 @@ public class Admin extends User {
 			Set<Chat> chats,
 			Set<Post> likes,
 			Set<Post> saves) {
+
 		super(
 				adminId,
 				username,

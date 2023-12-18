@@ -52,5 +52,17 @@ public class ApiKeyManager {
         System.arraycopy(concatenated, KEY_SIZE_BYTES, userIdBytes, 0, UUID_SIZE_BYTES);
         return UUID.fromString(new String(userIdBytes));
     }
+    /**
+     * Retrieves the expiration time from the provided API key.
+     *
+     * @param apiKey The API key containing expiration and creation time.
+     * @return the expiration time in seconds since the epoch.
+     * @throws IllegalArgumentException if the provided API key is invalid.
+     */
+    public static long getExpirationTime(String apiKey) {
+        byte[] concatenated = Base64.getDecoder().decode(apiKey);
+        ByteBuffer buffer = ByteBuffer.wrap(concatenated, KEY_SIZE_BYTES + UUID_SIZE_BYTES, LONG_SIZE_BYTES);
+        return buffer.getLong();
+    }
 
 }

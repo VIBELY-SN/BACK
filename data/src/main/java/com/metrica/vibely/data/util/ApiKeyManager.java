@@ -45,4 +45,12 @@ public class ApiKeyManager {
 
         return Base64.getEncoder().encodeToString(concatenated);
     }
+
+    public static UUID getId(String apiKey) {
+        byte[] concatenated = Base64.getDecoder().decode(apiKey);
+        byte[] userIdBytes = new byte[UUID_SIZE_BYTES];
+        System.arraycopy(concatenated, KEY_SIZE_BYTES, userIdBytes, 0, UUID_SIZE_BYTES);
+        return UUID.fromString(new String(userIdBytes));
+    }
+
 }

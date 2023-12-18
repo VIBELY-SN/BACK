@@ -20,4 +20,29 @@ public class ApiKeyManager {
     // <<-CONSTRUCTOR->>
     private ApiKeyManager() {
     }
+
+    // <<-METHODS->>
+    /**
+     * Generates a random API key using a secure random number generator.
+     *
+     * @return a randomly generated API key as a Base64-encoded string.
+     */
+    public static String generate(UUID id) {
+        byte[] keyBytes = new byte[KEY_SIZE_BYTES];
+        new SecureRandom().nextBytes(keyBytes);
+
+        // Get current time and set expiration time (1hour)
+        long currentTime = Instant.now().getEpochSecond();
+        long expirationTime = currentTime + 3600;
+
+        ByteBuffer buffer = ByteBuffer.allocate(KEY_SIZE_BYTES + UUID_SIZE_BYTES + LONG_SIZE_BYTES);
+        buffer.put(keyBytes);
+        byte[] uuidBytes = id.toString().getBytes();
+        buffer.put(uuidBytes);
+        buffer.putLong(expirationTime);
+
+        byte[] concatenated = buffer.array();
+
+        return Base64.getEncoder().encodeToString(concatenated);
+    }
 }

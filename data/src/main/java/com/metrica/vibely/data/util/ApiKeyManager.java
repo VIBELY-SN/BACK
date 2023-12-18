@@ -64,5 +64,44 @@ public class ApiKeyManager {
         ByteBuffer buffer = ByteBuffer.wrap(concatenated, KEY_SIZE_BYTES + UUID_SIZE_BYTES, LONG_SIZE_BYTES);
         return buffer.getLong();
     }
+    private static boolean isValidFormatApikey(String apiKey) {
+        byte[] concatenated = Base64.getDecoder().decode(apiKey);
 
+        if (concatenated.length != (KEY_SIZE_BYTES + UUID_SIZE_BYTES + LONG_SIZE_BYTES)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static boolean isValidExpirationTime(String apiKey) {
+        long expirationTime = getExpirationTime(apiKey);
+        long currentTime = Instant.now().getEpochSecond();
+        return expirationTime > currentTime;
+    }
+
+    /**
+     *
+     * @param apiKey
+     * @param savedApiKey
+     * @return
+     */
+    public static HttpStatusEnum isValid(String apiKey) {
+        if (apiKey == null) { return HttpStatusEnum.BAD_REQUEST; }
+
+        // TODO Implement this instead of decode in each method
+        // byte[] info = Base64.getDecoder().decode(apiKey);
+
+        try {
+            if (!isValidFormatApikey(apiKey))   throw new InvalidFormatException("Invalid API key format");
+            if (!isValidExpirationTime(apiKey)) throw new ExpiredApiKeyException();
+            return HttpStatusEnum.OK;
+        } catch (InvalidFormatException e) {
+            System.err.println("InvalidFormatException");
+            return HttpStatusEnum.BAD_REQUEST;
+        } catch (ExpiredApiKeyException e) {
+            System.err.println("ExpiredApiKeyException");
+            return HttpStatusEnum.INVALID_CREDENTIALS;
+        }
+    }
 }

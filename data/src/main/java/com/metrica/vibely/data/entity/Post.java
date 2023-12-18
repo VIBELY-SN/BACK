@@ -113,4 +113,171 @@ public class Post implements Copyable<Post> {
         this.setLikedBy   (likedBy);
         this.setSavedBy   (savedBy);
     }
+
+    // <<-METHODS->>
+    @Override
+    public Post deepCopy() {
+        Post copy = new Post();
+
+        copy.setPostId    (this.postId);
+        copy.setPostDate  (this.postDate);
+        copy.setStatus    (this.status);
+        copy.setVisibility(this.visibility);
+        copy.setContent   (this.content);
+        copy.setLikes     (this.likes);
+        copy.setTimesSaved(this.timesSaved);
+//        copy.setOwner     (this.owner);
+//        copy.setComments  (this.comments);
+//        copy.setLikedBy   (this.likedBy);
+//        copy.setSavedBy   (this.savedBy);
+
+        return copy;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.postId);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
+        Post other = (Post) obj;
+        return Objects.equals(this.postId, other.postId);
+    }
+
+    // <<-GETTERS & SETTERS->>
+    public UUID getPostId() {
+        return this.postId;
+    }
+
+    public void setPostId(final UUID postId) {
+        if (postId == null) {
+            this.postId = UUID.randomUUID();
+        } else {
+            this.postId = postId;
+        }
+    }
+
+    public LocalDateTime getPostDate() {
+        return this.postDate;
+    }
+
+    public void setPostDate(final LocalDateTime postDate) {
+        if (postDate == null) {
+            this.postDate = LocalDateTime.now();
+        } else {
+            this.postDate = postDate;
+        }
+    }
+
+    public PostStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(final PostStatus status) {
+        if (status == null) {
+            this.status = PostStatus.ACTIVE;
+        } else {
+            this.status = status;
+        }
+    }
+
+    public PostVisibility getVisibility() {
+        return this.visibility;
+    }
+
+    public void setVisibility(final PostVisibility visibility) {
+        if (visibility == null) {
+            this.visibility = PostVisibility.PUBLIC;
+        } else {
+            this.visibility = visibility;
+        }
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(final String content) {
+        if (content == null) {
+            this.content = "";
+        } else {
+            this.content = content;
+        }
+    }
+
+    public Integer getLikes() {
+        return this.likes;
+    }
+
+    public void setLikes(final Integer likes) {
+        if (likes == null) {
+            this.likes = 0;
+        } else {
+            this.likes = likes;
+        }
+    }
+
+    public Integer getTimesSaved() {
+        return this.timesSaved;
+    }
+
+    public void setTimesSaved(final Integer timesSaved) {
+        if (timesSaved == null) {
+            this.timesSaved = 0;
+        } else {
+            this.timesSaved = timesSaved;
+        }
+    }
+
+    public User getOwner() {
+        return this.owner.deepCopy();
+    }
+
+    public void setOwner(final User owner) {
+        if (owner == null) {
+            this.owner = new User();
+        } else {
+            this.owner = owner.deepCopy();
+        }
+    }
+
+    public Set<Post> getComments() {
+        return DeepCopyGenerator.generateCopy(this.comments);
+    }
+
+    public void setComments(final Set<Post> comments) {
+        this.comments = new TreePost();
+        if (comments != null) {
+            this.comments.addAll(DeepCopyGenerator.generateCopy(comments));
+        }
+    }
+
+    public Set<User> getLikedBy() {
+        return DeepCopyGenerator.generateCopy(this.likedBy);
+    }
+
+    public void setLikedBy(final Set<User> likedBy) {
+        this.likedBy = new HashSet<>();
+        if (likedBy != null) {
+            this.likedBy.addAll(DeepCopyGenerator.generateCopy(likedBy));
+        }
+    }
+
+    public Set<User> getSavedBy() {
+        return DeepCopyGenerator.generateCopy(this.savedBy);
+    }
+
+    public void setSavedBy(final Set<User> savedBy) {
+        this.savedBy = new HashSet<>();
+        if (savedBy != null) {
+            this.savedBy.addAll(DeepCopyGenerator.generateCopy(savedBy));
+        }
+    }
 }

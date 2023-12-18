@@ -52,6 +52,42 @@ public class ChatDTO {
         this.messages = messages;
     }
 
+    // <<-METHODS->>
+    /**
+     * Add a new participant to the chat.
+     *
+     * @param participant the new user
+     */
+    public boolean addParticipant(final UUID participant) {
+        return this.participants.add(participant);
+    }
+
+    /**
+     * Remove a participant from the chat.
+     *
+     * @param participant the user to remove
+     */
+    public boolean removeParticipant(final UUID participant) {
+        return this.participants.remove(participant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.chatId);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
+        ChatDTO other = (ChatDTO) obj;
+        return Objects.equals(this.chatId, other.chatId);
+    }
+
     // <<-GETTERS & SETTERS->>
     public UUID getChatId() {
         return this.chatId;

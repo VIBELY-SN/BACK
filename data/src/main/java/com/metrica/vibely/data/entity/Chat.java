@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
         // <<-FIELDS->>
 
+
         // Basic
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)

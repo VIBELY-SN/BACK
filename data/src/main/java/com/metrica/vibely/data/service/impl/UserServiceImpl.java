@@ -10,7 +10,6 @@ import com.metrica.vibely.data.model.mapper.UserMapper;
 import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.repository.UserRepository;
 import com.metrica.vibely.data.service.UserService;
-import com.metrica.vibely.data.util.PasswordHashing;
 
 /**
  * @since 2023-11-14

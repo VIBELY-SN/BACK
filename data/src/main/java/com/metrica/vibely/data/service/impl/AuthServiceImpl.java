@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.repository.UserRepository;
 import com.metrica.vibely.data.service.AuthService;
-import com.metrica.vibely.data.util.PasswordHashing;
 
 /**
  * 

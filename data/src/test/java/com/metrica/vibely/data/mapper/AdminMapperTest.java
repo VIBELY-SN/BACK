@@ -40,4 +40,42 @@ class AdminMapperTest {
     private static final Integer ADMIN_LOGINS = 1;
     private static final LocalDateTime ADMIN_LAST_CONN_DATE = LocalDateTime.now();
     private static final LocalDate ADMIN_BLOCKED_DATE = LocalDate.now();
+    // <<-METHODS->>
+    private AdminDTO createAdminDTO() {
+        AdminDTO adminDTO = new AdminDTO();
+        
+        adminDTO.setUserId(ADMIN_ID);
+        adminDTO.setUsername(ADMIN_USERNAME);
+        adminDTO.setPassword(ADMIN_PASSWORD);
+        adminDTO.setNickname(ADMIN_NICKNAME);
+        adminDTO.setEmail(ADMIN_EMAIL);
+        adminDTO.setApikey(ADMIN_APIKEY);
+        adminDTO.setState(ADMIN_STATE);
+        adminDTO.setPrivacy(ADMIN_PRIVACY);
+        adminDTO.setStatus(ADMIN_STATUS);
+        adminDTO.setLogins(ADMIN_LOGINS);
+        adminDTO.setLastConnDate(ADMIN_LAST_CONN_DATE);
+        adminDTO.setBlockedDate(ADMIN_BLOCKED_DATE);
+        
+        return adminDTO;
+    }
+    
+    private Admin createAdmin() {
+    	Admin admin = new Admin();
+        
+        admin.setUserId(ADMIN_ID);
+        admin.setUsername(ADMIN_USERNAME);
+        admin.setPassword(ADMIN_PASSWORD);
+        admin.setNickname(ADMIN_NICKNAME);
+        admin.setEmail(ADMIN_EMAIL);
+        admin.setApikey(ADMIN_APIKEY);
+        admin.setState(ADMIN_STATE);
+        admin.setPrivacy(ADMIN_PRIVACY);
+        admin.setStatus(ADMIN_STATUS);
+        admin.setLogins(ADMIN_LOGINS);
+        admin.setLastConnDate(ADMIN_LAST_CONN_DATE);
+        admin.setBlockedDate(ADMIN_BLOCKED_DATE);
+        
+        return admin;
+    }
 }

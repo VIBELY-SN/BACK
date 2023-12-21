@@ -33,4 +33,29 @@ public class MessageServiceImpl implements MessageService {
         this.chatRepository = chatRepository;
         this.userRepository = userRepository;
     }
+
+//  <<--METHODS-->>
+
+    @Override
+    public MessageDTO getById(UUID id) {
+        return MessageMapper.toDTO(this.messageRepository.findById(id).orElseThrow());
+    }
+
+    @Override
+    public MessageDTO create(final MessageDTO dto) {
+        Message message = MessageMapper.toEntity(dto, null, null);
+        Chat chat = this.chatRepository.findById(dto.getChat()).orElseThrow();
+        User user = this.userRepository.findById(dto.getSender()).orElseThrow();
+
+        message.setCreationTimestamp(LocalDateTime.now());
+        message.setStatus			(MessageStatus.PENDING);
+        message.setState			(MessageState.ENABLED);
+        message.setContent			(message.getContent());
+        message.setSender			(user);
+        message.setChat				(chat);
+
+        return MessageMapper.toDTO(messageRepository.save(message));
+    }
+
+
 }

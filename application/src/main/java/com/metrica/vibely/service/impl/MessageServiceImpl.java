@@ -85,4 +85,16 @@ public class MessageServiceImpl implements MessageService {
     }
 
 
+    @Override
+    public UUID getSender(UUID messageId) {
+        MessageDTO messageDto = MessageMapper.toDTO(messageRepository.findById(messageId).get());
+        return messageDto.getSender();
+    }
+
+    @Override
+    public UUID getChat(UUID messageId) {
+        MessageDTO messageDto = MessageMapper.toDTO(messageRepository.findById(messageId).get());
+        return messageDto.getChat();
+    }
+
 }

@@ -28,5 +28,13 @@ public interface AdminRepository extends JpaRepository<Admin, java.util.UUID> {
      * @return the user if exist
      */
     Optional<Admin> findByEmail(String email);
+
+    /**
+     * @param username
+     * @throws NoSuchElementException
+     */
+//	void deleteByUsername(String username);
+    @Query("SELECT a.apikey FROM Admin a WHERE a.userId=:id")
+    Optional<String> findApikeyByUserId(UUID id);
 }
 

@@ -33,6 +33,14 @@ public interface UserRepository extends JpaRepository<User, java.util.UUID> {
 	Optional<User> findByEmail(String email);
 
 	/**
+	 *
+	 * @param id
+	 * @return
+	 */
+	@Query("SELECT u.apikey FROM User u WHERE u.userId=:id")
+	Optional<String> findApikeyByUserId(UUID id);
+
+	/**
 	 * @param username
 	 * @throws NoSuchElementException
 	 */

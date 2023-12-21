@@ -62,3 +62,57 @@ class ChatMapperTest {
 
         return chat;
     }
+    @Test
+    @Tag("toEntity")
+    void toEntityTest() {
+        ChatDTO chatDTO = createChatDTO();
+
+        Set<User> participants = new HashSet<>();
+        Set<Message> messages = new HashSet<>();
+
+        Chat chat = ChatMapper.toEntity(chatDTO, participants, messages);
+
+        assertEquals(chatDTO.getChatId(), chat.getChatId());
+        assertEquals(chatDTO.getCreationDate(), chat.getCreationDate());
+        assertEquals(chatDTO.getType(), chat.getType());
+        assertEquals(chatDTO.getStatus(), chat.getStatus());
+        assertEquals(chatDTO.getState(), chat.getState());
+        assertEquals(chatDTO.getTitle(), chat.getTitle());
+        assertEquals(chatDTO.getLastActivity(), chat.getLastActivity());
+        
+        assertEquals(participants, chat.getParticipants());
+        assertEquals(messages, chat.getMessages());
+    }
+
+    @Test
+    @Tag("toDTO")
+    void toDTOTest() {
+        Chat chat = createChat();
+        
+        Set<User> participants = new HashSet<>();
+        Set<Message> messages = new HashSet<>();
+        
+        chat.setParticipants(participants);
+        chat.setMessages(messages);
+       
+        ChatDTO chatDTO = ChatMapper.toDTO(chat);
+
+        assertEquals(chat.getChatId(), chatDTO.getChatId());
+        assertEquals(chat.getCreationDate(), chatDTO.getCreationDate());
+        assertEquals(chat.getType(), chatDTO.getType());
+        assertEquals(chat.getStatus(), chatDTO.getStatus());
+        assertEquals(chat.getState(), chatDTO.getState());
+        assertEquals(chat.getTitle(), chatDTO.getTitle());
+        assertEquals(chat.getLastActivity(), chatDTO.getLastActivity());
+        
+        assertEquals(participants.stream()
+        						 .map(User::getUserId)
+        						 .collect(Collectors.toSet()),
+        			 chatDTO.getParticipants());
+        
+        assertEquals(messages.stream()
+        					 .map(Message::getMessageId)
+        					 .collect(Collectors.toSet()),
+        			 chatDTO.getMessages());
+    }
+}

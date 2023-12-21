@@ -29,4 +29,35 @@ public class PostMapper {
 
         return post;
     }
+
+    public static PostDTO toDTO(Post post) {
+        PostDTO postDTO = new PostDTO();
+
+        // Mapping Basics
+        postDTO.setPostId    (post.getPostId());
+        postDTO.setPostDate  (post.getPostDate());
+        postDTO.setStatus    (post.getStatus());
+        postDTO.setVisibility(post.getVisibility());
+        postDTO.setContent   (post.getContent());
+        postDTO.setLikes     (post.getLikes());
+        postDTO.setTimesSaved(post.getTimesSaved());
+
+        // Mapping Relations
+        postDTO.setOwner(post.getOwner().getUserId()); // Getting only the id
+        postDTO.setComments(post.getComments() // Mapping to get only the id
+                .stream()
+                .map(Post::getPostId)
+                .collect(Collectors.toSet()));
+        postDTO.setLikedBy (post.getLikedBy()
+                .stream()
+                .map(User::getUserId)
+                .collect(Collectors.toSet()));
+        postDTO.setSavedBy (post.getSavedBy()
+                .stream()
+                .map(User::getUserId)
+                .collect(Collectors.toSet()));
+
+        return postDTO;
+    }
+
 }

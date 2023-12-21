@@ -78,4 +78,107 @@ class AdminMapperTest {
         
         return admin;
     }
+    @Test
+    @Tag("toEntity")
+    void toEntityTest() {
+        AdminDTO adminDTO = createAdminDTO();
+        
+        Set<User> followers = new HashSet<>();
+        Set<User> following = new HashSet<>();
+        Set<Post> posts = new HashSet<>();
+        Set<Chat> chats = new HashSet<>();
+        Set<Post> likes = new HashSet<>();
+        Set<Post> saves = new HashSet<>();
+
+        Admin admin = AdminMapper.toEntity(adminDTO);
+
+        assertEquals(adminDTO.getUserId(), admin.getUserId());
+        assertEquals(adminDTO.getUsername(), admin.getUsername());
+        assertEquals(adminDTO.getPassword(), admin.getPassword());
+        assertEquals(adminDTO.getNickname(), admin.getNickname());
+        assertEquals(adminDTO.getEmail(), admin.getEmail());
+        assertEquals(adminDTO.getApikey(), admin.getApikey());
+        assertEquals(adminDTO.getState(), admin.getState());
+        assertEquals(adminDTO.getPrivacy(), admin.getPrivacy());
+        assertEquals(adminDTO.getStatus(), admin.getStatus());
+        assertEquals(adminDTO.getLogins(), admin.getLogins());
+        assertEquals(adminDTO.getLastConnDate(), admin.getLastConnDate());
+        assertEquals(adminDTO.getBlockedDate(), admin.getBlockedDate());
+        
+        assertEquals(followers, admin.getFollowers());
+        assertEquals(following, admin.getFollowing());
+        assertEquals(posts, admin.getPosts());
+        assertEquals(chats, admin.getChats());
+        assertEquals(chats, admin.getChats());
+        assertEquals(likes, admin.getLikes());
+        assertEquals(saves, admin.getSaves());
+        
+    }
+
+    @Test
+    @Tag("toDTO")
+    void toDTOTest() {
+        Admin admin = createAdmin();
+        
+        Set<User> followers = new HashSet<>();
+        Set<User> following = new HashSet<>();
+        Set<Post> posts = new HashSet<>();
+        Set<Chat> chats = new HashSet<>();
+        Set<Post> likes = new HashSet<>();
+        Set<Post> saves = new HashSet<>();
+
+        admin.setFollowers(followers);
+        admin.setFollowing(following);
+        admin.setPosts(posts);
+        admin.setChats(chats);
+        admin.setLikes(likes);
+        admin.setSaves(saves);
+        		
+        AdminDTO adminDTO = AdminMapper.toDTO(admin);
+
+        assertEquals(admin.getUserId(), adminDTO.getUserId());
+        assertEquals(admin.getUsername(), adminDTO.getUsername());
+        assertEquals(admin.getPassword(), adminDTO.getPassword());
+        assertEquals(admin.getNickname(), adminDTO.getNickname());
+        assertEquals(admin.getEmail(), adminDTO.getEmail());
+        assertEquals(admin.getApikey(), adminDTO.getApikey());
+        assertEquals(admin.getState(), adminDTO.getState());
+        assertEquals(admin.getPrivacy(), adminDTO.getPrivacy());
+        assertEquals(admin.getStatus(), adminDTO.getStatus());
+        assertEquals(admin.getLogins(), adminDTO.getLogins());
+        assertEquals(admin.getLastConnDate(), adminDTO.getLastConnDate());
+        assertEquals(admin.getBlockedDate(), adminDTO.getBlockedDate());
+        
+        assertEquals(followers.stream()
+			        		  .map(User::getUserId)
+			        		  .collect(Collectors.toSet()), 
+			         adminDTO.getFollowers());
+        
+        assertEquals(following.stream()
+			        		  .map(User::getUserId)
+			        		  .collect(Collectors.toSet()),
+        		     adminDTO.getFollowing());
+        
+        assertEquals(posts.stream()
+		        		  .map(Post::getPostId)
+		        		  .collect(Collectors.toSet()),
+        		     adminDTO.getPosts());
+        
+        assertEquals(chats.stream()
+        			      .map(Chat::getChatId)
+        			      .collect(Collectors.toSet()),
+        		     adminDTO.getChats());
+        
+        assertEquals(likes.stream()
+					      .map(Post::getPostId)
+					      .collect(Collectors.toSet()),
+		             adminDTO.getLikes());
+        
+        assertEquals(posts.stream()
+					      .map(Post::getPostId)
+					      .collect(Collectors.toSet()),
+					 adminDTO.getPosts());
+ 
+        
+    }
 }

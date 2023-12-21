@@ -47,4 +47,55 @@ public class UserMapper {
 
 		return user;
 	}
+
+	/**
+	 *
+	 * @param user
+	 * @return
+	 */
+	public static UserDTO toDTO(User user) {
+		UserDTO userDTO = new UserDTO();
+
+		// Mapping Basics
+		userDTO.setUserId	   (user.getUserId());
+		userDTO.setNickname	   (user.getNickname());
+		userDTO.setUsername	   (user.getUsername());
+		userDTO.setPassword	   (user.getPassword());
+		userDTO.setEmail	   (user.getEmail());
+		userDTO.setApikey	   (user.getApikey());
+		userDTO.setPrivacy     (user.getPrivacy());
+		userDTO.setStatus	   (user.getStatus());
+		userDTO.setState	   (user.getState());
+		userDTO.setLogins	   (user.getLogins());
+		userDTO.setBlockedDate (user.getBlockedDate());
+		userDTO.setLastConnDate(user.getLastConnDate());
+
+		// Mapping Relations
+		userDTO.setFollowers(user.getFollowers() // Mapping to get only the id
+				.stream()
+				.map(User::getUserId)
+				.collect(Collectors.toSet()));
+		userDTO.setFollowing(user.getFollowing()
+				.stream()
+				.map(User::getUserId)
+				.collect(Collectors.toSet()));
+		userDTO.setPosts(user.getPosts()
+				.stream()
+				.map(Post::getPostId)
+				.collect(Collectors.toSet()));
+		userDTO.setChats(user.getChats()
+				.stream()
+				.map(Chat::getChatId)
+				.collect(Collectors.toSet()));
+		userDTO.setLikes(user.getPosts()
+				.stream()
+				.map(Post::getPostId)
+				.collect(Collectors.toSet()));
+		userDTO.setSaves(user.getSaves()
+				.stream()
+				.map(Post::getPostId)
+				.collect(Collectors.toSet()));
+
+		return userDTO;
+	}
 }

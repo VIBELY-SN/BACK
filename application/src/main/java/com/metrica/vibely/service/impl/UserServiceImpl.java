@@ -36,4 +36,45 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(final UserRepository userRepostory) {
         this.userRepository = userRepostory;
     }
+
+    // <<-METHODS->>
+    @Override
+    public UserDTO getById(UUID id) {
+        return UserMapper.toDTO(userRepository.findById(id).orElseThrow());
+    }
+
+    @Override
+    public UserDTO getByUsername(final String username) {
+        return UserMapper.toDTO(userRepository.findByUsername(username)
+                .orElseThrow());
+    }
+
+    @Override
+    public UserDTO getByEmail(final String email) {
+        return UserMapper.toDTO(userRepository.findByEmail(email)
+                .orElseThrow());
+    }
+
+    @Override
+    public void deleteByUsername(final String username) {
+        User user = this.userRepository.findByUsername(username).orElseThrow();
+        user.setState(UserState.DISABLED);
+        this.userRepository.save(user);
+    }
+
+
+    @Override
+    public UserDTO create(final UserDTO userParam) {
+        User user = UserMapper.toEntity(userParam);
+
+        user.setState		(UserState.ENABLED);
+        user.setStatus		(UserStatus.ONLINE);
+        user.setLogins		(1);
+        user.setLastConnDate(LocalDateTime.now());
+        user.setPassword	(PasswordHasher.hash(userParam.getPassword()));
+
+        return UserMapper.toDTO(userRepository.save(user));
+    }
+
+
 }

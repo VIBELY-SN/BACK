@@ -76,5 +76,58 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toDTO(userRepository.save(user));
     }
 
+    public UserDTO update(UserDTO newUserDto) {
+        User user = userRepository.findById(newUserDto.getUserId()).orElseThrow();
+
+        String newNickname = newUserDto.getNickname();
+        String newUsername = newUserDto.getUsername();
+        String newEmail = newUserDto.getEmail();
+        String newPassword = newUserDto.getPassword();
+        UserStatus newStatus = newUserDto.getStatus();
+        PrivacyType newPrivacy = newUserDto.getPrivacy();
+
+        if(newNickname != null) { user.setNickname(newNickname); }
+        if(newUsername != null) { user.setUsername(newUsername); }
+        if(newEmail    != null) { user.setEmail(newEmail); }
+        if(newPassword != null) { user.setNickname(PasswordHasher.hash(newPassword)); }
+        if(newStatus   != null) { user.setStatus(newStatus); }
+        if(newPrivacy  != null) { user.setPrivacy(newPrivacy); }
+
+
+        return UserMapper.toDTO(userRepository.save(user));
+    }
+
+    @Override
+    public UserDTO followUser(final UUID userId,final UUID followedUserId) {
+        User user 		  = userRepository.findById(userId)
+                .orElseThrow();
+        User followedUser = userRepository.findById(followedUserId)
+                .orElseThrow();
+
+        if(!followedUser.getFollowers().contains(user) && userId != followedUserId) {
+            followedUser.getFollowers().add     (user);
+            user		.getFollowing().add		(followedUser);
+            userRepository			   .save	(followedUser);
+        }
+
+        return UserMapper.toDTO(userRepository.save(user));
+    }
+
+    @Override
+    public UserDTO unfollowUser(final UUID userId, final UUID followedUserId) {
+        User user 		  	= userRepository.findById(userId)
+                .orElseThrow();
+        User unFollowedUser = userRepository.findById(followedUserId)
+                .orElseThrow();
+
+        if( unFollowedUser.getFollowers().contains(user) && userId != followedUserId) {
+            unFollowedUser.getFollowers().remove  (user);
+            user		  .getFollowing().remove  (unFollowedUser);
+            userRepository				 .save	  (unFollowedUser);
+        }
+
+        return UserMapper.toDTO(userRepository.save(user));
+    }
+
 
 }

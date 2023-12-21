@@ -40,3 +40,4 @@ class AdminMapperTest {
     private static final Integer ADMIN_LOGINS = 1;
     private static final LocalDateTime ADMIN_LAST_CONN_DATE = LocalDateTime.now();
     private static final LocalDate ADMIN_BLOCKED_DATE = LocalDate.now();
+}

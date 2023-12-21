@@ -1,5 +1,75 @@
 package com.metrica.vibely.data.mapper;
 
-public class MessageMapperTest {
 
-}
+import org.junit.jupiter.api.Test;
+
+import com.metrica.vibely.data.entity.Chat;
+import com.metrica.vibely.data.entity.Message;
+import com.metrica.vibely.data.entity.User;
+import com.metrica.vibely.data.model.dto.MessageDTO;
+import com.metrica.vibely.data.model.enumerator.MessageState;
+import com.metrica.vibely.data.model.enumerator.MessageStatus;
+import com.metrica.vibely.data.model.mapper.MessageMapper;
+
+import org.junit.jupiter.api.Tag;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+class MessageMapperTest {
+
+    // <--CONSTANTS-->
+    private static final UUID MESSAGE_ID = UUID.randomUUID();
+    private static final LocalDateTime CREATION_TIMESTAMP = LocalDateTime.now();
+    private static final MessageStatus STATUS = MessageStatus.SENT;
+    private static final MessageState STATE = MessageState.ENABLED;
+    private static final String CONTENT = "This is a test message content";
+    private static final UUID CHAT_ID = UUID.randomUUID();
+    private static final UUID SENDER_ID = UUID.randomUUID();
+
+    // <--METHODS-->
+    private MessageDTO createMessageDTO() {
+        MessageDTO messageDTO = new MessageDTO();
+        
+        messageDTO.setMessageId(MESSAGE_ID);
+        messageDTO.setCreationTimestamp(CREATION_TIMESTAMP);
+        messageDTO.setStatus(STATUS);
+        messageDTO.setState(STATE);
+        messageDTO.setContent(CONTENT);
+        messageDTO.setChat(CHAT_ID);
+        messageDTO.setSender(SENDER_ID);
+        
+        return messageDTO;
+    }
+    
+    
+    private Message createMessage() {
+        Message message = new Message();
+        
+        message.setMessageId(MESSAGE_ID);
+        message.setCreationTimestamp(CREATION_TIMESTAMP);
+        message.setStatus(STATUS);
+        message.setState(STATE);
+        message.setContent(CONTENT);
+
+        return message;
+    }
+
+
+    private Chat createChat() {
+        Chat chat = new Chat();
+        
+        chat.setChatId(CHAT_ID);
+        
+        return chat;
+    }
+
+    private User createSender() {
+        User sender = new User();
+        
+        sender.setUserId(SENDER_ID);
+        
+        return sender;
+    }

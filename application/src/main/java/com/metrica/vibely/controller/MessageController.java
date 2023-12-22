@@ -62,4 +62,29 @@ public class MessageController {
         return this.responseManager.generateCreateResponse(message);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateMessageResponse> update(
+            @PathVariable
+            UUID id,
+            @RequestBody
+            CreateMessageRequest createMessage,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors())
+            return ResponseEntity.badRequest().build();
+
+        MessageDTO messageDto = createMessage.toDto();
+
+        messageDto.setMessageId(id);
+        MessageDTO message = this.messageService.update(messageDto);
+
+        return this.responseManager.generateUpdateResponse(message);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        this.messageService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

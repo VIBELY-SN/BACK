@@ -50,4 +50,28 @@ public class AdminAuthInterceptor implements HandlerInterceptor {
     }
 
 
+    @Override
+    public boolean preHandle(
+            @NonNull
+            HttpServletRequest request,
+            @NonNull
+            HttpServletResponse response,
+            @NonNull
+            Object handler
+    ) {
+        String apiKey = request.getHeader("x-api-key");
+        return setStatus(response, apiKey);
+    }
+
+    @Override
+    public void postHandle(
+            @NonNull
+            HttpServletRequest request,
+            @NonNull
+            HttpServletResponse response,
+            @NonNull
+            Object handler,
+            ModelAndView mAV
+    ) {}
+
 }

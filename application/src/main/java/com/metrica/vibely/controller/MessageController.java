@@ -38,4 +38,28 @@ public class MessageController {
         this.responseManager = responseManager;
         this.messageService = messageService;
     }
+
+    // <<-METHODS->>
+    @GetMapping("/{id}")
+    public ResponseEntity<GetMessageResponse> getById(@PathVariable UUID id) {
+        MessageDTO messageDto = this.messageService.getById(id);
+        if(messageDto.getState()== MessageState.DISABLED) throw new NoSuchElementException();
+        return this.responseManager.generateGetResponse(messageDto);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<CreateMessageResponse> create(
+            @RequestBody
+            CreateMessageRequest createMessage,
+            BindingResult bindingResult
+    ){
+        if (bindingResult.hasErrors())
+            return ResponseEntity.badRequest().build();
+
+        MessageDTO messageDto = createMessage.toDto();
+        MessageDTO message = this.messageService.create(messageDto);
+
+        return this.responseManager.generateCreateResponse(message);
+    }
+
 }

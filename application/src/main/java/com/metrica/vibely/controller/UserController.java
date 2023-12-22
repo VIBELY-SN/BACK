@@ -79,4 +79,50 @@ public class UserController {
     }
 
 
+    /**
+     * @TODO falta añadir la funcionalidad
+     * @param id
+     * @return
+     */
+//    @GetMapping("/friendNetwork/{id}")
+//    public ResponseEntity<GetFriendNetworkResponse> getNetwork(@PathVariable UUID id){
+//		Set<UUID> participantIds = this.userService.getFriendNetwork(id);
+//        return this.responseManager.generateGetNetworkResponse(participantIds);
+//    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<CreateUserResponse> create(
+            @RequestBody
+            @Valid
+            CreateUserRequest userRequest,
+            BindingResult bindingResult
+    ) {
+
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        UserDTO userDTO = this.userService.create(userRequest.toUserDTO());
+        return this.responseManager.generateCreateResponse(userDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateUserResponse> updateById(
+            @PathVariable
+            UUID id,
+            @RequestBody
+            @Valid
+            UpdateUserRequest userRequest,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+        UserDTO userDTO = userRequest.toDTO();
+        userDTO.setUserId(id);
+        UserDTO updatedDTO = this.userService.update(userDTO);
+        return this.responseManager.generateUpdateResponse(updatedDTO);
+    }
+
+
 }

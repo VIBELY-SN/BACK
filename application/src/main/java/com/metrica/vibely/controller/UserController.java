@@ -124,5 +124,10 @@ public class UserController {
         return this.responseManager.generateUpdateResponse(updatedDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
+        this.userService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

@@ -42,5 +42,41 @@ public class UserController {
         this.userService = userService;
     }
 
+    // <<-METHODS->>
+    @GetMapping("/{id}")
+    public ResponseEntity<BasicInfoResponse> getById(@PathVariable UUID id) {
+        UserDTO userDTO = this.userService.getById(id);
+
+        if (userDTO.getState() != UserState.DISABLED) {
+            return this.responseManager.generateGetResponse(userDTO);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<BasicInfoResponse> getByUsername(@PathVariable String username) {
+        UserDTO userDTO = this.userService.getByUsername(username);
+
+        if (userDTO.getState()   != UserState.DISABLED &&
+                userDTO.getPrivacy() == PrivacyType.PUBLIC) {
+            return this.responseManager.generateGetResponse(userDTO);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<BasicInfoResponse> getByEmail(@PathVariable String email) {
+        UserDTO userDTO = this.userService.getByEmail(email);
+
+        if (userDTO.getState()   != UserState.DISABLED &&
+                userDTO.getPrivacy() == PrivacyType.PUBLIC) {
+            return this.responseManager.generateGetResponse(userDTO);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
 
 }

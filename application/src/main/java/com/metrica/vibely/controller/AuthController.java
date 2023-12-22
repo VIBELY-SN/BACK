@@ -32,4 +32,32 @@ public class AuthController {
     }
 
 
+    // <<-METHODS->>
+    @PostMapping("/auth/username")
+    public ResponseEntity<?> login(
+            @RequestBody
+            @Valid
+            AuthUserRequest authRequest,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) { return ResponseEntity.badRequest().build(); }
+
+        String apiKey = this.authService.usernameAuth(authRequest.getUsername(), authRequest.getPassword());
+        return ResponseEntity.ok()
+                .body(java.util.Map.of("apiKey", apiKey));
+    }
+
+    @PostMapping("/auth/email")
+    public ResponseEntity<?> login(
+            @RequestBody
+            @Valid
+            AuthEmailRequest authRequest,
+            BindingResult bindingResult
+    ) {
+        if(bindingResult.hasErrors()) { return ResponseEntity.badRequest().build(); }
+
+        String apiKey = this.authService.emailAuth(authRequest.getEmail(), authRequest.getPassword());
+        return ResponseEntity.ok().body(Map.of("apiKey", apiKey));
+    }
+
 }

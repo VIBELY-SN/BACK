@@ -59,5 +59,32 @@ public class AuthController {
         String apiKey = this.authService.emailAuth(authRequest.getEmail(), authRequest.getPassword());
         return ResponseEntity.ok().body(Map.of("apiKey", apiKey));
     }
+    @PostMapping("/admin/auth/username")
+    public ResponseEntity<?> login(
+            @RequestBody
+            @Valid
+            AdminAuthUserRequest authRequest,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) { return ResponseEntity.badRequest().build(); }
+
+        String apiKey = this.authService.adminUsernameAuth(authRequest.getUsername(), authRequest.getPassword());
+        return ResponseEntity.ok()
+                .body(java.util.Map.of("apiKey", apiKey));
+    }
+
+    @PostMapping("/admin/auth/email")
+    public ResponseEntity<?> login(
+            @RequestBody
+            @Valid
+            AdminAuthEmailRequest authRequest,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) { return ResponseEntity.badRequest().build(); }
+
+        String apiKey = this.authService.adminEmailAuth(authRequest.getEmail(), authRequest.getPassword());
+        return ResponseEntity.ok()
+                .body(java.util.Map.of("apiKey", apiKey));
+    }
 
 }

@@ -86,5 +86,4 @@ public class MessageController {
         this.messageService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
 }

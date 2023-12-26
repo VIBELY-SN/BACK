@@ -2,10 +2,6 @@ package com.metrica.vibely.data.model.dto;
 
 import com.metrica.vibely.data.model.enumerator.MessageState;
 
-public class MessageDTO {
-
-    package com.metrica.vibely.data.model.dto;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -125,4 +121,4 @@ import com.metrica.vibely.data.model.enumerator.MessageStatus;
             this.sender = sender;
         }
     }
-}
+

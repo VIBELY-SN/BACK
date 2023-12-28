@@ -13,9 +13,17 @@ public class AddRemoveChatRequest {
     public AddRemoveChatRequest() {
     }
 
+//  <<--METHODS-->>
+    public ChatDTO toDTO() {
+        ChatDTO chatDto = new ChatDTO();
+
+        chatDto.setParticipants(participants);
+
+        return chatDto;
+    }
 //  <<--GETTERS & SETTERS-->>
     public Set<UUID> getParticipants() {
-    return participants;
+        return participants;
     }
 
     public void setParticipants(Set<UUID> participants) {

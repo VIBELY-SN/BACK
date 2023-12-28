@@ -33,6 +33,18 @@ public class CreateUserRequest {
     public CreateUserRequest() {
     }
 
+    // <<--METHODS-->>
+    public UserDTO toUserDTO() {
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setUsername(this.username);
+        userDTO.setPassword(this.password);
+        userDTO.setNickname(this.nickname);
+        userDTO.setEmail   (this.email);
+
+        return userDTO;
+    }
+
     // <<-GETTERS & SETTERS->>
     public String getUsername() {
         return username;

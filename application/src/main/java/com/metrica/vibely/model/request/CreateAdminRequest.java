@@ -37,6 +37,18 @@ public class CreateAdminRequest {
         return this.username;
     }
 
+    // <<-METHODS->>
+    public AdminDTO toAdminDTO() {
+        AdminDTO admin = new AdminDTO();
+
+        admin.setUsername(this.username);
+        admin.setPassword(this.password);
+        admin.setNickname(this.nickname);
+        admin.setEmail   (this.email);
+
+        return admin;
+    }
+
     public void setUsername(final String username) {
         this.username = username;
     }

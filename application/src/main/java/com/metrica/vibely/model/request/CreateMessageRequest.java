@@ -34,6 +34,17 @@ public class CreateMessageRequest {
     public CreateMessageRequest() {
     }
 
+    //	<<--METHODS-->>
+    public  MessageDTO toDto() {
+        MessageDTO messageDto = new MessageDTO();
+
+        messageDto.setContent		   (this.getContent());
+        messageDto.setChat			   (this.getChat());
+        messageDto.setSender           (this.getSender());
+
+        return messageDto;
+    }
+
     //	<<--GETTERS & SETTERS-->>
 
     public LocalDateTime getCreationTimestamp() {

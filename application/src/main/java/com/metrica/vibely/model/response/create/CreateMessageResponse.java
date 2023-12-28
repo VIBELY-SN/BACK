@@ -15,6 +15,17 @@ public class CreateMessageResponse {
     public CreateMessageResponse() {
     }
 
+    //	<<--METHODS-->>
+    public CreateMessageResponse generateResponse(MessageDTO messageDto) {
+
+        this.setMessageId(messageDto.getMessageId());
+        this.setSender(messageDto.getSender());
+        this.setChatId(messageDto.getChat());
+        this.setContent(messageDto.getContent());
+
+        return this;
+    }
+
     //	<<--GETTERS & SETTERS-->>
     public UUID getMessageId() {
         return messageId;

@@ -74,5 +74,84 @@ class UserMapperTest {
         
         return user;
     }
+    @Test
+    @Tag("toEntity")
+    void toEntityTest() {
+        UserDTO userDTO = createUserDTO();
+
+        Set<User> followers = new HashSet<>();
+        Set<User> following = new HashSet<>();
+        Set<Post> posts = new HashSet<>();
+        Set<Chat> chats = new HashSet<>();
+        Set<Post> likes = new HashSet<>();
+        Set<Post> saves = new HashSet<>();
+
+        User user = UserMapper.toEntity(userDTO);
+
+        assertEquals(userDTO.getUserId(), user.getUserId());
+        assertEquals(userDTO.getUsername(), user.getUsername());
+        assertEquals(userDTO.getPassword(), user.getPassword());
+        assertEquals(userDTO.getNickname(), user.getNickname());
+        assertEquals(userDTO.getEmail(), user.getEmail());
+        assertEquals(userDTO.getApikey(), user.getApikey());
+        assertEquals(userDTO.getState(), user.getState());
+        assertEquals(userDTO.getPrivacy(), user.getPrivacy());
+        assertEquals(userDTO.getStatus(), user.getStatus());
+        assertEquals(userDTO.getLogins(), user.getLogins());
+        assertEquals(userDTO.getLastConnDate(), user.getLastConnDate());
+        assertEquals(userDTO.getBlockedDate(), user.getBlockedDate());
+;
+
+        assertEquals(followers, user.getFollowers());
+        assertEquals(following, user.getFollowing());
+        assertEquals(posts, user.getPosts());
+        assertEquals(chats, user.getChats());
+        assertEquals(likes, user.getLikes());
+        assertEquals(saves, user.getSaves());
+    
+    }
+
+    @Test
+    @Tag("toDTO")
+    void toDTOTest() {
+        User user = createUser();
+
+        UserDTO userDTO = UserMapper.toDTO(user);
+
+        assertEquals(user.getUserId(), userDTO.getUserId());
+        assertEquals(user.getUsername(), userDTO.getUsername());
+        assertEquals(user.getPassword(), userDTO.getPassword());
+        assertEquals(user.getNickname(), userDTO.getNickname());
+        assertEquals(user.getEmail(), userDTO.getEmail());
+        assertEquals(user.getApikey(), userDTO.getApikey());
+        assertEquals(user.getState(), userDTO.getState());
+        assertEquals(user.getPrivacy(), userDTO.getPrivacy());
+        assertEquals(user.getStatus(), userDTO.getStatus());
+        assertEquals(user.getLogins(), userDTO.getLogins());
+        assertEquals(user.getLastConnDate(), userDTO.getLastConnDate());
+        assertEquals(user.getBlockedDate(), userDTO.getBlockedDate());
+
+        assertEquals(user.getFollowers().stream()
+						 .map(User::getUserId)
+						 .collect(Collectors.toSet()), 
+					 userDTO.getFollowers());
+
+		assertEquals(user.getFollowing().stream()
+		       		 	 .map(User::getUserId)
+		       		 	 .collect(Collectors.toSet()),
+		       	     userDTO.getFollowing());
+		
+		assertEquals(user.getPosts().stream()
+						 .map(Post::getPostId)
+						 .collect(Collectors.toSet()), 
+					 userDTO.getPosts());
+		
+		assertEquals(user.getChats().stream()
+						 .map(Chat::getChatId)
+						 .collect(Collectors.toSet()), 
+					 userDTO.getChats());
+
+    }
+}
     
     

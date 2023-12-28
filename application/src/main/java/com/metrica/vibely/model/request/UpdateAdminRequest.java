@@ -17,6 +17,18 @@ public class UpdateAdminRequest {
     public UpdateAdminRequest() {
     }
 
+    // <<-METHODS->>
+    public AdminDTO toDTO() {
+        AdminDTO adminDTO = new AdminDTO();
+
+        adminDTO.setUsername(this.username);
+        adminDTO.setPassword(this.password);
+        adminDTO.setNickname(this.nickname);
+        adminDTO.setEmail   (this.email);
+
+        return adminDTO;
+    }
+
     // <<-GETTERS & SETTERS->>
     public String getUsername() {
         return this.username;

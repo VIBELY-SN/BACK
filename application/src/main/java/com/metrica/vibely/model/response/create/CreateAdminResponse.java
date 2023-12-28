@@ -16,6 +16,15 @@ public class CreateAdminResponse {
     public CreateAdminResponse() {
     }
 
+    // <<-METHODS->>
+    public CreateAdminResponse generateResponse(AdminDTO adminDto) {
+        this.setUserId  (adminDto.getUserId());
+        this.setUsername(adminDto.getUsername());
+        this.setNickname(adminDto.getNickname());
+        this.setEmail   (adminDto.getEmail());
+        return this;
+    }
+
     // <<-GETTERS & SETTERS->>
     public UUID getUserId() {
         return this.userId;

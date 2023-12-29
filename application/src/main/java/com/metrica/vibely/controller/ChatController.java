@@ -38,4 +38,14 @@ public class ChatController {
 	    	this.responseManager = responseManager;
 	        this.chatService = chatService;
 	    }
+	    // METHODS
+	    @GetMapping("/{id}")
+	    public ResponseEntity<GetChatResponse> getById(@PathVariable UUID id) {
+	    	ChatDTO chatDto = chatService.getById(id); 
+	    	
+	    	if (chatDto.getState()   != ChatState.DISABLED) {
+	    		return this.responseManager.generateGetResponse(chatDto);
+	    	}
+	    	return ResponseEntity.notFound().build();
+	    }
 }

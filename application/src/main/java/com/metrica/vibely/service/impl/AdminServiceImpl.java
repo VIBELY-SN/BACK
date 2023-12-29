@@ -93,4 +93,16 @@ public class AdminServiceImpl implements AdminService {
         // TODO Auto-generated method stub
         
     }
+    
+    @Override
+    public AdminDTO followUser(UUID adminId, UUID followedUserId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public AdminDTO unfollowUser(UUID adminId, UUID followedUserId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

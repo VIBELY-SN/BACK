@@ -81,4 +81,16 @@ public class AdminServiceImpl implements AdminService {
         return AdminMapper.toDTO(adminRepository.save(admin));
     }
 
+    @Override
+    public void deleteById(UUID id) {
+        Admin admin = this.adminRepository.findById(id).orElseThrow();
+        admin.setState(UserState.DISABLED);
+        this.adminRepository.save(admin);
+    }
+
+    @Override
+    public void deleteByUsername(String username) {
+        // TODO Auto-generated method stub
+        
+    }
 }

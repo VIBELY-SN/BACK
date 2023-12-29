@@ -81,4 +81,46 @@ public class AdminController {
 	        ChatDTO updatedDTO = this.chatService.update(chatDTO);
 	        return this.responseManager.generateUpdateResponse(updatedDTO);
 	    }
+		@DeleteMapping("/{id}")
+	    public ResponseEntity<Void> deleteByUsername(@PathVariable UUID id) {
+	        this.chatService.deleteById(id);
+	        return ResponseEntity.noContent().build();
+	    }
+		
+		@PutMapping("/add/{id}")
+		public ResponseEntity<UpdateChatResponse> addMember(
+				@PathVariable
+				UUID id,
+				@RequestBody
+				AddRemoveChatRequest chatRequest,
+				BindingResult bindingResult
+		 ) {
+	         if (!bindingResult.hasErrors()) {
+	             ChatDTO chatDto = chatRequest.toDTO();
+	             chatDto.setChatId(id);
+
+	             ChatDTO updatedDto = this.chatService.addMembers(id, chatDto.getParticipants());
+
+	             return this.responseManager.generateUpdateResponse(updatedDto);
+	         }
+	         return ResponseEntity.badRequest().build();
+	     }
+		
+		@PutMapping("/remove/{id}")
+		public ResponseEntity<UpdateChatResponse> removeMember(
+				@PathVariable
+				UUID id,
+				@RequestBody
+				AddRemoveChatRequest chatRequest,
+				BindingResult bindingResult
+		) {
+	        if (!bindingResult.hasErrors()) {
+	            ChatDTO chatDto = chatRequest.toDTO();
+	            chatDto.setChatId(id);
+
+	            ChatDTO updatedDto = this.chatService.removeMembers(id, chatDto.getParticipants());
+	            return this.responseManager.generateUpdateResponse(updatedDto);
+	        }
+	        return ResponseEntity.badRequest().build();
+	    }
 }

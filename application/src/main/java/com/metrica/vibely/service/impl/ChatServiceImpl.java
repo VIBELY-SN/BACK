@@ -30,4 +30,21 @@ public class ChatServiceImpl implements ChatService {
 			this.userRepository = userRepository;
 			this.chatRepository = chatRepository;
 		}
+		
+		@Override
+	    public ChatDTO create(ChatDTO ChatDto) {
+	    	Set<User> participants = ChatDto.getParticipants().stream()
+	    													  .map(p -> userRepository.findById(p).get())
+	    													  .collect(Collectors.toSet());
+	    	
+	        Chat chat = ChatMapper.toEntity(ChatDto, participants, null);
+	        
+	        chat.setCreationDate(LocalDateTime.now());
+	        chat.setLastActivity(null);
+	        chat.setStatus		(ChatStatus.ACTIVE);
+	        chat.setState 		(ChatState.ENABLED);
+	        chat.setTitle 		(ChatDto.getTitle());
+	        chat.setType		(ChatDto.getType());       
+	        return ChatMapper.toDTO(this.chatRepository.save(chat)); 
+	    }
 }

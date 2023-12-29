@@ -48,4 +48,37 @@ public class AdminController {
 	    	}
 	    	return ResponseEntity.notFound().build();
 	    }
+	    @PostMapping("/create")
+	    public ResponseEntity<CreateChatResponse> create(
+	            @RequestBody
+//	          @Valid
+	            CreateChatRequest chatRequest,
+	            BindingResult bindingResult
+	     ) {
+	         if (bindingResult.hasErrors()) {
+	             return ResponseEntity.badRequest().build();
+	         }
+	         ChatDTO chatDto = this.chatService.create(chatRequest.toChatDTO());
+	         return this.responseManager.generateCreateResponse(chatDto);
+	     }
+		
+		@PutMapping("/{id}")
+	    public ResponseEntity<UpdateChatResponse> updateById(
+	            @PathVariable
+	            UUID id,
+	            @RequestBody
+	            @Valid
+	            UpdateChatRequest chatRequest,
+	            BindingResult bindingResult
+	    ) {
+	        if (bindingResult.hasErrors()) {
+	            return ResponseEntity.badRequest().build();
+	        }
+
+	        ChatDTO chatDTO = chatRequest.toDTO();
+	        chatDTO.setChatId(id);
+
+	        ChatDTO updatedDTO = this.chatService.update(chatDTO);
+	        return this.responseManager.generateUpdateResponse(updatedDTO);
+	    }
 }

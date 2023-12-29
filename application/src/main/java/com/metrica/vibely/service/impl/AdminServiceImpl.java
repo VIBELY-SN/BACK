@@ -49,4 +49,36 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = this.adminRepository.findByEmail(email).orElseThrow();
         return AdminMapper.toDTO(admin);
     }
+    
+    @Override
+    public AdminDTO create(AdminDTO adminDTO) {
+        Admin admin = AdminMapper.toEntity(adminDTO);
+        
+        admin.setPassword(PasswordHasher.hash(admin.getPassword()));
+        admin.setState  (UserState.ENABLED);
+        admin.setPrivacy(PrivacyType.PUBLIC);
+        admin.setLogins (0);
+        admin.setStatus (UserStatus.OFFLINE);
+        admin.setLastConnDate(LocalDateTime.now());
+        
+        return AdminMapper.toDTO(adminRepository.save(admin));
+    }
+
+    @Override
+    public AdminDTO update(AdminDTO adminDTO) {
+        Admin admin = this.adminRepository.findById(adminDTO.getUserId()).orElseThrow();
+        
+        String username = adminDTO.getUsername();
+        String password = adminDTO.getPassword();
+        String nickname = adminDTO.getNickname();
+        String email    = adminDTO.getEmail();
+        
+        if (username != null) admin.setUsername(username);
+        if (password != null) admin.setPassword(PasswordHasher.hash(password));
+        if (nickname != null) admin.setNickname(nickname);
+        if (email    != null) admin.setEmail   (email);
+        
+        return AdminMapper.toDTO(adminRepository.save(admin));
+    }
+
 }

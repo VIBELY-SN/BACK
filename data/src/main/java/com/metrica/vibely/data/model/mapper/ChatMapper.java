@@ -28,4 +28,28 @@ public class ChatMapper {
 
         return chat;
     }
+	
+	public static ChatDTO toDTO(Chat chat) {
+        ChatDTO chatDTO = new ChatDTO();
+
+        // Mapping Basics
+        chatDTO.setChatId(chat.getChatId());
+        chatDTO.setCreationDate(chat.getCreationDate());
+        chatDTO.setType(chat.getType());
+        chatDTO.setStatus(chat.getStatus());
+        chatDTO.setState(chat.getState());
+        chatDTO.setTitle(chat.getTitle());
+        chatDTO.setLastActivity(chat.getLastActivity());
+
+        // Mapping Relations
+        chatDTO.setParticipants(chat.getParticipants().stream()
+					                .map(User::getUserId)
+					                .collect(Collectors.toSet()));
+
+        chatDTO.setMessages	   (chat.getMessages().stream()
+					                .map(Message::getMessageId)
+					                .collect(Collectors.toSet()));
+
+        return chatDTO;
+    }
 }

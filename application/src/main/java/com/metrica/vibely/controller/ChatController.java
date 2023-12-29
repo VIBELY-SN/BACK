@@ -61,4 +61,66 @@ public class ChatController {
 	         ChatDTO chatDto = this.chatService.create(chatRequest.toChatDTO());
 	         return this.responseManager.generateCreateResponse(chatDto);
 	     }
+	    @PutMapping("/{id}")
+	    public ResponseEntity<UpdateChatResponse> updateById(
+	            @PathVariable
+	            UUID id,
+	            @RequestBody
+	            @Valid
+	            UpdateChatRequest chatRequest,
+	            BindingResult bindingResult
+	    ) {
+	        if (bindingResult.hasErrors()) {
+	            return ResponseEntity.badRequest().build();
+	        }
+
+	        ChatDTO chatDTO = chatRequest.toDTO();
+	        chatDTO.setChatId(id);
+
+	        ChatDTO updatedDTO = this.chatService.update(chatDTO);
+	        return this.responseManager.generateUpdateResponse(updatedDTO);
+	    }
+
+	    @DeleteMapping("/{id}")
+	    public ResponseEntity<Void> deleteByUsername(@PathVariable UUID id) {
+	        this.chatService.deleteById(id);
+	        return ResponseEntity.noContent().build();
+	    }
+		
+		@PutMapping("/add/{id}")
+		public ResponseEntity<UpdateChatResponse> addMember(
+				@PathVariable
+				UUID id,
+				@RequestBody
+				AddRemoveChatRequest chatRequest,
+				BindingResult bindingResult
+		 ) {
+	         if (!bindingResult.hasErrors()) {
+	             ChatDTO chatDto = chatRequest.toDTO();
+	             chatDto.setChatId(id);
+
+	             ChatDTO updatedDto = this.chatService.addMembers(id, chatDto.getParticipants());
+
+	             return this.responseManager.generateUpdateResponse(updatedDto);
+	         }
+	         return ResponseEntity.badRequest().build();
+	     }
+		
+		@PutMapping("/remove/{id}")
+		public ResponseEntity<UpdateChatResponse> removeMember(
+				@PathVariable
+				UUID id,
+				@RequestBody
+				AddRemoveChatRequest chatRequest,
+				BindingResult bindingResult
+		) {
+	        if (!bindingResult.hasErrors()) {
+	            ChatDTO chatDto = chatRequest.toDTO();
+	            chatDto.setChatId(id);
+
+	            ChatDTO updatedDto = this.chatService.removeMembers(id, chatDto.getParticipants());
+	            return this.responseManager.generateUpdateResponse(updatedDto);
+	        }
+	        return ResponseEntity.badRequest().build();
+	    }
 }

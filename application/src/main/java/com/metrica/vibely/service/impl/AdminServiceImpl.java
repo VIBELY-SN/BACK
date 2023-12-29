@@ -27,4 +27,26 @@ public class AdminServiceImpl implements AdminService {
     public AdminServiceImpl(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
+    
+    // METHODS
+    @Override
+    public AdminDTO getById(UUID id) {
+        Admin admin = this.adminRepository.findById(id).orElseThrow();
+        
+        if (admin.getState() != UserState.DISABLED)
+            return AdminMapper.toDTO(admin);
+        throw new NoSuchElementException();
+    }
+
+    @Override
+    public AdminDTO getByUsername(String username) {
+        Admin admin = this.adminRepository.findByUsername(username).orElseThrow();
+        return AdminMapper.toDTO(admin);
+    }
+
+    @Override
+    public AdminDTO getByEmail(String email) {
+        Admin admin = this.adminRepository.findByEmail(email).orElseThrow();
+        return AdminMapper.toDTO(admin);
+    }
 }

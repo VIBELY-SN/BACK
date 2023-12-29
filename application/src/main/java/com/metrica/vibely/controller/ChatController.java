@@ -48,4 +48,17 @@ public class ChatController {
 	    	}
 	    	return ResponseEntity.notFound().build();
 	    }
+	    @PostMapping("/create")
+	    public ResponseEntity<CreateChatResponse> create(
+	            @RequestBody
+//	          @Valid
+	            CreateChatRequest chatRequest,
+	            BindingResult bindingResult
+	     ) {
+	         if (bindingResult.hasErrors()) {
+	             return ResponseEntity.badRequest().build();
+	         }
+	         ChatDTO chatDto = this.chatService.create(chatRequest.toChatDTO());
+	         return this.responseManager.generateCreateResponse(chatDto);
+	     }
 }

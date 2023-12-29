@@ -17,4 +17,21 @@ public class MessageMapper {
 
         return message;
     }
+	
+	public static MessageDTO toDTO(Message message) {
+        MessageDTO messageDTO = new MessageDTO();
+
+        // Mapping Basics
+        messageDTO.setMessageId        (message.getMessageId());
+        messageDTO.setCreationTimestamp(message.getCreationTimestamp());
+        messageDTO.setStatus		   (message.getStatus());
+        messageDTO.setState			   (message.getState());
+        messageDTO.setContent          (message.getContent());
+
+        // Mapping Relations
+        messageDTO.setChat             (message.getChat().getChatId());
+        messageDTO.setSender           (message.getSender().getUserId());
+
+        return messageDTO;
+    }
 }

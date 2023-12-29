@@ -47,4 +47,68 @@ public class ChatServiceImpl implements ChatService {
 	        chat.setType		(ChatDto.getType());       
 	        return ChatMapper.toDTO(this.chatRepository.save(chat)); 
 	    }
+		@Override
+	    public ChatDTO addMembers(UUID chatId, Set<UUID> membersToAdd) {
+	        Chat chat = this.chatRepository.findById(chatId).orElseThrow();
+	        
+	        Set<User> addedParts = chat.getParticipants();
+	        
+	        addedParts.addAll(membersToAdd.stream()
+	        							  .map(p -> this.userRepository.findById(p).orElseThrow())
+	        							  .collect(Collectors.toSet()));
+	        chat.setParticipants(addedParts);
+	        
+	        return ChatMapper.toDTO(this.chatRepository.save(chat));
+	    }
+
+	    @Override
+	    public ChatDTO removeMembers(UUID chatId, Set<UUID> membersToRemove) {
+	        Chat chat = this.chatRepository.findById(chatId).orElseThrow();
+	        
+	        Set<User> removedParts = chat.getParticipants();
+	        
+	        removedParts.removeAll(membersToRemove.stream()
+	        							  .map(p -> userRepository.findById(p).orElseThrow())
+	        							  .collect(Collectors.toSet()));
+	        chat.setParticipants(removedParts);
+	        
+	        return ChatMapper.toDTO(this.chatRepository.save(chat));
+	    }
+
+	    @Override
+	    public Set<User> getMembers(UUID chatId) {
+	        return this.chatRepository.findById(chatId).orElseThrow().getParticipants();
+	    }
+
+	    @Override
+	    public Set<Message> getMessages(UUID chatId) {
+	        return this.chatRepository.findById(chatId).orElseThrow().getMessages();
+	    }
+
+	    @Override
+	    public void deleteById(UUID chatId) {
+	        Chat chat = this.chatRepository.findById(chatId).orElseThrow();
+	        chat.setState(ChatState.DISABLED);
+	        this.chatRepository.save(chat);
+	    }
+
+		@Override
+			public ChatDTO getById(UUID id) {
+				return ChatMapper.toDTO(this.chatRepository.findById(id).orElseThrow());
+			}
+
+		@Override
+		public ChatDTO update(ChatDTO dto) {
+			Chat chat = this.chatRepository.findById(dto.getChatId()).orElseThrow();
+			
+			String newTitle = dto.getTitle();
+			ChatType newType = dto.getType();
+			ChatStatus newStatus = dto.getStatus();
+			
+			if(newTitle  != null) { chat.setTitle(newTitle); }
+			if(newType   != null) { chat.setType(newType); }
+			if(newStatus != null) { chat.setStatus(newStatus); }
+			
+			return ChatMapper.toDTO(this.chatRepository.save(chat));
+		}
 }

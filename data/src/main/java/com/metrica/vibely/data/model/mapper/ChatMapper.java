@@ -9,8 +9,8 @@ import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.model.dto.ChatDTO;
 
 public class ChatMapper {
-
-    public static Chat toEntity(ChatDTO chatDTO, Set<User> participants, Set<Message> messages) {
+	
+	public static Chat toEntity(ChatDTO chatDTO, Set<User> participants, Set<Message> messages) {
         Chat chat = new Chat();
 
         // Mapping Basics
@@ -28,8 +28,8 @@ public class ChatMapper {
 
         return chat;
     }
-
-    public static ChatDTO toDTO(Chat chat) {
+	
+	public static ChatDTO toDTO(Chat chat) {
         ChatDTO chatDTO = new ChatDTO();
 
         // Mapping Basics
@@ -43,12 +43,12 @@ public class ChatMapper {
 
         // Mapping Relations
         chatDTO.setParticipants(chat.getParticipants().stream()
-                .map(User::getUserId)
-                .collect(Collectors.toSet()));
+					                .map(User::getUserId)
+					                .collect(Collectors.toSet()));
 
         chatDTO.setMessages	   (chat.getMessages().stream()
-                .map(Message::getMessageId)
-                .collect(Collectors.toSet()));
+					                .map(Message::getMessageId)
+					                .collect(Collectors.toSet()));
 
         return chatDTO;
     }

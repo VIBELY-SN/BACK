@@ -17,4 +17,4 @@ public interface MessageService extends CrudService<MessageDTO, UUID> {
 	
 	UUID getChat(UUID messageId);	
 
-}
+} 

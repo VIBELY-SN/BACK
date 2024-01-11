@@ -27,10 +27,9 @@ import java.util.UUID;
 
 /**
  * <h1>Post Entity</h1>
- *
+ * 
  * @since 2023-11-13
  * @version 1.0
- * @author Adrian, Alex
  */
 @Entity
 public class Post implements Copyable<Post> {
@@ -52,8 +51,8 @@ public class Post implements Copyable<Post> {
     private Integer likes;
     @Column(name = "times_saved")
     private Integer timesSaved;
-
-    // Relations
+	
+	// Relations
     @OneToOne(optional = false)
     @JoinColumn(name = "owner_id",
             unique = true,
@@ -62,8 +61,8 @@ public class Post implements Copyable<Post> {
     private User owner;
     @OneToMany
     @JoinColumn(name = "parent_id",
-            updatable = false,
-            foreignKey = @ForeignKey(name = "fk_post_comment"))
+        updatable = false,
+        foreignKey = @ForeignKey(name = "fk_post_comment"))
     private Set<Post> comments;
     @ManyToMany
     @JoinTable(name = "post_user_likes",
@@ -74,12 +73,12 @@ public class Post implements Copyable<Post> {
     private Set<User> likedBy;
     @ManyToMany
     @JoinTable(name = "post_user_saves",
-            joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"),
-            foreignKey = @ForeignKey(name = "fk_post-user_saves_post"),
-            inverseForeignKey = @ForeignKey(name = "fk_post-user_saves_user"))
+        joinColumns = @JoinColumn(name = "post_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id"),
+        foreignKey = @ForeignKey(name = "fk_post-user_saves_post"),
+        inverseForeignKey = @ForeignKey(name = "fk_post-user_saves_user"))
     private Set<User> savedBy;
-
+    
     // <<-CONSTRUCTORS->>
     public Post() {
         this.setPostId  (null);
@@ -113,7 +112,7 @@ public class Post implements Copyable<Post> {
         this.setLikedBy   (likedBy);
         this.setSavedBy   (savedBy);
     }
-
+    
     // <<-METHODS->>
     @Override
     public Post deepCopy() {
@@ -280,4 +279,19 @@ public class Post implements Copyable<Post> {
             this.savedBy.addAll(DeepCopyGenerator.generateCopy(savedBy));
         }
     }
+
+    // <<-CLASS->>
+    static class TreePost extends java.util.TreeSet<Post> {
+
+        // <<-CONSTANT->>
+        private static final long serialVersionUID = 1L;
+
+        // <<-CONSTRUCTOR->>
+        public TreePost() {
+            // The argument is a Comparator
+            super((p1, p2) -> p1.getPostDate().compareTo(p2.getPostDate()));
+        }
+
+    }
+
 }

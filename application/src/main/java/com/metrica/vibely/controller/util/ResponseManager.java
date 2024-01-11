@@ -58,4 +58,29 @@ public class ResponseManager {
     	return ResponseEntity.ok().body(friendNetworkResponse.generateResponse(participantIds));
     }
 	
+ // <<-CREATE RESPONSE->>
+    public ResponseEntity<CreateUserResponse> generateCreateResponse(UserDTO userDto) {
+    	CreateUserResponse userResponse = new CreateUserResponse();
+    	return ResponseEntity.status(HttpStatus.CREATED).body(userResponse.generateResponse(userDto));
+    }
+    
+    public ResponseEntity<CreateAdminResponse> generateCreateResponse(AdminDTO adminDto) {
+    	CreateAdminResponse adminResponse = new CreateAdminResponse();
+    	return ResponseEntity.status(HttpStatus.CREATED).body(adminResponse.generateResponse(adminDto));
+    }
+    
+    public ResponseEntity<CreatePostResponse> generateCreateResponse(PostDTO postDto) {
+    	CreatePostResponse postResponse = new CreatePostResponse();
+    	return ResponseEntity.status(HttpStatus.CREATED).body(postResponse.generateResponse(postDto));
+    }
+    
+    public ResponseEntity<CreateChatResponse> generateCreateResponse(ChatDTO chatDto) {
+    	CreateChatResponse chatResponse = new CreateChatResponse();
+    	return ResponseEntity.status(HttpStatus.CREATED).body(chatResponse.generateResponse(chatDto));
+    }
+    
+    public ResponseEntity<CreateMessageResponse> generateCreateResponse(MessageDTO messageDto) {
+    	CreateMessageResponse messageResponse = new CreateMessageResponse();
+    	return ResponseEntity.status(HttpStatus.CREATED).body(messageResponse.generateResponse(messageDto));
+    }
 }

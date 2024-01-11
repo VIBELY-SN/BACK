@@ -71,3 +71,104 @@ public class PostController {
         PostDTO createdDTO = this.postService.create(createPostRequest.toPostDTO());
         return this.responseManager.generateCreateResponse(createdDTO);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdatePostResponse> update(
+            @PathVariable
+            UUID id,
+            @RequestBody
+            @Valid
+            UpdatePostRequest postRequest,
+            BindingResult bindingResult
+   ) {
+       if (bindingResult.hasErrors()) {
+           return ResponseEntity.badRequest().build();
+       }
+       PostDTO postDTO = postRequest.toDTO();
+       postDTO.setPostId(id);
+       PostDTO updatedDTO = this.postService.update(postDTO);
+       return this.responseManager.generateUpdateResponse(updatedDTO);
+   }
+
+   @DeleteMapping("/{id}")
+   public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
+       this.postService.deleteById(id);
+       return ResponseEntity.noContent().build();
+   }
+   
+   @PutMapping("addLikedBy/{postId}")
+   public ResponseEntity<UpdateLikedByPostResponse> addLikedBy(
+		   @PathVariable 
+		   UUID postId,
+		   @RequestBody
+           @Valid
+           UpdateLikedByPostRequest postRequest,
+           BindingResult bindingResult
+	){
+	   if (bindingResult.hasErrors()) {
+           return ResponseEntity.badRequest().build();
+       }
+	   PostDTO postDTO = postRequest.toDTO();
+       postDTO.setPostId(postId);
+       PostDTO updatedDTO = this.postService.addLikedBy(postDTO);
+       return this.responseManager.generateLikedByUpdateResponse(updatedDTO);
+   }
+   
+   // DISLIKE
+   @PutMapping("removeLikedBy/{postId}")
+   public ResponseEntity<UpdateLikedByPostResponse> removeLikedBy(
+		   @PathVariable 
+		   UUID postId,
+		   @RequestBody
+           @Valid
+           UpdateLikedByPostRequest postRequest,
+           BindingResult bindingResult
+	){
+	   if (bindingResult.hasErrors()) {
+           return ResponseEntity.badRequest().build();
+       }
+	   PostDTO postDTO = postRequest.toDTO();
+       postDTO.setPostId(postId);
+       PostDTO updatedDTO = this.postService.removeLikedBy(postDTO);
+       return this.responseManager.generateLikedByUpdateResponse(updatedDTO);
+   }
+   
+   // SAVE
+   @PutMapping("addSavedBy/{postId}")
+   public ResponseEntity<UpdateSavedByPostResponse> addTimesSavedBy(
+		   @PathVariable 
+		   UUID postId,
+		   @RequestBody
+           @Valid
+           UpdateSavedByPostRequest postRequest,
+           BindingResult bindingResult
+	){
+	   if (bindingResult.hasErrors()) {
+           return ResponseEntity.badRequest().build();
+       }
+	   PostDTO postDTO = postRequest.toDTO();
+       postDTO.setPostId(postId);
+       PostDTO updatedDTO = this.postService.addSavedBy(postDTO);
+       return this.responseManager.generateSavedByUpdateResponse(updatedDTO);
+   }
+   
+   // SAVE
+   @PutMapping("removeSavedBy/{postId}")
+   public ResponseEntity<UpdateSavedByPostResponse> removeTimesSavedBy(
+		   @PathVariable 
+		   UUID postId,
+		   @RequestBody
+           @Valid
+           UpdateSavedByPostRequest postRequest,
+           BindingResult bindingResult
+	){
+	   if (bindingResult.hasErrors()) {
+           return ResponseEntity.badRequest().build();
+       }
+	   PostDTO postDTO = postRequest.toDTO();
+       postDTO.setPostId(postId);
+       PostDTO updatedDTO = this.postService.removeSavedBy(postDTO);
+       return this.responseManager.generateSavedByUpdateResponse(updatedDTO);
+   }
+ 
+}

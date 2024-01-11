@@ -15,6 +15,14 @@ public class UpdateAdminResponse {
     public UpdateAdminResponse() {
     }
 
+    // <<--METHODS-->>
+    public UpdateAdminResponse generateResponse(AdminDTO adminDTO) {
+        this.setUserId  (adminDTO.getUserId());
+        this.setUsername(adminDTO.getUsername());
+        this.setNickname(adminDTO.getNickname());
+        this.setEmail   (adminDTO.getEmail());
+        return this;
+    }
 
     // <<-GETTERS & SETTERS->>
     public UUID getUserId() {

@@ -83,4 +83,30 @@ public class ResponseManager {
     	CreateMessageResponse messageResponse = new CreateMessageResponse();
     	return ResponseEntity.status(HttpStatus.CREATED).body(messageResponse.generateResponse(messageDto));
     }
+    
+ // <<-UPDATE RESPONSE->>
+    public ResponseEntity<UpdateUserResponse> generateUpdateResponse(UserDTO userDto) {
+    	UpdateUserResponse userResponse = new UpdateUserResponse();
+    	return ResponseEntity.ok().body(userResponse.generateResponse(userDto));
+    }
+    
+    public ResponseEntity<UpdateAdminResponse> generateUpdateResponse(AdminDTO adminDto) {
+    	UpdateAdminResponse adminResponse = new UpdateAdminResponse();
+    	return ResponseEntity.ok().body(adminResponse.generateResponse(adminDto));
+    }
+    
+    public ResponseEntity<UpdatePostResponse> generateUpdateResponse(PostDTO postDto) {
+    	UpdatePostResponse postResponse = new UpdatePostResponse();
+    	return ResponseEntity.ok().body(postResponse.generateResponse(postDto));
+    }
+    
+    public ResponseEntity<UpdateChatResponse> generateUpdateResponse(ChatDTO chatDto) {
+    	UpdateChatResponse chatResponse = new UpdateChatResponse();
+    	return ResponseEntity.ok().body(chatResponse.generateResponse(chatDto));
+    }
+    
+    public ResponseEntity<UpdateMessageResponse> generateUpdateResponse(MessageDTO messageDto) {
+    	UpdateMessageResponse messageResponse = new UpdateMessageResponse();
+    	return ResponseEntity.ok().body(messageResponse.generateResponse(messageDto));
+    }
 }

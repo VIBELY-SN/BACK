@@ -8,13 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * <h1>App Configuration</h1>
- *
- * @since 2023-11-29
- * @version 1.0
- * @author Alex, Gonzalo
- */
 @Configuration
 public class AppConfiguration implements WebMvcConfigurer {
 

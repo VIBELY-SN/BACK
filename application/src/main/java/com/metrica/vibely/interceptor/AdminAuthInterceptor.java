@@ -16,13 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * <h1>Authentication Interceptor</h1>
- *
- * @since 2023-11-29
- * @version 1.0
- * @author Alex, Gonzalo
- */
 @Component
 public class AdminAuthInterceptor implements HandlerInterceptor {
 

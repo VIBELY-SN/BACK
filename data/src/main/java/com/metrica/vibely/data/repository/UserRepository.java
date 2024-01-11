@@ -9,12 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.metrica.vibely.data.entity.User;
 
-/**
- *
- * @since 2023-11-14
- * @author Raul
- * @version 1.0
- */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, java.util.UUID> {
 

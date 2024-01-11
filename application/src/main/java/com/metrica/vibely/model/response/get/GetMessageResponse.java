@@ -23,6 +23,20 @@ public class GetMessageResponse {
     public GetMessageResponse() {
     }
 
+    //	<<--METHODS-->>
+    public GetMessageResponse generateResponse(MessageDTO messageDto) {
+
+        this.setMessageId(messageDto.getMessageId());
+        this.setCreationTimestamp(messageDto.getCreationTimestamp());
+        this.setStatus(messageDto.getStatus());
+        this.setState(messageDto.getState());
+        this.setContent(messageDto.getContent());
+        this.setChat(messageDto.getChat());
+        this.setSender(messageDto.getSender());
+
+        return this;
+    }
+
     //	<<--GETTERS & SETTERS-->>
     public UUID getMessageId() {
         return messageId;

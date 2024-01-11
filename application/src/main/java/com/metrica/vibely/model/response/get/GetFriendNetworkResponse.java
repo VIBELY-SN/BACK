@@ -14,6 +14,12 @@ public class GetFriendNetworkResponse {
     public GetFriendNetworkResponse() {
     }
 
+    // <<--METHODS-->>
+    public GetFriendNetworkResponse generateResponse(Set<UUID> participantIds) {
+        this.setFollowers(participantIds);
+        return this;
+    }
+
     // <<--GETTERS & SETTERS-->>
 
     public Set<UUID> getFollowers() {

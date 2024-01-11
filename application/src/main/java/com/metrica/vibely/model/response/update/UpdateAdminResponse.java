@@ -23,7 +23,6 @@ public class UpdateAdminResponse {
         this.setEmail   (adminDTO.getEmail());
         return this;
     }
-
     // <<-GETTERS & SETTERS->>
     public UUID getUserId() {
         return userId;

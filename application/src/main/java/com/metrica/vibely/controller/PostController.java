@@ -29,13 +29,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * <h1>Post Controller</h1>
- * 
- * @since 2023-11-27
- * @version 1.0
- * @author Adri
- */
 @RestController
 @RequestMapping("/api/v1/posts")
 public class PostController {

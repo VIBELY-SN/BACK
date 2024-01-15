@@ -1,5 +1,21 @@
 package com.metrica.vibely.data.entity;
 
+import com.metrica.vibely.data.model.enumerator.PostStatus;
+import com.metrica.vibely.data.model.enumerator.PostVisibility;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class PostEntityTest {
 
 	// <<-CONSTANTS->>

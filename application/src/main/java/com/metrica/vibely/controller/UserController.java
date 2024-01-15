@@ -7,7 +7,7 @@ import com.metrica.vibely.data.model.enumerator.UserState;
 import com.metrica.vibely.model.request.CreateUserRequest;
 import com.metrica.vibely.model.request.UpdateUserRequest;
 import com.metrica.vibely.model.response.create.CreateUserResponse;
-import com.metrica.vibely.model.response.get.BasicInfoResponse;
+import com.metrica.vibely.model.response.get.GetUserResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
 import com.metrica.vibely.service.UserService;
 
@@ -32,53 +32,52 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     // <<-FIELDS->>
-    private ResponseManager responseManager;
+	private ResponseManager responseManager;
     private UserService userService;
 
     // <<-CONSTRUCTOR->>
     @Autowired
     public UserController(UserService userService, ResponseManager responseManager) {
-        this.responseManager = responseManager;
+    	this.responseManager = responseManager;
         this.userService = userService;
     }
 
     // <<-METHODS->>
     @GetMapping("/{id}")
-    public ResponseEntity<BasicInfoResponse> getById(@PathVariable UUID id) {
+    public ResponseEntity<GetUserResponse> getById(@PathVariable UUID id) {
         UserDTO userDTO = this.userService.getById(id);
-
+        
         if (userDTO.getState() != UserState.DISABLED) {
-            return this.responseManager.generateGetResponse(userDTO);
+        	return this.responseManager.generateGetResponse(userDTO);
         }
-
+        
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<BasicInfoResponse> getByUsername(@PathVariable String username) {
+    public ResponseEntity<GetUserResponse> getByUsername(@PathVariable String username) {
         UserDTO userDTO = this.userService.getByUsername(username);
-
+        
         if (userDTO.getState()   != UserState.DISABLED &&
-                userDTO.getPrivacy() == PrivacyType.PUBLIC) {
-            return this.responseManager.generateGetResponse(userDTO);
+            userDTO.getPrivacy() == PrivacyType.PUBLIC) {
+        	return this.responseManager.generateGetResponse(userDTO);
         }
-
+        
         return ResponseEntity.notFound().build();
     }
-
+    
     @GetMapping("/email/{email}")
-    public ResponseEntity<BasicInfoResponse> getByEmail(@PathVariable String email) {
+    public ResponseEntity<GetUserResponse> getByEmail(@PathVariable String email) {
         UserDTO userDTO = this.userService.getByEmail(email);
-
+        
         if (userDTO.getState()   != UserState.DISABLED &&
-                userDTO.getPrivacy() == PrivacyType.PUBLIC) {
-            return this.responseManager.generateGetResponse(userDTO);
+            userDTO.getPrivacy() == PrivacyType.PUBLIC) {
+        	return this.responseManager.generateGetResponse(userDTO);
         }
-
+        
         return ResponseEntity.notFound().build();
     }
-
-
+    
     /**
      * @TODO falta añadir la funcionalidad
      * @param id
@@ -87,7 +86,7 @@ public class UserController {
 //    @GetMapping("/friendNetwork/{id}")
 //    public ResponseEntity<GetFriendNetworkResponse> getNetwork(@PathVariable UUID id){
 //		Set<UUID> participantIds = this.userService.getFriendNetwork(id);
-//        return this.responseManager.generateGetNetworkResponse(participantIds);
+//        return this.responseManager.generateGetNetworkResponse(participantIds);  	
 //    }
 
     @PostMapping("/signup")
@@ -97,11 +96,11 @@ public class UserController {
             CreateUserRequest userRequest,
             BindingResult bindingResult
     ) {
-
-        if (bindingResult.hasErrors()) {
+        
+        if (bindingResult.hasErrors()) {            
             return ResponseEntity.badRequest().build();
         }
-
+        
         UserDTO userDTO = this.userService.create(userRequest.toUserDTO());
         return this.responseManager.generateCreateResponse(userDTO);
     }
@@ -129,5 +128,5 @@ public class UserController {
         this.userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
+    
 }

@@ -1,5 +1,10 @@
 package com.metrica.vibely.data.model.mapper;
 
+import com.metrica.vibely.data.entity.Chat;
+import com.metrica.vibely.data.entity.Message;
+import com.metrica.vibely.data.entity.User;
+import com.metrica.vibely.data.model.dto.MessageDTO;
+
 public class MessageMapper {
 	public static Message toEntity(MessageDTO messageDTO, Chat chat, User sender) {
         Message message = new Message();

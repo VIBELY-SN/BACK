@@ -1,5 +1,19 @@
 package com.metrica.vibely.data.entity;
 
+import com.metrica.vibely.data.model.enumerator.MessageState;
+import com.metrica.vibely.data.model.enumerator.MessageStatus;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class MessageEntityTest {
 
 	// <<-CONSTANTS->>

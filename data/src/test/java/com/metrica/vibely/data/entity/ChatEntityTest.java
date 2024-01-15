@@ -1,5 +1,24 @@
 package com.metrica.vibely.data.entity;
 
+import com.metrica.vibely.data.model.enumerator.ChatState;
+import com.metrica.vibely.data.model.enumerator.ChatStatus;
+import com.metrica.vibely.data.model.enumerator.ChatType;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class ChatEntityTest {
 
 	// <<-CONSTANTS->>

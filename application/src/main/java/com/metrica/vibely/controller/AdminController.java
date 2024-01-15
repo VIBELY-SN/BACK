@@ -27,13 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * <h1>Administrator Controller</h1>
- * 
- * @since 2023-11-20
- * @version 1.0  
- * @author Alex
- */
 @RestController
 @RequestMapping("/api/v1/admin/users")
 public class AdminController {

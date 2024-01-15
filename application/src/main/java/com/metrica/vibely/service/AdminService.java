@@ -3,6 +3,7 @@ package com.metrica.vibely.service;
 import com.metrica.vibely.data.model.dto.AdminDTO;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
 
 public interface AdminService extends CrudService<AdminDTO, UUID> {
 	

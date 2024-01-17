@@ -23,12 +23,12 @@ public interface AdminRepository extends JpaRepository<Admin, java.util.UUID> {
 	@Query("SELECT a FROM Admin a WHERE a.username = :username")
 	Optional<Admin> findByAdminUsername(@Param("username") String username);
 
-    /**
+    /** 
      * Find a user by its username.
      *
      * @param username the unique username
      * @return the user if exist
-     */
+     */ 
 	@Query("SELECT a FROM Admin a WHERE a.email = :email")
     Optional<Admin> findByEmail(@Param("email")String email);
 
@@ -39,7 +39,10 @@ public interface AdminRepository extends JpaRepository<Admin, java.util.UUID> {
      * @param username
      * @throws NoSuchElementException
      */
-//	void deleteByUsername(String username);
+	@Query("SELECT a FROM Admin a WHERE a.username = :username")
+	void deleteAdminByUsername(@Param("username")String username);
+	
+	
     @Query("SELECT a.apikey FROM Admin a WHERE a.userId=:id")
     Optional<String> findApikeyByUserId(UUID id);
 }

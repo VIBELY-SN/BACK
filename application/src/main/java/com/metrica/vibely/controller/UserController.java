@@ -98,7 +98,7 @@ public class UserController {
     ) {
         
         if (bindingResult.hasErrors()) {            
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().build(); 
         }
         
         UserDTO userDTO = this.userService.create(userRequest.toUserDTO());
@@ -114,6 +114,7 @@ public class UserController {
             UpdateUserRequest userRequest,
             BindingResult bindingResult
     ) {
+    	System.out.println("Sy un a mierda");
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }

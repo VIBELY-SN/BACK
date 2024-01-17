@@ -1,19 +1,5 @@
 package com.metrica.vibely.controller;
 
-import com.metrica.vibely.controller.util.ResponseManager;
-import com.metrica.vibely.data.model.dto.AdminDTO;
-import com.metrica.vibely.data.model.enumerator.PrivacyType;
-import com.metrica.vibely.data.model.enumerator.UserState;
-import com.metrica.vibely.model.request.CreateAdminRequest;
-import com.metrica.vibely.model.request.UpdateAdminRequest;
-import com.metrica.vibely.model.response.create.CreateAdminResponse;
-import com.metrica.vibely.model.response.get.BasicInfoResponse;
-import com.metrica.vibely.model.response.get.GetAdminResponse;
-import com.metrica.vibely.model.response.update.UpdateAdminResponse;
-import com.metrica.vibely.service.AdminService;
-
-import jakarta.validation.Valid;
-
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +13,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.metrica.vibely.controller.util.ResponseManager;
+import com.metrica.vibely.data.model.dto.AdminDTO;
+import com.metrica.vibely.data.model.enumerator.PrivacyType;
+import com.metrica.vibely.data.model.enumerator.UserState;
+import com.metrica.vibely.model.request.CreateAdminRequest;
+import com.metrica.vibely.model.request.UpdateAdminRequest;
+import com.metrica.vibely.model.response.create.CreateAdminResponse;
+import com.metrica.vibely.model.response.get.GetAdminResponse;
+import com.metrica.vibely.model.response.update.UpdateAdminResponse;
+import com.metrica.vibely.service.AdminService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/admin/users")
@@ -46,7 +45,7 @@ public class AdminController {
     }
 
     // <<-METHODS->>
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")  
     public ResponseEntity<GetAdminResponse> getById(@PathVariable UUID id) {
         AdminDTO adminDTO = this.adminService.getById(id);
         return this.responseManager.generateGetResponse(adminDTO);
@@ -104,6 +103,7 @@ public class AdminController {
             UpdateAdminRequest userRequest,
             BindingResult bindingResult
     ) {
+    	System.out.println("frederick");
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }

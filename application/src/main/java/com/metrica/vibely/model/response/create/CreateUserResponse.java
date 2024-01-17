@@ -2,15 +2,8 @@ package com.metrica.vibely.model.response.create;
 
 import java.util.UUID;
 
-import com.metrica.vibely.data.model.dto.AdminDTO;
 import com.metrica.vibely.data.model.dto.UserDTO;
 
-/**
- * 
- * @since 2023-12-15
- * @author 
- * @version 1.0
- */
 public class CreateUserResponse {
 	// <<-FIELDS->>
 	private UUID userId;

@@ -19,17 +19,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	
-	 // ATRIBUTES
+
+    // <<-FIELD->>
     private AdminRepository adminRepository;
     
-    // CONSTRUCTOR
+    // <<-CONSTRUCTOR->>
     @Autowired
     public AdminServiceImpl(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
     
-    // METHODS
+    // <<-METHODS->>
     @Override
     public AdminDTO getById(UUID id) {
         Admin admin = this.adminRepository.findById(id).orElseThrow();
@@ -50,7 +50,7 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = this.adminRepository.findByEmail(email).orElseThrow();
         return AdminMapper.toDTO(admin);
     }
-    
+
     @Override
     public AdminDTO create(AdminDTO adminDTO) {
         Admin admin = AdminMapper.toEntity(adminDTO);
@@ -94,7 +94,7 @@ public class AdminServiceImpl implements AdminService {
         // TODO Auto-generated method stub
         
     }
-    
+
     @Override
     public AdminDTO followUser(UUID adminId, UUID followedUserId) {
         // TODO Auto-generated method stub
@@ -106,4 +106,5 @@ public class AdminServiceImpl implements AdminService {
         // TODO Auto-generated method stub
         return null;
     }
+
 }

@@ -27,100 +27,107 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/api/v1/chats")
 public class ChatController {
-		// ATRIBUTES
-		ResponseManager responseManager;
-	    private ChatService chatService;
 
-	    // CONSTRUCTOR
-	    @Autowired
-	    public ChatController(ChatService chatService, ResponseManager responseManager) {
-	    	this.responseManager = responseManager;
-	        this.chatService = chatService;
-	    }
-	    // METHODS
-	    @GetMapping("/{id}")
-	    public ResponseEntity<GetChatResponse> getById(@PathVariable UUID id) {
-	    	ChatDTO chatDto = chatService.getById(id); 
-	    	
-	    	if (chatDto.getState()   != ChatState.DISABLED) {
-	    		return this.responseManager.generateGetResponse(chatDto);
-	    	}
-	    	return ResponseEntity.notFound().build();
-	    }
-	    @PostMapping("/create")
-	    public ResponseEntity<CreateChatResponse> create(
-	            @RequestBody
-//	          @Valid
-	            CreateChatRequest chatRequest,
-	            BindingResult bindingResult
-	     ) {
-	         if (bindingResult.hasErrors()) {
-	             return ResponseEntity.badRequest().build();
-	         }
-	         ChatDTO chatDto = this.chatService.create(chatRequest.toChatDTO());
-	         return this.responseManager.generateCreateResponse(chatDto);
-	     }
-	    @PutMapping("/{id}")
-	    public ResponseEntity<UpdateChatResponse> updateById(
-	            @PathVariable
-	            UUID id,
-	            @RequestBody
-	            @Valid
-	            UpdateChatRequest chatRequest,
-	            BindingResult bindingResult
-	    ) {
-	        if (bindingResult.hasErrors()) {
-	            return ResponseEntity.badRequest().build();
-	        }
+    // <<-FIELDS->>
+	ResponseManager responseManager;
+    private ChatService chatService;
 
-	        ChatDTO chatDTO = chatRequest.toDTO();
-	        chatDTO.setChatId(id);
+    // <<-CONSTRUCTOR->>
+    @Autowired
+    public ChatController(ChatService chatService, ResponseManager responseManager) {
+    	this.responseManager = responseManager;
+        this.chatService = chatService;
+    }
 
-	        ChatDTO updatedDTO = this.chatService.update(chatDTO);
-	        return this.responseManager.generateUpdateResponse(updatedDTO);
-	    }
+    // <<-METHODS->>
+    @GetMapping("/{id}")
+    public ResponseEntity<GetChatResponse> getById(@PathVariable UUID id) {
+    	ChatDTO chatDto = chatService.getById(id); 
+    	
+    	if (chatDto.getState()   != ChatState.DISABLED) {
+    		return this.responseManager.generateGetResponse(chatDto);
+    	}
+    	return ResponseEntity.notFound().build();
+    }
 
-	    @DeleteMapping("/{id}")
-	    public ResponseEntity<Void> deleteByUsername(@PathVariable UUID id) {
-	        this.chatService.deleteById(id);
-	        return ResponseEntity.noContent().build();
-	    }
-		
-		@PutMapping("/add/{id}")
-		public ResponseEntity<UpdateChatResponse> addMember(
-				@PathVariable
-				UUID id,
-				@RequestBody
-				AddRemoveChatRequest chatRequest,
-				BindingResult bindingResult
-		 ) {
-	         if (!bindingResult.hasErrors()) {
-	             ChatDTO chatDto = chatRequest.toDTO();
-	             chatDto.setChatId(id);
+    @PostMapping("/create")
+    public ResponseEntity<CreateChatResponse> create(
+            @RequestBody
+//          @Valid
+            CreateChatRequest chatRequest,
+            BindingResult bindingResult
+     ) {
+         if (bindingResult.hasErrors()) {
+             return ResponseEntity.badRequest().build();
+         }
+         ChatDTO chatDto = this.chatService.create(chatRequest.toChatDTO());
+         return this.responseManager.generateCreateResponse(chatDto);
+     }
+	
+	@PutMapping("/{id}")
+    public ResponseEntity<UpdateChatResponse> updateById(
+            @PathVariable
+            UUID id,
+            @RequestBody
+            @Valid
+            UpdateChatRequest chatRequest,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
 
-	             ChatDTO updatedDto = this.chatService.addMembers(id, chatDto.getParticipants());
+        ChatDTO chatDTO = chatRequest.toDTO();
+        chatDTO.setChatId(id);
 
-	             return this.responseManager.generateUpdateResponse(updatedDto);
-	         }
-	         return ResponseEntity.badRequest().build();
-	     }
-		
-		@PutMapping("/remove/{id}")
-		public ResponseEntity<UpdateChatResponse> removeMember(
-				@PathVariable
-				UUID id,
-				@RequestBody
-				AddRemoveChatRequest chatRequest,
-				BindingResult bindingResult
-		) {
-	        if (!bindingResult.hasErrors()) {
-	            ChatDTO chatDto = chatRequest.toDTO();
-	            chatDto.setChatId(id);
+        ChatDTO updatedDTO = this.chatService.update(chatDTO);
+        return this.responseManager.generateUpdateResponse(updatedDTO);
+    }
 
-	            ChatDTO updatedDto = this.chatService.removeMembers(id, chatDto.getParticipants());
-	            return this.responseManager.generateUpdateResponse(updatedDto);
-	        }
-	        return ResponseEntity.badRequest().build();
-	    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteByUsername(@PathVariable UUID id) {
+        this.chatService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+	
+	@PutMapping("/add/{id}")
+	public ResponseEntity<UpdateChatResponse> addMember(
+			@PathVariable
+			UUID id,
+			@RequestBody
+			AddRemoveChatRequest chatRequest,
+			BindingResult bindingResult
+	 ) {
+         if (!bindingResult.hasErrors()) {
+             ChatDTO chatDto = chatRequest.toDTO();
+             chatDto.setChatId(id);
+
+             ChatDTO updatedDto = this.chatService.addMembers(id, chatDto.getParticipants());
+
+             return this.responseManager.generateUpdateResponse(updatedDto);
+         }
+         return ResponseEntity.badRequest().build();
+     }
+	
+	@PutMapping("/remove/{id}")
+	public ResponseEntity<UpdateChatResponse> removeMember(
+			@PathVariable
+			UUID id,
+			@RequestBody
+			AddRemoveChatRequest chatRequest,
+			BindingResult bindingResult
+	) {
+        if (!bindingResult.hasErrors()) {
+            ChatDTO chatDto = chatRequest.toDTO();
+            chatDto.setChatId(id);
+
+            ChatDTO updatedDto = this.chatService.removeMembers(id, chatDto.getParticipants());
+            return this.responseManager.generateUpdateResponse(updatedDto);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 }

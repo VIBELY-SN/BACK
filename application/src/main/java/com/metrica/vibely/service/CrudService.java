@@ -1,7 +1,21 @@
 package com.metrica.vibely.service;
 
-public interface CrudService<DTO, ID> {
-	/**
+/**
+ * <h1>CRUD Service</h1>
+ * 
+ * <p>Service with the basic CRUD methods</p>
+ * <ul>
+ *  <li>Create</li>
+ *  <li>Read</li>
+ *  <li>Update</li>
+ *  <li>Delete</li>
+ * </ul>
+ * 
+*/
+
+abstract interface CrudService<DTO, ID> {
+
+    /**
      * Fetches an object by its identifier.
      *
      * @param id the object identifier
@@ -33,4 +47,5 @@ public interface CrudService<DTO, ID> {
      * @throws NoSuchElementException
      */
     void deleteById(ID id);
+
 }

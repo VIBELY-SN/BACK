@@ -2,14 +2,8 @@ package com.metrica.vibely.service;
 
 import java.util.UUID;
 
-/**
- *
- *
- * @since 2023-11-14
- * @version 1.0
- */
 public interface AuthService {
-
+    
     /**
      * @param username
      * @param password
@@ -25,7 +19,7 @@ public interface AuthService {
      * @return
      */
     String emailAuth(String email, String password);
-
+    
     /**
      * @param username
      * @param password
@@ -41,14 +35,14 @@ public interface AuthService {
      * @return
      */
     String adminEmailAuth(String email, String password);
-
+    
     /**
-     *
+     * 
      * @param id
      * @return
      */
     String getApikey(UUID id);
-
+    
     String getAdminApikey(UUID id);
 
 }

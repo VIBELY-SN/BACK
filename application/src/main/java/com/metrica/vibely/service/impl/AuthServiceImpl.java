@@ -13,12 +13,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * 
- * @since 2023-11-14
- * @version 1.0
- * @author
- */
 @Service
 public class AuthServiceImpl implements AuthService {
 

@@ -29,27 +29,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     // <<-FIELDS->>
-    private ResponseManager responseManager;
+	private ResponseManager responseManager;
     private MessageService messageService;
 
     // <<-CONSTRUCTOR->>
     @Autowired
     public MessageController(MessageService messageService, ResponseManager responseManager) {
-        this.responseManager = responseManager;
+    	this.responseManager = responseManager;
         this.messageService = messageService;
     }
 
     // <<-METHODS->>
     @GetMapping("/{id}")
     public ResponseEntity<GetMessageResponse> getById(@PathVariable UUID id) {
-        MessageDTO messageDto = this.messageService.getById(id);
-        if(messageDto.getState()== MessageState.DISABLED) throw new NoSuchElementException();
-        return this.responseManager.generateGetResponse(messageDto);
+    	MessageDTO messageDto = this.messageService.getById(id);
+    	if(messageDto.getState()== MessageState.DISABLED) throw new NoSuchElementException();
+    	return this.responseManager.generateGetResponse(messageDto);
     }
-
-    @PostMapping("/create")
-    public ResponseEntity<CreateMessageResponse> create(
-            @RequestBody
+    
+	@PostMapping("/create")
+	public ResponseEntity<CreateMessageResponse> create(
+            @RequestBody 
             CreateMessageRequest createMessage,
             BindingResult bindingResult
     ){
@@ -61,7 +61,7 @@ public class MessageController {
 
         return this.responseManager.generateCreateResponse(message);
     }
-
+	
     @PutMapping("/{id}")
     public ResponseEntity<UpdateMessageResponse> update(
             @PathVariable
@@ -74,7 +74,7 @@ public class MessageController {
             return ResponseEntity.badRequest().build();
 
         MessageDTO messageDto = createMessage.toDto();
-
+        
         messageDto.setMessageId(id);
         MessageDTO message = this.messageService.update(messageDto);
 
@@ -86,4 +86,5 @@ public class MessageController {
         this.messageService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 }

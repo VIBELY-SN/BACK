@@ -31,12 +31,7 @@ public class CreateAdminRequest {
     // <<-CONSTRUCTOR->>
     public CreateAdminRequest() {
     }
-
-    // <<-GETTERS & SETTERS->>
-    public String getUsername() {
-        return this.username;
-    }
-
+    
     // <<-METHODS->>
     public AdminDTO toAdminDTO() {
         AdminDTO admin = new AdminDTO();
@@ -47,6 +42,11 @@ public class CreateAdminRequest {
         admin.setEmail   (this.email);
 
         return admin;
+    }
+
+    // <<-GETTERS & SETTERS->>
+    public String getUsername() {
+        return this.username;
     }
 
     public void setUsername(final String username) {

@@ -18,13 +18,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * <h1>Post Service Impl</h1>
- * 
- * @since 2023-11-27
- * @author 
- * @version 1.0
- */
 @Service
 public class PostServiceImpl implements PostService{
 	

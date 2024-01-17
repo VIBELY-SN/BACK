@@ -7,29 +7,29 @@ import com.metrica.vibely.data.model.enumerator.PostVisibility;
 import java.util.UUID;
 
 public interface PostService extends CrudService<PostDTO, UUID> {
-
-	/**
-	 *
-	 * @param content
+	
+    /**
+	 * 
+	 * @param content 
 	 * @param CreatorUsername
 	 * @return postDTO
 	 * @throws NoSuchElementException
 	 */
 	PostDTO getByContentandCreator(String content, String username);
-
+	
 	/**
 	 * changes post status
 	 * @param status
 	 * @throws NoSuchElementException
 	 */
-	PostDTO changeStatus(PostStatus status);
-
+	PostDTO changeStatus(PostStatus status); 
+	
 	/**
 	 * changes post visibility
 	 * @param visibility
 	 * @throws NoSuchElementException
 	 */
-	PostDTO changeVisibility(PostVisibility visibility);
+	PostDTO changeVisibility(PostVisibility visibility); 
 
 	void deleteById(UUID postId);
 
@@ -53,12 +53,12 @@ public interface PostService extends CrudService<PostDTO, UUID> {
 	 * @throws NoSuchElementException
 	 */
 	PostDTO addSavedBy(PostDTO postDTO);
-
+	
 	/**
 	 * remove user to savedBy list
 	 * @param postDTO
 	 * @throws NoSuchElementException
 	 */
 	PostDTO removeSavedBy(PostDTO postDTO);
-
+	
 }

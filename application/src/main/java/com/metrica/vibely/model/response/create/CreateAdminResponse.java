@@ -33,7 +33,7 @@ public class CreateAdminResponse {
     public void setUserId(final UUID userId) {
         this.userId = userId;
     }
-
+    
     public String getUsername() {
         return this.username;
     }
@@ -57,6 +57,5 @@ public class CreateAdminResponse {
     public void setEmail(final String email) {
         this.email = email;
     }
-
 
 }

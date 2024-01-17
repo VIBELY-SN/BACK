@@ -19,44 +19,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessageServiceImpl implements MessageService {
+public class MessageServiceImpl implements MessageService{
+	private MessageRepository messageRepository;
+	private ChatRepository chatRepository;
+	private UserRepository userRepository;
+	
+	@Autowired
+	public MessageServiceImpl(final MessageRepository messageRepository, final ChatRepository chatRepository, final UserRepository userRepository) {
+		this.messageRepository=messageRepository;
+		this.chatRepository=chatRepository;
+		this.userRepository=userRepository;
+	}
+	
+	@Override
+	public MessageDTO getById(UUID id) {
+		return MessageMapper.toDTO(this.messageRepository.findById(id).orElseThrow());
+	}
 
-//  <<--FIELDS-->>
-    private MessageRepository messageRepository;
-    private ChatRepository chatRepository;
-    private UserRepository userRepository;
-
-//  <<--CONSTRUCTOR-->>
-    @Autowired
-    public MessageServiceImpl(final MessageRepository messageRepository, final ChatRepository chatRepository, final UserRepository userRepository) {
-        this.messageRepository = messageRepository;
-        this.chatRepository = chatRepository;
-        this.userRepository = userRepository;
-    }
-
-//  <<--METHODS-->>
-
-    @Override
-    public MessageDTO getById(UUID id) {
-        return MessageMapper.toDTO(this.messageRepository.findById(id).orElseThrow());
-    }
-
-    @Override
-    public MessageDTO create(final MessageDTO dto) {
-        Message message = MessageMapper.toEntity(dto, null, null);
-        Chat chat = this.chatRepository.findById(dto.getChat()).orElseThrow();
-        User user = this.userRepository.findById(dto.getSender()).orElseThrow();
-
-        message.setCreationTimestamp(LocalDateTime.now());
-        message.setStatus			(MessageStatus.PENDING);
-        message.setState			(MessageState.ENABLED);
-        message.setContent			(message.getContent());
-        message.setSender			(user);
-        message.setChat				(chat);
-
-        return MessageMapper.toDTO(messageRepository.save(message));
-    }
-
+	@Override
+	public MessageDTO create(final MessageDTO dto) {
+		Message message = MessageMapper.toEntity(dto, null, null);
+		Chat chat = this.chatRepository.findById(dto.getChat()).orElseThrow();
+		User user = this.userRepository.findById(dto.getSender()).orElseThrow();
+		
+		message.setCreationTimestamp(LocalDateTime.now());
+		message.setStatus			(MessageStatus.PENDING);
+		message.setState			(MessageState.ENABLED);
+		message.setContent			(message.getContent());
+		message.setSender			(user);
+		message.setChat				(chat);
+		
+		return MessageMapper.toDTO(messageRepository.save(message));
+	}
 
     @Override
     public MessageDTO update(MessageDTO messageDTO) {
@@ -72,29 +66,28 @@ public class MessageServiceImpl implements MessageService {
 
         return MessageMapper.toDTO(this.messageRepository.save(message));
     }
+	
+	@Override
+	public void deleteById(UUID id) {
+		messageRepository.deleteById(id);
+		
+	}
 
-    @Override
-    public void deleteById(UUID id) {
-        messageRepository.deleteById(id);
+	@Override
+	public MessageDTO getByContent(String content) {
+		return null;
+	}
 
-    }
+	@Override
+	public UUID getSender(UUID messageId) {
+		MessageDTO messageDto = MessageMapper.toDTO(messageRepository.findById(messageId).get());
+		return messageDto.getSender();
+	}
 
-    @Override
-    public MessageDTO getByContent(String content) {
-        return null;
-    }
-
-
-    @Override
-    public UUID getSender(UUID messageId) {
-        MessageDTO messageDto = MessageMapper.toDTO(messageRepository.findById(messageId).get());
-        return messageDto.getSender();
-    }
-
-    @Override
-    public UUID getChat(UUID messageId) {
-        MessageDTO messageDto = MessageMapper.toDTO(messageRepository.findById(messageId).get());
-        return messageDto.getChat();
+	@Override
+	public UUID getChat(UUID messageId) {
+		MessageDTO messageDto = MessageMapper.toDTO(messageRepository.findById(messageId).get());
+		return messageDto.getChat();
     }
 
 }

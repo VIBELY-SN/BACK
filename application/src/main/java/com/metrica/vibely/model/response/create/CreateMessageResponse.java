@@ -5,57 +5,57 @@ import java.util.UUID;
 import com.metrica.vibely.data.model.dto.MessageDTO;
 
 public class CreateMessageResponse {
-    //	<<--ATRIBUTES-->>
-    private UUID messageId;
-    private UUID sender;
-    private UUID chatId;
-    private String content;
+//	<<--ATRIBUTES-->>
+	private UUID messageId;
+	private UUID sender;
+	private UUID chatId;
+	private String content;
+	
+//	<<--CONSTRUCTOR-->>
+	public CreateMessageResponse() {
+	}
 
-    //	<<--CONSTRUCTOR-->>
-    public CreateMessageResponse() {
-    }
+//	<<--METHODS-->>
+	public CreateMessageResponse generateResponse(MessageDTO messageDto) {		
+		
+		this.setMessageId(messageDto.getMessageId());
+		this.setSender(messageDto.getSender());
+		this.setChatId(messageDto.getChat());
+		this.setContent(messageDto.getContent());
+		
+		return this;
+	}
+	
+//	<<--GETTERS & SETTERS-->>
+	public UUID getMessageId() {
+		return messageId;
+	}
 
-    //	<<--METHODS-->>
-    public CreateMessageResponse generateResponse(MessageDTO messageDto) {
+	public void setMessageId(UUID messageId) {
+		this.messageId = messageId;
+	}
 
-        this.setMessageId(messageDto.getMessageId());
-        this.setSender(messageDto.getSender());
-        this.setChatId(messageDto.getChat());
-        this.setContent(messageDto.getContent());
+	public UUID getSender() {
+		return sender;
+	}
 
-        return this;
-    }
+	public void setSender(UUID sender) {
+		this.sender = sender;
+	}
 
-    //	<<--GETTERS & SETTERS-->>
-    public UUID getMessageId() {
-        return messageId;
-    }
+	public UUID getChatId() {
+		return chatId;
+	}
 
-    public void setMessageId(UUID messageId) {
-        this.messageId = messageId;
-    }
+	public void setChatId(UUID chatId) {
+		this.chatId = chatId;
+	}
 
-    public UUID getSender() {
-        return sender;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setSender(UUID sender) {
-        this.sender = sender;
-    }
-
-    public UUID getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(UUID chatId) {
-        this.chatId = chatId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

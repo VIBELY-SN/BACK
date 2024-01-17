@@ -4,12 +4,6 @@ import java.util.UUID;
 
 import com.metrica.vibely.data.model.dto.PostDTO;
 
-/**
- * 
- * @since 2023-12-27
- * @author 
- * @version 1.0
- */
 public class CreatePostResponse {
 
 	// <<-FIELDS->>

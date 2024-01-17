@@ -8,89 +8,89 @@ import com.metrica.vibely.data.model.enumerator.MessageState;
 import com.metrica.vibely.data.model.enumerator.MessageStatus;
 
 public class GetMessageResponse {
+	
+//	<<--ATRIBUTES-->>
+	private UUID messageId;
+	private LocalDateTime creationTimestamp;
+	private MessageStatus status;
+	private MessageState state;
+	private String content;
 
-    //	<<--ATRIBUTES-->>
-    private UUID messageId;
-    private LocalDateTime creationTimestamp;
-    private MessageStatus status;
-    private MessageState state;
-    private String content;
+	private UUID chat;
+	private UUID sender;
+	 
+//	<<--CONSTRUCTOR-->>
+	public GetMessageResponse() {
+	}
 
-    private UUID chat;
-    private UUID sender;
+//	<<--METHODS-->>
+	public GetMessageResponse generateResponse(MessageDTO messageDto) {
+		
+		this.setMessageId(messageDto.getMessageId());
+		this.setCreationTimestamp(messageDto.getCreationTimestamp());
+		this.setStatus(messageDto.getStatus());
+		this.setState(messageDto.getState());
+		this.setContent(messageDto.getContent());
+		this.setChat(messageDto.getChat());
+		this.setSender(messageDto.getSender());
+		
+		return this;
+	}
+	
+//	<<--GETTERS & SETTERS-->> 
+	public UUID getMessageId() {
+		return messageId;
+	}
 
-    //	<<--CONSTRUCTOR-->>
-    public GetMessageResponse() {
-    }
+	public void setMessageId(UUID messageId) {
+		this.messageId = messageId;
+	}
 
-    //	<<--METHODS-->>
-    public GetMessageResponse generateResponse(MessageDTO messageDto) {
+	public LocalDateTime getCreationTimestamp() {
+		return creationTimestamp;
+	}
 
-        this.setMessageId(messageDto.getMessageId());
-        this.setCreationTimestamp(messageDto.getCreationTimestamp());
-        this.setStatus(messageDto.getStatus());
-        this.setState(messageDto.getState());
-        this.setContent(messageDto.getContent());
-        this.setChat(messageDto.getChat());
-        this.setSender(messageDto.getSender());
+	public void setCreationTimestamp(LocalDateTime creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+	}
 
-        return this;
-    }
+	public MessageStatus getStatus() {
+		return status;
+	}
 
-    //	<<--GETTERS & SETTERS-->>
-    public UUID getMessageId() {
-        return messageId;
-    }
+	public void setStatus(MessageStatus status) {
+		this.status = status;
+	}
 
-    public void setMessageId(UUID messageId) {
-        this.messageId = messageId;
-    }
+	public MessageState getState() {
+		return state;
+	}
 
-    public LocalDateTime getCreationTimestamp() {
-        return creationTimestamp;
-    }
+	public void setState(MessageState state) {
+		this.state = state;
+	}
 
-    public void setCreationTimestamp(LocalDateTime creationTimestamp) {
-        this.creationTimestamp = creationTimestamp;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public MessageStatus getStatus() {
-        return status;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setStatus(MessageStatus status) {
-        this.status = status;
-    }
+	public UUID getChat() {
+		return chat;
+	}
 
-    public MessageState getState() {
-        return state;
-    }
+	public void setChat(UUID chat) {
+		this.chat = chat;
+	}
 
-    public void setState(MessageState state) {
-        this.state = state;
-    }
+	public UUID getSender() {
+		return sender;
+	}
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public UUID getChat() {
-        return chat;
-    }
-
-    public void setChat(UUID chat) {
-        this.chat = chat;
-    }
-
-    public UUID getSender() {
-        return sender;
-    }
-
-    public void setSender(UUID sender) {
-        this.sender = sender;
-    }
+	public void setSender(UUID sender) {
+		this.sender = sender;
+	}
 }

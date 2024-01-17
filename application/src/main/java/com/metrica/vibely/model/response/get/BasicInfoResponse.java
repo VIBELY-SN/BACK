@@ -8,7 +8,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class BasicInfoResponse {
-	// <<-FIELDS->>
+    
+    // <<-FIELDS->>
     private UUID userId;
     private String username;
     private String nickname;
@@ -22,8 +23,8 @@ public class BasicInfoResponse {
     // <<-CONSTRUCTOR->>
     public BasicInfoResponse() {
     }
-	
- // <<-METHOD->>
+    
+    // <<-METHOD->>
     public <T extends UserDTO> BasicInfoResponse generateResponse(T dto) {
         this.setUserId   (dto.getUserId());
         this.setUsername (dto.getUsername());
@@ -110,4 +111,5 @@ public class BasicInfoResponse {
     public void setPosts(Set<UUID> posts) {
         this.posts = posts;
     }
+    
 }

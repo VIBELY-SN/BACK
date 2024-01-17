@@ -5,13 +5,6 @@ import com.metrica.vibely.data.model.dto.PostDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * <h1>Update Post Request</h1>
- * 
- * @since 2023-11-28
- * @version 1.0
- * @author 
- */
 public class UpdatePostRequest {
 	
 	// <<-FIELDS->>

@@ -9,6 +9,10 @@ import com.metrica.vibely.data.model.enumerator.ChatType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * @since 2023-11-20
+ * @version 1.0
+ */
 public class CreateChatRequest {
 //	<<--FIELDS-->>
 	@NotNull

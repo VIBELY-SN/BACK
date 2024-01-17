@@ -64,7 +64,7 @@ public class PostController {
         PostDTO createdDTO = this.postService.create(createPostRequest.toPostDTO());
         return this.responseManager.generateCreateResponse(createdDTO);
     }
-
+	
     @PutMapping("/{id}")
     public ResponseEntity<UpdatePostResponse> update(
             @PathVariable

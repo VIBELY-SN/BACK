@@ -18,32 +18,32 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Component
 public class AdminAuthInterceptor implements HandlerInterceptor {
-
+	
     // <<-FIELD->>
-    private AuthService authService;
+	private AuthService authService;
 
     // <<-CONSTRUCTOR->>
-    @Autowired
-    public AdminAuthInterceptor(AdminRepository adminRepository, AuthService authService) {
-        this.authService = authService;
-    }
+	@Autowired
+	public AdminAuthInterceptor(AdminRepository adminRepository, AuthService authService) {
+		this.authService = authService;
+	}
+	
     // <<-METHODS->>
     private boolean setStatus(HttpServletResponse response, String apiKey) {
-        if(ApiKeyManager.isValid(apiKey) == HttpStatusEnum.OK) {
-            UUID userId = ApiKeyManager.getId(apiKey);
-            return this.authService.getAdminApikey(userId).equals(apiKey);
-        }
-        if(ApiKeyManager.isValid(apiKey) == HttpStatusEnum.BAD_REQUEST) {
-            response.setStatus(HttpStatusEnum.BAD_REQUEST.getStatus());
-        }
-        if(ApiKeyManager.isValid(apiKey) == HttpStatusEnum.INVALID_CREDENTIALS) {
-            response.setStatus(HttpStatusEnum.INVALID_CREDENTIALS.getStatus());
-        }
-        return false;
+    	if(ApiKeyManager.isValid(apiKey) == HttpStatusEnum.OK) {
+    		UUID userId = ApiKeyManager.getId(apiKey);
+    		return this.authService.getAdminApikey(userId).equals(apiKey);
+    	}
+    	if(ApiKeyManager.isValid(apiKey) == HttpStatusEnum.BAD_REQUEST) { 
+    		response.setStatus(HttpStatusEnum.BAD_REQUEST.getStatus()); 
+    	}
+    	if(ApiKeyManager.isValid(apiKey) == HttpStatusEnum.INVALID_CREDENTIALS) {
+    		response.setStatus(HttpStatusEnum.INVALID_CREDENTIALS.getStatus());
+    	}
+    	return false;
     }
 
-
-    @Override
+	@Override
     public boolean preHandle(
             @NonNull
             HttpServletRequest request,

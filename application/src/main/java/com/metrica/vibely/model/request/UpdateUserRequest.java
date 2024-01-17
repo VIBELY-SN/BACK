@@ -4,13 +4,6 @@ import com.metrica.vibely.data.model.dto.UserDTO;
 
 import jakarta.validation.constraints.Pattern;
 
-/**
- * <h1>Update User Request</h1>
- * 
- * @since 2023-11-27
- * @version 1.0
- * @author 
- */
 public class UpdateUserRequest {
 	
 	// <<-FIELDS->>

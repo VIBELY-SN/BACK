@@ -41,7 +41,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminDTO getByUsername(String username) {
-        Admin admin = this.adminRepository.findByUsername(username).orElseThrow();
+        Admin admin = this.adminRepository.findByAdminUsername(username).orElseThrow();
         return AdminMapper.toDTO(admin);
     }
 
@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService {
     public AdminDTO getByEmail(String email) {
         Admin admin = this.adminRepository.findByEmail(email).orElseThrow();
         return AdminMapper.toDTO(admin);
-    }
+    } 
 
     @Override
     public AdminDTO create(AdminDTO adminDTO) {

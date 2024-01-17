@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 	@Override
 	public String adminUsernameAuth(final String username, final String password) {
-		User user = this.adminRepository.findByUsername(username)
+		User user = this.adminRepository.findByAdminUsername(username)
 		        		.orElseThrow(() -> new InvalidCredentialsException());
 		
 		if (PasswordHasher.matches(password, user.getPassword())) {
@@ -63,7 +63,7 @@ public class AuthServiceImpl implements AuthService {
 						.orElseThrow(() -> new InvalidCredentialsException()); 
 		if(PasswordHasher.matches(password, user.getPassword())) {
 			return updateInfo(user);
-		} else throw new InvalidCredentialsException();
+		} else throw new InvalidCredentialsException();  
 	}
 	
 

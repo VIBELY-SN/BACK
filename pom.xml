@@ -14,7 +14,7 @@
     <groupId>com.metrica</groupId>
     <artifactId>vibely-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <name>Vibely Backend</name>
     <description>Vibely Back-end project</description>
@@ -36,6 +36,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                  <configuration>
+                         <mainClass>com.metrica.vibely.MainApplication</mainClass>
+                  </configuration> 
             </plugin>
         </plugins>
     </build>

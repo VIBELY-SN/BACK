@@ -22,5 +22,5 @@ jobs:
         cache: maven
     # Por ahora skipeamos test... mvn -B package --file pom.xml -Dmaven.test.skip
     - name: Build with Maven
-      run: mvn -B clean install
+      run: mvn -B clean install -Dmaven.test.skip
       

@@ -1,8 +1,11 @@
 package com.metrica.vibely.model.request;
 
+import com.metrica.vibely.data.model.dto.UserDTO;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+
 
 public class CreateUserRequest {
 
@@ -13,10 +16,10 @@ public class CreateUserRequest {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = "[a-zA-Z_-\\d]*")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{12,}$")
     private String password;
 
-    @Pattern(regexp = "[a-zA-Z_-\\d]*")
+    @Pattern(regexp = "[a-zA-Z0-9_-]*")
     @NotBlank
     private String nickname;
 
@@ -27,6 +30,18 @@ public class CreateUserRequest {
 
     // <<-CONSTRUCTOR->>
     public CreateUserRequest() {
+    }
+
+    // <<--METHODS-->>
+    public UserDTO toUserDTO() {
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setUsername(this.username);
+        userDTO.setPassword(this.password);
+        userDTO.setNickname(this.nickname);
+        userDTO.setEmail   (this.email);
+
+        return userDTO;
     }
 
     // <<-GETTERS & SETTERS->>

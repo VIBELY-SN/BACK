@@ -32,6 +32,7 @@
     </modules>
 
     <build>
+        <finalName>vibely-back</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

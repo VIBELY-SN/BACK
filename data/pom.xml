@@ -9,6 +9,7 @@
         <groupId>com.metrica</groupId>
         <artifactId>vibely-backend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath />
     </parent>
 
     <groupId>com.metrica.vibely</groupId>
@@ -20,7 +21,6 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
     </properties>
 
     <dependencies>

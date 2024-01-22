@@ -14,7 +14,7 @@
     <groupId>com.metrica</groupId>
     <artifactId>vibely-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <name>Vibely Backend</name>
     <description>Vibely Back-end project</description>

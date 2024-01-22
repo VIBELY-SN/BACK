@@ -9,7 +9,6 @@
         <groupId>com.metrica</groupId>
         <artifactId>vibely-backend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath />
     </parent>
 
     <groupId>com.metrica.vibely</groupId>

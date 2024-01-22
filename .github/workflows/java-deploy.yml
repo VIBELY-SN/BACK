@@ -1,7 +1,7 @@
 
 name: Java CICD
 
-run-name: Desplegando Back en oagueda.xyz by @${{ [github.actor](http://github.actor/) }}
+run-name: Desplegando Back en oagueda.xyz by @${{ github.actor }}
 
 on:
   push:

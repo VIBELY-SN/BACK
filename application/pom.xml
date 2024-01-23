@@ -13,7 +13,7 @@
 
     <groupId>com.metrica.vibely</groupId>
     <artifactId>application</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>application</name>
     <description>Application module</description>

@@ -42,6 +42,9 @@
                     <goals>
                         <goal>repackage</goal>
                     </goals>
+                  <configuration>
+                        <excludeArtifactIds>data</excludeArtifactIds>
+                    </configuration>
                 </execution>
             </executions>
             </plugin>

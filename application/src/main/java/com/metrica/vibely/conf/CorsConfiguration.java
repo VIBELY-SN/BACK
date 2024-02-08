@@ -15,7 +15,7 @@ public class CorsConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("http://prueba.oagueda.xyz", "https://vibely.oagueda.xyz")
+                .allowedOrigins("http://prueba.oagueda.xyz", "https://vibely.oagueda.xyz","http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("x-api-key")

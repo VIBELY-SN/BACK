@@ -77,17 +77,6 @@ public class UserController {
         
         return ResponseEntity.notFound().build();
     }
-    
-    /**
-     * @TODO falta añadir la funcionalidad
-     * @param id
-     * @return
-     */
-//    @GetMapping("/friendNetwork/{id}")
-//    public ResponseEntity<GetFriendNetworkResponse> getNetwork(@PathVariable UUID id){
-//		Set<UUID> participantIds = this.userService.getFriendNetwork(id);
-//        return this.responseManager.generateGetNetworkResponse(participantIds);  	
-//    }
 
     @PostMapping("/signup")
     public ResponseEntity<CreateUserResponse> create(
@@ -114,7 +103,6 @@ public class UserController {
             UpdateUserRequest userRequest,
             BindingResult bindingResult
     ) {
-    	System.out.println("Sy un a mierda");
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }

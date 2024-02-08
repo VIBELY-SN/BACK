@@ -9,13 +9,13 @@ public class CorsConfiguration implements WebMvcConfigurer {
 
     // <<-CONSTANTS->>
 //    private static final String ORIGIN = "http://localhost:4200";
-	private static final String ORIGIN = "prueba.oagueda.xyz:80";
+//	  private static final String ORIGIN = "prueba.oagueda.xyz:80";
 
     // <<-METHODS->>
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins(ORIGIN)
+                .allowedOrigins("http://prueba.oagueda.xyz:80", "http://vibely.oagueda.xyz:443")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("x-api-key")

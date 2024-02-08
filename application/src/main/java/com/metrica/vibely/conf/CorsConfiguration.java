@@ -8,7 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfiguration implements WebMvcConfigurer {
 
     // <<-CONSTANTS->>
-    private static final String ORIGIN = "http://localhost:4200";
+//    private static final String ORIGIN = "http://localhost:4200";
+	private static final String ORIGIN = "prueba.oagueda.xyz:80";
 
     // <<-METHODS->>
     @Override

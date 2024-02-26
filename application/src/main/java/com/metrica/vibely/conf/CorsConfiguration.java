@@ -15,10 +15,11 @@ public class CorsConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("*")
-                .allowedMethods("*")
+                .allowedOrigins("https://vibely-api.oagueda.xyz", "https://vibely.oagueda.xyz","http://localhost:4200")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .exposedHeaders("*")
+                .exposedHeaders("x-api-key")
+                .allowCredentials(true)
                 .maxAge(3600);
     }
 

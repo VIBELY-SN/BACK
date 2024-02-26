@@ -18,7 +18,7 @@ public class CorsConfiguration implements WebMvcConfigurer {
                 .allowedOrigins("https://vibely-api.oagueda.xyz", "https://vibely.oagueda.xyz","http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .exposedHeaders("x-api-key")
+                .exposedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(3600);
     }

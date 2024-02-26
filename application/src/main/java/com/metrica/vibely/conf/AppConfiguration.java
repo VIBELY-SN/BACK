@@ -27,17 +27,6 @@ public class AppConfiguration implements WebMvcConfigurer {
     }
 
     // <<-METHOD->>
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins("https://vibely-api.oagueda.xyz", "https://vibely.oagueda.xyz","http://localhost:4200")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .exposedHeaders("x-api-key")
-                .allowCredentials(true)
-                .maxAge(3600);
-    }
     
     @Override 
     public void addInterceptors(InterceptorRegistry registry) {
@@ -51,6 +40,17 @@ public class AppConfiguration implements WebMvcConfigurer {
         	.addPathPatterns("/api/v1/admin/**")
         	.excludePathPatterns("/api/v1/admin/auth/**")
             .excludePathPatterns("/api/v1/admin/users/signup");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("https://vibely-api.oagueda.xyz", "https://vibely.oagueda.xyz","http://localhost:4200")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .exposedHeaders("x-api-key")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 
 }

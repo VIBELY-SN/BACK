@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.ForeignKey;
@@ -53,9 +54,8 @@ public class Post implements Copyable<Post> {
     private Integer timesSaved;
 	
 	// Relations
-    @OneToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "owner_id",
-            unique = true,
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_post_user"))
     private User owner;

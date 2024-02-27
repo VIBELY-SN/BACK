@@ -40,6 +40,15 @@ public class AuthServiceImpl implements AuthService {
 	}  
 	
 	@Override
+	public UUID userId(final String username, final String password) {
+		User user = this.userRepository.findByUsername(username)
+        		.orElseThrow(() -> new InvalidCredentialsException());
+		if (PasswordHasher.matches(password, user.getPassword())) {
+			return user.getUserId();
+		} else throw new InvalidCredentialsException();
+	}
+	
+	@Override
 	public String emailAuth(final String email, final String password) {
 		User user = this.userRepository.findByEmail(email)
 						.orElseThrow(() -> new InvalidCredentialsException()); 

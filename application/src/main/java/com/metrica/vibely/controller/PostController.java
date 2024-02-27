@@ -15,7 +15,9 @@ import com.metrica.vibely.service.PostService;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +51,15 @@ public class PostController {
     public ResponseEntity<GetPostResponse> getById(@PathVariable UUID id) {
         PostDTO postDTO = this.postService.getById(id);
         return this.responseManager.generateGetResponse(postDTO);
+    }
+    
+    @GetMapping("/all")
+    public List<ResponseEntity<GetPostResponse>> getAll(){
+    	return this.postService.getAll()
+    						.stream()
+    						.map(m-> this.responseManager.generateGetResponse(m))
+    						.collect(Collectors.toList());
+    	
     }
 	
 	@PostMapping("/create")

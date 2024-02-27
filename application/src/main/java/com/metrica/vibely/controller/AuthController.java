@@ -42,8 +42,12 @@ public class AuthController {
         if (bindingResult.hasErrors()) { return ResponseEntity.badRequest().build(); }
 
         String apiKey = this.authService.usernameAuth(authRequest.getUsername(), authRequest.getPassword());
+        String id = this.authService.userId(authRequest.getUsername(), authRequest.getPassword()).toString();
+        Map<String, Object> responseBody = new java.util.HashMap<>();
+        responseBody.put("apiKey", apiKey);
+        responseBody.put("UserId", id);
         return ResponseEntity.ok()
-                .body(java.util.Map.of("apiKey", apiKey)); 
+                .body(responseBody); 
     } 
     
     @PostMapping("/auth/email")

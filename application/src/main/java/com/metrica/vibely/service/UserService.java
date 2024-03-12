@@ -2,6 +2,7 @@ package com.metrica.vibely.service;
 
 import com.metrica.vibely.data.model.dto.UserDTO;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -47,5 +48,7 @@ public interface UserService extends CrudService<UserDTO, UUID>{
 	 * @throws NoSuchElementException
 	 */
 	Set<UUID> getFriendNetwork(UUID id);
+
+	List<UserDTO> getAll();
 	
 }

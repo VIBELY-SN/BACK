@@ -1,10 +1,12 @@
 package com.metrica.vibely.service.impl;
 
 import com.metrica.vibely.data.entity.User;
+import com.metrica.vibely.data.model.dto.PostDTO;
 import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.data.model.enumerator.PrivacyType;
 import com.metrica.vibely.data.model.enumerator.UserState;
 import com.metrica.vibely.data.model.enumerator.UserStatus;
+import com.metrica.vibely.data.model.mapper.PostMapper;
 import com.metrica.vibely.data.model.mapper.UserMapper;
 import com.metrica.vibely.data.entity.Chat;
 import com.metrica.vibely.data.entity.Post;
@@ -38,6 +40,13 @@ public class UserServiceImpl implements UserService {
 	}
 
     // <<-METHODS->>
+	@Override
+	public List<UserDTO> getAll(){
+		return userRepository.findAll()
+							 .stream()
+							 .map(m -> UserMapper.toDTO(m))
+							 .collect(Collectors.toList());
+	}
     @Override
     public UserDTO getById(UUID id) {
         return UserMapper.toDTO(userRepository.findById(id).orElseThrow());

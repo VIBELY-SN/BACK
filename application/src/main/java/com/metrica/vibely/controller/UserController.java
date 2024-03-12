@@ -8,12 +8,15 @@ import com.metrica.vibely.model.request.CreateUserRequest;
 import com.metrica.vibely.model.request.UpdateUserRequest;
 import com.metrica.vibely.model.response.create.CreateUserResponse;
 import com.metrica.vibely.model.response.get.BasicInfoResponse;
+import com.metrica.vibely.model.response.get.GetPostResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
 import com.metrica.vibely.service.UserService;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -76,6 +79,15 @@ public class UserController {
         }
         
         return ResponseEntity.notFound().build();
+    }
+    
+    @GetMapping("/all")
+    public List<ResponseEntity<BasicInfoResponse>> getAll(){
+    	return this.userService.getAll()
+    						.stream()
+    						.map(m-> this.responseManager.generateGetResponse(m))
+    						.collect(Collectors.toList());
+    	
     }
 
     @PostMapping("/signup")

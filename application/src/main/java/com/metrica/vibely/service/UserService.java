@@ -39,7 +39,7 @@ public interface UserService extends CrudService<UserDTO, UUID>{
 	 * @return
 	 * @throws NoSuchElementException
 	 */
-	UserDTO unfollowUser(UUID userId, UUID followedUserId);
+	UserDTO unfollowUser(String username, String followedUsername);
 
 	/**
 	 * 

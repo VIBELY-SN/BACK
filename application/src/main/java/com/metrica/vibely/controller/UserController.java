@@ -11,6 +11,7 @@ import com.metrica.vibely.model.response.create.CreateUserResponse;
 import com.metrica.vibely.model.response.get.BasicInfoResponse;
 import com.metrica.vibely.model.response.get.GetPostResponse;
 import com.metrica.vibely.model.response.update.FollowUserResponse;
+import com.metrica.vibely.model.response.update.UnfollowUserResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
 import com.metrica.vibely.service.UserService;
 
@@ -121,6 +122,21 @@ public class UserController {
     		) {
     	userService.followUser(username, followedUsername);
     	return this.responseManager.generateFollowUserResponse(username, followedUsername);
+    }
+    
+    @PutMapping("/unfollow/{username}/{followedUsername}")
+    public ResponseEntity<UnfollowUserResponse> unfollowByUsername(
+    		@PathVariable
+    		String username,
+    		@PathVariable
+    		String followedUsername,
+    		@RequestBody
+    		@Valid
+    		FollowUserRequest userRequest,
+    		BindingResult bindingResult
+    		) {
+    	userService.unfollowUser(username, followedUsername);
+    	return this.responseManager.generateUnfollowUserResponse(username, followedUsername);
     }
 
     @PutMapping("/{id}")

@@ -5,10 +5,12 @@ import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.data.model.enumerator.PrivacyType;
 import com.metrica.vibely.data.model.enumerator.UserState;
 import com.metrica.vibely.model.request.CreateUserRequest;
+import com.metrica.vibely.model.request.FollowUserRequest;
 import com.metrica.vibely.model.request.UpdateUserRequest;
 import com.metrica.vibely.model.response.create.CreateUserResponse;
 import com.metrica.vibely.model.response.get.BasicInfoResponse;
 import com.metrica.vibely.model.response.get.GetPostResponse;
+import com.metrica.vibely.model.response.update.FollowUserResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
 import com.metrica.vibely.service.UserService;
 
@@ -104,6 +106,21 @@ public class UserController {
         
         UserDTO userDTO = this.userService.create(userRequest.toUserDTO());
         return this.responseManager.generateCreateResponse(userDTO);
+    }
+    
+    @PutMapping("/follow/{username}/{followedUsername}")
+    public ResponseEntity<FollowUserResponse> followByUsername(
+    		@PathVariable
+    		String username,
+    		@PathVariable
+    		String followedUsername,
+    		@RequestBody
+    		@Valid
+    		FollowUserRequest userRequest,
+    		BindingResult bindingResult
+    		) {
+    	userService.followUser(username, followedUsername);
+    	return this.responseManager.generateFollowUserResponse(username, followedUsername);
     }
 
     @PutMapping("/{id}")

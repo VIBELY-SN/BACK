@@ -30,7 +30,7 @@ public interface UserService extends CrudService<UserDTO, UUID>{
      */
     void deleteByUsername(String username);
 	
-	UserDTO followUser(UUID userId, UUID followedUserId);
+	UserDTO followUser(String username, String followedUsername);
 	
 	/**
 	 * 

@@ -17,6 +17,7 @@ import com.metrica.vibely.service.UserService;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,19 +109,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO followUser(final UUID userId,final UUID followedUserId) {
-		User user 		  = userRepository.findById(userId)
+	public UserDTO followUser(final String username,final String followedUsername) {
+		User user 		  = userRepository.findByUsername(username)
 										  .orElseThrow();
-		User followedUser = userRepository.findById(followedUserId)
+		User followedUser = userRepository.findByUsername(followedUsername)
 										  .orElseThrow();
 		
-		if(!followedUser.getFollowers().contains(user) && userId != followedUserId) {
-			followedUser.getFollowers().add     (user); 
-			user		.getFollowing().add		(followedUser); 
-			userRepository			   .save	(followedUser);
-		} 
-		
-		return UserMapper.toDTO(userRepository.save(user));
+		if(!followedUser.getFollowers().contains(user) && user.getUserId() != followedUser.getUserId()) {
+			Set<User> updatedFollowers = new HashSet<User>(followedUser.getFollowers());
+			Set<User> updatedFollowing = new HashSet<User>(user.getFollowers());
+			
+			//Setting the FOLLOWED users followers
+			updatedFollowers.add(user);
+			followedUser.setFollowers(updatedFollowers);
+			
+			//Setting the user that is FOLLOWING 
+			updatedFollowing.add(followedUser);
+			user.setFollowing(updatedFollowing);
+			
+			//Saving both changes in db
+			userRepository.save(followedUser);
+			userRepository.save(user);
+		} return UserMapper.toDTO(userRepository.save(user));
 	}
 
 	@Override

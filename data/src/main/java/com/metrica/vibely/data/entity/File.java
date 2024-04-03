@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -38,9 +39,10 @@ public class File implements Copyable<File> {
     private Long size;
     
     // Relations
-    @OneToMany
-    //(JoinTable remaining)
-    private Set<User> uploader;
+    
+    //JoinTable remaining
+    @ManyToOne
+    private User uploader;
     
  // <<-CONSTRUCTORS->>
     
@@ -50,7 +52,7 @@ public class File implements Copyable<File> {
 			String		contentType,
 			String 		absolutePath, 
 			Long 		size, 
-			Set<User> 	uploader) {
+			User 		uploader) {
 		this.setFileId		(fileId);
 		this.setFileName	(fileName);
 		this.setContentType	(contentType);
@@ -138,16 +140,12 @@ public class File implements Copyable<File> {
 		this.contentType = contentType;
 	}
 
-	public Set<User> getUploader() {
-		 return DeepCopyGenerator.generateCopy(this.uploader);
+	public User getUploader() {
+		 return this.uploader;
 	}
 
-	public void setUploader(final Set<User> uploader) {
+	public void setUploader(User uploader) {
 		this.uploader = uploader;
-		this.uploader = new HashSet<>();
-       if (uploader != null) {
-           this.uploader.addAll(DeepCopyGenerator.generateCopy(uploader));
-       }
 	}
 
 	

@@ -15,7 +15,7 @@ public class FileDTO {
     private Long 		size;
     
     // Relations
-    private Set<UUID> 	uploader;
+    private UUID 	uploader;
 	
 	
 	// <<-CONSTRUCTORS->>
@@ -28,7 +28,7 @@ public class FileDTO {
 				String		contentType,
 				String 		absolutePath, 
 				Long 		size, 
-				Set<UUID> 	uploader) {
+				UUID 	uploader) {
 			this.setFileId		(fileId);
 			this.setFileName	(fileName);
 			this.setContentType	(contentType);
@@ -107,12 +107,12 @@ public class FileDTO {
 		}
 
 
-		public Set<UUID> getUploader() {
+		public UUID getUploader() {
 			return uploader;
 		}
 
 
-		public void setUploader(final Set<UUID> uploader) {
+		public void setUploader(final UUID uploader) {
 			this.uploader = uploader;
 		}
 }

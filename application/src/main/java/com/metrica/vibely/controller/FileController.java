@@ -50,18 +50,18 @@ public class FileController {
     
     
     @GetMapping("/userFiles/{id}")
-    public ResponseEntity<GetAllFilesByUserResponse> getAllByUserName(UUID id){
+    public ResponseEntity<GetAllFilesByUserResponse> getAllByUserName(@PathVariable UUID id){
     	List<FileDTO> userFiles = this.fileService.getAllByUserName(id);
     	return this.responseManager.generateGetResponse(userFiles); 	
     }
     
-    @PostMapping("/upload")
+    @PostMapping("/upload/{uploader}")
     public ResponseEntity<CreateFileResponse> uploadFile(
     		@RequestBody
             @Valid
             MultipartFile file,
             BindingResult bindingResult,
-            UUID uploader
+            @PathVariable UUID uploader
    ){
     	if (bindingResult.hasErrors()) {            
             return ResponseEntity.badRequest().build(); 

@@ -2,17 +2,21 @@ package com.metrica.vibely.controller.util;
 
 import com.metrica.vibely.data.model.dto.AdminDTO;
 import com.metrica.vibely.data.model.dto.ChatDTO;
+import com.metrica.vibely.data.model.dto.FileDTO;
 import com.metrica.vibely.data.model.dto.MessageDTO;
 import com.metrica.vibely.data.model.dto.PostDTO;
 import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.model.response.create.CreateAdminResponse;
 import com.metrica.vibely.model.response.create.CreateChatResponse;
+import com.metrica.vibely.model.response.create.CreateFileResponse;
 import com.metrica.vibely.model.response.create.CreateMessageResponse;
 import com.metrica.vibely.model.response.create.CreatePostResponse;
 import com.metrica.vibely.model.response.create.CreateUserResponse;
 import com.metrica.vibely.model.response.get.BasicInfoResponse;
 import com.metrica.vibely.model.response.get.GetAdminResponse;
+import com.metrica.vibely.model.response.get.GetAllFilesByUserResponse;
 import com.metrica.vibely.model.response.get.GetChatResponse;
+import com.metrica.vibely.model.response.get.GetFileResponse;
 import com.metrica.vibely.model.response.get.GetFriendNetworkResponse;
 import com.metrica.vibely.model.response.get.GetMessageResponse;
 import com.metrica.vibely.model.response.get.GetPostResponse;
@@ -26,6 +30,7 @@ import com.metrica.vibely.model.response.update.UpdatePostResponse;
 import com.metrica.vibely.model.response.update.UpdateSavedByPostResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,6 +50,16 @@ public class ResponseManager {
     public ResponseEntity<GetAdminResponse> generateGetResponse(AdminDTO adminDto) {
         GetAdminResponse adminResponse = new GetAdminResponse();
         return ResponseEntity.ok().body(adminResponse.generateResponse(adminDto));
+    }
+    
+    public ResponseEntity<GetFileResponse> generateGetResponse(FileDTO fileDto){
+    	GetFileResponse fileResponse = new GetFileResponse();
+    	 return ResponseEntity.ok().body(fileResponse.generateResponse(fileDto));
+    }
+    
+    public ResponseEntity<GetAllFilesByUserResponse> generateGetResponse(List<FileDTO> userFiles){
+    	GetAllFilesByUserResponse allfilesByUserResponse = new GetAllFilesByUserResponse();
+    	 return ResponseEntity.ok().body(allfilesByUserResponse.generateResponse(userFiles));
     }
     
     public ResponseEntity<GetPostResponse> generateGetResponse(PostDTO postDto) {
@@ -76,6 +91,11 @@ public class ResponseManager {
     public ResponseEntity<CreateAdminResponse> generateCreateResponse(AdminDTO adminDto) {
     	CreateAdminResponse adminResponse = new CreateAdminResponse();
     	return ResponseEntity.status(HttpStatus.CREATED).body(adminResponse.generateResponse(adminDto));
+    }
+    
+    public ResponseEntity<CreateFileResponse> generateCreateResponse(FileDTO fileDto){
+    	CreateFileResponse fileResponse = new CreateFileResponse();
+    	return ResponseEntity.status(HttpStatus.CREATED).body(fileResponse.generateResponse(fileDto));
     }
     
     public ResponseEntity<CreatePostResponse> generateCreateResponse(PostDTO postDto) {

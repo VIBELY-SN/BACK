@@ -4,6 +4,7 @@ import com.metrica.vibely.data.model.dto.PostDTO;
 import com.metrica.vibely.data.model.enumerator.PostStatus;
 import com.metrica.vibely.data.model.enumerator.PostVisibility;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface PostService extends CrudService<PostDTO, UUID> {
@@ -16,6 +17,13 @@ public interface PostService extends CrudService<PostDTO, UUID> {
 	 * @throws NoSuchElementException
 	 */
 	PostDTO getByContentandCreator(String content, String username);
+	
+	/**
+	 * 
+	 * @return List<postDTO>
+	 * @throws NoSuchElementException
+	 */
+	List<PostDTO> getAll();
 	
 	/**
 	 * changes post status

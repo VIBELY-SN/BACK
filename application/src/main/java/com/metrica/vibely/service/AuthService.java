@@ -45,4 +45,6 @@ public interface AuthService {
     
     String getAdminApikey(UUID id);
 
+	UUID userId(String username, String password);
+
 }

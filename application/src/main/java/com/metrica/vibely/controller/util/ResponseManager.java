@@ -20,6 +20,8 @@ import com.metrica.vibely.model.response.get.GetFileResponse;
 import com.metrica.vibely.model.response.get.GetFriendNetworkResponse;
 import com.metrica.vibely.model.response.get.GetMessageResponse;
 import com.metrica.vibely.model.response.get.GetPostResponse;
+import com.metrica.vibely.model.response.update.FollowUserResponse;
+import com.metrica.vibely.model.response.update.UnfollowUserResponse;
 import com.metrica.vibely.model.response.update.UpdateAdminResponse;
 import com.metrica.vibely.model.response.update.UpdateChatResponse;
 import com.metrica.vibely.model.response.update.UpdateLikedByPostResponse;
@@ -154,5 +156,14 @@ public class ResponseManager {
     	UpdateSavedByPostResponse postResponse = new UpdateSavedByPostResponse();
     	return ResponseEntity.ok().body(postResponse.generateResponse(postDTO));
     }
+ 
+    public ResponseEntity<FollowUserResponse> generateFollowUserResponse(String username, String followedUsername) {
+    	FollowUserResponse followResponse = new FollowUserResponse();
+    	return ResponseEntity.ok().body(followResponse.generateResponse(username, followedUsername));
+    }
     
+    public ResponseEntity<UnfollowUserResponse> generateUnfollowUserResponse(String username, String followedUsername) {
+    	UnfollowUserResponse unfollowResponse = new UnfollowUserResponse();
+    	return ResponseEntity.ok().body(unfollowResponse.generateResponse(username, followedUsername));
+    }
 }

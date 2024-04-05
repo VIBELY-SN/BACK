@@ -51,6 +51,9 @@ public class AuthInterceptor implements HandlerInterceptor {
             @NonNull
             Object handler
     ) {
+		if(request.getMethod().equals("OPTIONS")) {
+			return true;
+		}
         String apiKey = request.getHeader("x-api-key");
         return setStatus(response, apiKey);
     }

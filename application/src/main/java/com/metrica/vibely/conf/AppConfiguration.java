@@ -26,6 +26,7 @@ public class AppConfiguration implements WebMvcConfigurer {
     }
 
     // <<-METHOD->>
+    
     @Override 
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this.authInterceptor)

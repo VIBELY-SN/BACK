@@ -5,15 +5,21 @@ import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.data.model.enumerator.PrivacyType;
 import com.metrica.vibely.data.model.enumerator.UserState;
 import com.metrica.vibely.model.request.CreateUserRequest;
+import com.metrica.vibely.model.request.FollowUserRequest;
 import com.metrica.vibely.model.request.UpdateUserRequest;
 import com.metrica.vibely.model.response.create.CreateUserResponse;
 import com.metrica.vibely.model.response.get.BasicInfoResponse;
+import com.metrica.vibely.model.response.get.GetPostResponse;
+import com.metrica.vibely.model.response.update.FollowUserResponse;
+import com.metrica.vibely.model.response.update.UnfollowUserResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
 import com.metrica.vibely.service.UserService;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,6 +83,15 @@ public class UserController {
         
         return ResponseEntity.notFound().build();
     }
+    
+    @GetMapping("/all")
+    public List<ResponseEntity<BasicInfoResponse>> getAll(){
+    	return this.userService.getAll()
+    						.stream()
+    						.map(m-> this.responseManager.generateGetResponse(m))
+    						.collect(Collectors.toList());
+    	
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<CreateUserResponse> create(
@@ -92,6 +107,36 @@ public class UserController {
         
         UserDTO userDTO = this.userService.create(userRequest.toUserDTO());
         return this.responseManager.generateCreateResponse(userDTO);
+    }
+    
+    @PutMapping("/follow/{username}/{followedUsername}")
+    public ResponseEntity<FollowUserResponse> followByUsername(
+    		@PathVariable
+    		String username,
+    		@PathVariable
+    		String followedUsername,
+    		@RequestBody
+    		@Valid
+    		FollowUserRequest userRequest,
+    		BindingResult bindingResult
+    		) {
+    	userService.followUser(username, followedUsername);
+    	return this.responseManager.generateFollowUserResponse(username, followedUsername);
+    }
+    
+    @PutMapping("/unfollow/{username}/{followedUsername}")
+    public ResponseEntity<UnfollowUserResponse> unfollowByUsername(
+    		@PathVariable
+    		String username,
+    		@PathVariable
+    		String followedUsername,
+    		@RequestBody
+    		@Valid
+    		FollowUserRequest userRequest,
+    		BindingResult bindingResult
+    		) {
+    	userService.unfollowUser(username, followedUsername);
+    	return this.responseManager.generateUnfollowUserResponse(username, followedUsername);
     }
 
     @PutMapping("/{id}")

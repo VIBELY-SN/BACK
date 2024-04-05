@@ -11,9 +11,11 @@ import com.metrica.vibely.data.repository.UserRepository;
 import com.metrica.vibely.service.PostService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,15 @@ public class PostServiceImpl implements PostService{
 		return PostMapper.toDTO(postRepository.findById(id)
 				  							  .orElseThrow());
 	}
-
+	
+	@Override
+	public List<PostDTO> getAll(){
+		return postRepository.findAll()
+							 .stream()
+							 .map(m -> PostMapper.toDTO(m))
+							 .collect(Collectors.toList());
+	}
+	
 	@Override
 	public PostDTO create(PostDTO dto) {
 		Post post = PostMapper.toEntity(dto, null, null, null, null);

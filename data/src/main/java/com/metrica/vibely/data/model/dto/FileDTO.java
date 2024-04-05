@@ -1,7 +1,6 @@
 package com.metrica.vibely.data.model.dto;
 
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 public class FileDTO {

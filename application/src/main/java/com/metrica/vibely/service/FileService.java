@@ -11,7 +11,7 @@ import com.metrica.vibely.data.model.dto.FileDTO;
 
 public interface FileService{
 	
-	final String PATH = "C:\\Users\\Tiago\\Desktop\\ficheros\\";
+	final String PATH = "C:\\Users\\Raul\\Desktop\\files\\";
 	
 	/**
      * Gets file information by its id

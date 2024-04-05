@@ -56,12 +56,11 @@ public class FileServiceImpl implements FileService{
 	@Override
 	public FileDTO uploadFile(MultipartFile file, UUID uploaderId) throws IOException {
 		User uploader = userRepository.findById(uploaderId).orElseThrow();
-		File fileEntity = FileMapper.multipartFiletoEntity(file, PATH, uploaderId);
+		File fileEntity = FileMapper.multipartFiletoEntity(file, PATH, uploader);
 		FileDTO fileDto = FileMapper.toDTO(fileEntity);
 		
 		// Escribimos en disco con Files.write(Ruta, contenido del fichero)
 		Files.write(Paths.get(fileDto.getAbsolutePath()),file.getBytes());
-		
 		fileRepository.save(fileEntity);
 		
 		return fileDto;

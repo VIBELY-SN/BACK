@@ -1,27 +1,23 @@
 package com.metrica.vibely.data.entity;
 
+import java.util.Objects;
+import java.util.UUID;
+
 import com.metrica.vibely.data.util.Copyable;
-import com.metrica.vibely.data.util.DeepCopyGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 
 
 
 @Entity
-@Table(name = "Uploaded_files")
+@Table
 public class File implements Copyable<File> {
 	// <<-FIELDS->>
     // Basic
@@ -41,8 +37,12 @@ public class File implements Copyable<File> {
     // Relations
     
     //JoinTable remaining
-    @ManyToOne
-    private UUID uploader;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "uploader",
+    		referencedColumnName = "user_id",
+            unique = true,
+            nullable = false)
+    private User uploader;
     
  // <<-CONSTRUCTORS->>
     
@@ -52,7 +52,7 @@ public class File implements Copyable<File> {
 			String		contentType,
 			String 		absolutePath, 
 			Long 		size, 
-			UUID 		uploader) {
+			User 		uploader) {
 		this.setFileId		(fileId);
 		this.setFileName	(fileName);
 		this.setContentType	(contentType);
@@ -140,11 +140,11 @@ public class File implements Copyable<File> {
 		this.contentType = contentType;
 	}
 
-	public UUID getUploader() {
+	public User getUploader() {
 		 return this.uploader;
 	}
 
-	public void setUploader(UUID uploader) {
+	public void setUploader(User uploader) {
 		this.uploader = uploader;
 	}
 

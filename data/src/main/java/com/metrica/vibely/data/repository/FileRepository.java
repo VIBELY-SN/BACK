@@ -15,7 +15,7 @@ public interface FileRepository extends JpaRepository<File, UUID>{
 	 * @return list of files
 	 * @throws NoSuchElementException
 	 */
-	@Query("SELECT file_id FROM Uploaded_files WHERE uploader =: id")
+	@Query("SELECT a FROM File a WHERE a.uploader =:id")
 	List<File> findAllByUploader(UUID id);
 	
 }

@@ -57,15 +57,15 @@ public class FileController {
     
     @PostMapping("/upload/{uploader}")
     public ResponseEntity<CreateFileResponse> uploadFile(
-    		@RequestBody
+//    		@RequestBody
             @Valid
             MultipartFile file,
-            BindingResult bindingResult,
+//            BindingResult bindingResult,
             @PathVariable UUID uploader
    ){
-    	if (bindingResult.hasErrors()) {            
-            return ResponseEntity.badRequest().build(); 
-        }
+//    	if (bindingResult.hasErrors()) {            
+//            return ResponseEntity.badRequest().build(); 
+//        }
     	
     	try {
 			FileDTO fileDto = this.fileService.uploadFile(file, uploader);

@@ -19,6 +19,7 @@ public class BasicInfoResponse {
     private Set<UUID> followers;
     private Set<UUID> following;
     private Set<UUID> posts;
+    private Set<UUID> chats;
     
     // <<-CONSTRUCTOR->>
     public BasicInfoResponse() {
@@ -35,6 +36,7 @@ public class BasicInfoResponse {
         this.setFollowers(dto.getFollowers());
         this.setFollowing(dto.getFollowing());
         this.setPosts    (dto.getPosts());
+        this.setChats    (dto.getChats());
         
         return this;
     }
@@ -52,7 +54,16 @@ public class BasicInfoResponse {
         return username;
     }
 
-    public void setUsername(String username) {
+    
+    public Set<UUID> getChats() {
+		return chats;
+	}
+
+	public void setChats(Set<UUID> chats) {
+		this.chats = chats;
+	}
+
+	public void setUsername(String username) {
         this.username = username;
     }
 

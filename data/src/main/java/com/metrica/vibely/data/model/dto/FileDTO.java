@@ -28,7 +28,7 @@ public class FileDTO {
 				String		contentType,
 				String 		absolutePath, 
 				Long 		size, 
-				UUID 	uploader) {
+				UUID 		uploader) {
 			this.setFileId		(fileId);
 			this.setFileName	(fileName);
 			this.setContentType	(contentType);

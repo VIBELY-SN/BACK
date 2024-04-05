@@ -1,13 +1,10 @@
 package com.metrica.vibely.data.model.mapper;
 
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.metrica.vibely.data.entity.File;
-import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.model.dto.FileDTO;
 
 
@@ -18,7 +15,7 @@ public class FileMapper {
 		 * @param 	FileDTO the DTO to map
 		 * @return 	the entity with the DTO info
 		 */
-	public static File toEntity(FileDTO fileDTO, User uploader) {
+	public static File toEntity(FileDTO fileDTO, UUID uploader) {
 		File file = new File();
 
 		// Mapping Basics
@@ -51,7 +48,7 @@ public class FileMapper {
 			fileDTO.setSize			(file.getSize());
 
 		// Mapping Relations
-			fileDTO.setUploader(file.getUploader().getUserId());
+			fileDTO.setUploader(file.getUploader());
 			
 		return fileDTO;
 	}
@@ -62,7 +59,7 @@ public class FileMapper {
      * @param 	MultipartFile entity
      * @return 	the file entity
      */
-	public static File multipartFiletoEntity(MultipartFile file, String path, User uploader) {
+	public static File multipartFiletoEntity(MultipartFile file, String path, UUID uploader) {
 		File fileEntity = new File();
 		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
 

@@ -2,11 +2,11 @@ package com.metrica.vibely.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.model.dto.FileDTO;
 
 public interface FileService{

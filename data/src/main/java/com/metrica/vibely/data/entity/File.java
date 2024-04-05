@@ -23,7 +23,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "Uploaded_files")
 public class File implements Copyable<File> {
-	 // <<-FIELDS->>
+	// <<-FIELDS->>
     // Basic
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,7 +42,7 @@ public class File implements Copyable<File> {
     
     //JoinTable remaining
     @ManyToOne
-    private User uploader;
+    private UUID uploader;
     
  // <<-CONSTRUCTORS->>
     
@@ -52,7 +52,7 @@ public class File implements Copyable<File> {
 			String		contentType,
 			String 		absolutePath, 
 			Long 		size, 
-			User 		uploader) {
+			UUID 		uploader) {
 		this.setFileId		(fileId);
 		this.setFileName	(fileName);
 		this.setContentType	(contentType);
@@ -140,11 +140,11 @@ public class File implements Copyable<File> {
 		this.contentType = contentType;
 	}
 
-	public User getUploader() {
+	public UUID getUploader() {
 		 return this.uploader;
 	}
 
-	public void setUploader(User uploader) {
+	public void setUploader(UUID uploader) {
 		this.uploader = uploader;
 	}
 

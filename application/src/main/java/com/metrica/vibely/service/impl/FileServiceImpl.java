@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.metrica.vibely.data.entity.File;
@@ -19,6 +20,7 @@ import com.metrica.vibely.data.repository.FileRepository;
 import com.metrica.vibely.data.repository.UserRepository;
 import com.metrica.vibely.service.FileService;
 
+@Service
 public class FileServiceImpl implements FileService{
 	
 	// <<-FIELD->>
@@ -54,7 +56,7 @@ public class FileServiceImpl implements FileService{
 	@Override
 	public FileDTO uploadFile(MultipartFile file, UUID uploaderId) throws IOException {
 		User uploader = userRepository.findById(uploaderId).orElseThrow();
-		File fileEntity = FileMapper.multipartFiletoEntity(file, PATH, uploader);
+		File fileEntity = FileMapper.multipartFiletoEntity(file, PATH, uploaderId);
 		FileDTO fileDto = FileMapper.toDTO(fileEntity);
 		
 		// Escribimos en disco con Files.write(Ruta, contenido del fichero)

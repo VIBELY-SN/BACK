@@ -1,21 +1,20 @@
 package com.metrica.vibely.data.entity;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.UUID;
+
 import com.metrica.vibely.data.model.enumerator.MessageState;
 import com.metrica.vibely.data.model.enumerator.MessageStatus;
 import com.metrica.vibely.data.util.Copyable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.UUID;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Message implements Copyable<Message> {
@@ -34,15 +33,15 @@ public class Message implements Copyable<Message> {
     private String content;
 
     // Relations
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "chat_id",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_message_chat"))
+            unique = false)
     private Chat chat;
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "sender_id",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_message_user"))
+            unique = false)
     private User sender;
 
     // <<-CONSTRUCTORS->>

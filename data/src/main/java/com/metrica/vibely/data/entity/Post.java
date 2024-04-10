@@ -1,5 +1,11 @@
 package com.metrica.vibely.data.entity;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 import com.metrica.vibely.data.model.enumerator.PostStatus;
 import com.metrica.vibely.data.model.enumerator.PostVisibility;
 import com.metrica.vibely.data.util.Copyable;
@@ -9,6 +15,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,14 +24,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.ForeignKey;
-
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * <h1>Post Entity</h1>
@@ -79,7 +78,11 @@ public class Post implements Copyable<Post> {
         inverseForeignKey = @ForeignKey(name = "fk_post-user_saves_user"))
     private Set<User> savedBy;
     
-    // <<-CONSTRUCTORS->>
+    @OneToMany(mappedBy = "ownerPost")
+    private Set<File> files;
+    
+
+	// <<-CONSTRUCTORS->>
     public Post() {
         this.setPostId  (null);
         this.setOwner   (null);
@@ -293,5 +296,4 @@ public class Post implements Copyable<Post> {
         }
 
     }
-
 }

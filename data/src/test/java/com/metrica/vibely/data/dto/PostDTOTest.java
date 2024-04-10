@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import com.metrica.vibely.data.entity.Post;
 import com.metrica.vibely.data.model.dto.PostDTO;
-import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.data.model.enumerator.PostStatus;
 import com.metrica.vibely.data.model.enumerator.PostVisibility;
 

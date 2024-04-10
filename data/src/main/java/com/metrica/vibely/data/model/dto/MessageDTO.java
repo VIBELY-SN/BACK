@@ -1,7 +1,5 @@
 package com.metrica.vibely.data.model.dto;
 
-import com.metrica.vibely.data.model.enumerator.MessageState;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;

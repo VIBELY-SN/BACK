@@ -2,6 +2,7 @@ package com.metrica.vibely.data.mapper;
 
 import org.junit.jupiter.api.Test;
 
+import com.metrica.vibely.data.entity.File;
 import com.metrica.vibely.data.entity.Post;
 import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.model.dto.PostDTO;

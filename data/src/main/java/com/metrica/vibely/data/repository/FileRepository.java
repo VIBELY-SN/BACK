@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.metrica.vibely.data.entity.File;
 
@@ -15,7 +16,7 @@ public interface FileRepository extends JpaRepository<File, UUID>{
 	 * @return list of files
 	 * @throws NoSuchElementException
 	 */
-	@Query("SELECT a FROM File a WHERE a.uploader =:id")
-	List<File> findAllByUploader(UUID id);
+	@Query("SELECT f FROM File f WHERE f.ownerPost.postId = :postId")
+    List<File> getAllByOwnerPostId(@Param("postId") UUID postId);
 	
 }

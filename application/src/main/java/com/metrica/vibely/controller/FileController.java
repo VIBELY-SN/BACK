@@ -6,12 +6,10 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.metrica.vibely.controller.util.ResponseManager;
 import com.metrica.vibely.data.model.dto.FileDTO;
 import com.metrica.vibely.model.response.create.CreateFileResponse;
-import com.metrica.vibely.model.response.get.GetAllFilesByUserResponse;
+import com.metrica.vibely.model.response.get.GetAllFilesByOwnerResponse;
 import com.metrica.vibely.model.response.get.GetFileResponse;
 import com.metrica.vibely.service.FileService;
 
@@ -50,25 +48,25 @@ public class FileController {
     
     
     @GetMapping("/userFiles/{id}")
-    public ResponseEntity<GetAllFilesByUserResponse> getAllByUserName(@PathVariable UUID id){
-    	List<FileDTO> userFiles = this.fileService.getAllByUserName(id);
+    public ResponseEntity<GetAllFilesByOwnerResponse> getAllByUserName(@PathVariable UUID id){
+    	List<FileDTO> userFiles = this.fileService.getAllByOwnerPostId(id);
     	return this.responseManager.generateGetResponse(userFiles); 	
     }
     
-    @PostMapping("/upload/{uploader}")
+    @PostMapping("/upload/{ownerPostId}")
     public ResponseEntity<CreateFileResponse> uploadFile(
 //    		@RequestBody
             @Valid
             MultipartFile file,
 //            BindingResult bindingResult,
-            @PathVariable UUID uploader
+            @PathVariable UUID ownerPostId
    ){
 //    	if (bindingResult.hasErrors()) {            
 //            return ResponseEntity.badRequest().build(); 
 //        }
     	
     	try {
-			FileDTO fileDto = this.fileService.uploadFile(file, uploader);
+			FileDTO fileDto = this.fileService.uploadFile(file, ownerPostId);
 			return this.responseManager.generateCreateResponse(fileDto);
 		} catch (IOException e) {
 			 return ResponseEntity.notFound().build();

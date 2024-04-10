@@ -1,5 +1,6 @@
 package com.metrica.vibely.data.model.dto;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ public class FileDTO {
     private Long 		size;
     
     // Relations
-    private UUID 	uploader;
+    private UUID 	ownerPostId;
 	
 	
 	// <<-CONSTRUCTORS->>
@@ -27,14 +28,14 @@ public class FileDTO {
 				String		contentType,
 				String 		absolutePath, 
 				Long 		size, 
-				UUID 		uploader) {
+				UUID 		ownerPostId,
+				LocalDateTime fileDate) {
 			this.setFileId		(fileId);
 			this.setFileName	(fileName);
 			this.setContentType	(contentType);
 			this.setAbsolutePath(absolutePath);
 			this.setSize		(size);
-			this.setUploader	(uploader);
-
+			this.setOwnerPostId	(ownerPostId);
 		}
 		
 	// <<-METHODS->>
@@ -106,12 +107,12 @@ public class FileDTO {
 		}
 
 
-		public UUID getUploader() {
-			return uploader;
+		public UUID getOwnerPostId() {
+			return ownerPostId;
 		}
 
 
-		public void setUploader(final UUID uploader) {
-			this.uploader = uploader;
+		public void setOwnerPostId(final UUID ownerPostId) {
+			this.ownerPostId = ownerPostId;
 		}
 }

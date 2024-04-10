@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.metrica.vibely.data.model.dto.FileDTO;
 
-public class GetAllFilesByUserResponse {
+public class GetAllFilesByOwnerResponse {
 //	<<--ATRIBUTEs-->>
 	List<FileDTO> userFiles;
 	
 //	<<--CONSTRUCTOR-->>
-	public GetAllFilesByUserResponse() {
+	public GetAllFilesByOwnerResponse() {
 	}
 //	<<--METHODS-->>
-	public GetAllFilesByUserResponse generateResponse(List<FileDTO> userFiles) {
+	public GetAllFilesByOwnerResponse generateResponse(List<FileDTO> userFiles) {
 		this.userFiles = userFiles;
 		return this;
 	}

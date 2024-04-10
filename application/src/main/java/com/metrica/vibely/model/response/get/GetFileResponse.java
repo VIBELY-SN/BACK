@@ -1,6 +1,5 @@
 package com.metrica.vibely.model.response.get;
 
-import java.util.Set;
 import java.util.UUID;
 
 import com.metrica.vibely.data.model.dto.FileDTO;
@@ -27,7 +26,7 @@ public class GetFileResponse {
     	this.setContentType	(fileDto.getContentType());
     	this.setAbsolutePath(fileDto.getAbsolutePath());
     	this.setSize		(fileDto.getSize());
-    	this.setUploader	(fileDto.getUploader());
+    	this.setUploader	(fileDto.getOwnerPostId());
     	
     	return this;
     }

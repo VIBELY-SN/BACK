@@ -7,11 +7,12 @@ import com.metrica.vibely.data.util.Copyable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -36,13 +37,13 @@ public class File implements Copyable<File> {
     
     // Relations
     
-    //JoinTable remaining
-    @OneToOne(optional = false)
-    @JoinColumn(name = "uploader",
-    		referencedColumnName = "user_id",
-            unique = true,
-            nullable = false)
-    private User uploader;
+
+	//JoinTable remaining
+    @ManyToOne
+    @JoinColumn(name = "ownerpost",
+    	nullable = false,
+    	foreignKey = @ForeignKey(name = "fk_file_post"))
+    private Post ownerPost;
     
  // <<-CONSTRUCTORS->>
     
@@ -52,18 +53,18 @@ public class File implements Copyable<File> {
 			String		contentType,
 			String 		absolutePath, 
 			Long 		size, 
-			User 		uploader) {
+			Post 		ownerPost) {
 		this.setFileId		(fileId);
 		this.setFileName	(fileName);
 		this.setContentType	(contentType);
 		this.setAbsolutePath(absolutePath);
 		this.setSize		(size);
-		this.setUploader	(uploader);
+		this.setOwnerPost	(ownerPost);
 }
 	
     public File() {
     	this.setFileId(null);
-		this.setUploader(null);
+		this.setOwnerPost(null);
     }
    
  // <<-METHODS->>
@@ -140,12 +141,12 @@ public class File implements Copyable<File> {
 		this.contentType = contentType;
 	}
 
-	public User getUploader() {
-		 return this.uploader;
+	public Post getOwnerPost() {
+		 return this.ownerPost;
 	}
 
-	public void setUploader(User uploader) {
-		this.uploader = uploader;
+	public void setOwnerPost(Post ownerPost) {
+		this.ownerPost = ownerPost;
 	}
 
 	

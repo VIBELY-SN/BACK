@@ -8,7 +8,7 @@ public class CreateFileResponse {
 
 	// <<-FIELDS->>
 	private String 		fileName;
-	private UUID 	uploader;
+	private UUID 		ownerPostId;
 	
 	// <<-CONSTRUCTOR->>
 	public CreateFileResponse() {
@@ -16,7 +16,7 @@ public class CreateFileResponse {
 	// <<--METHODS-->>
 	public CreateFileResponse generateResponse(FileDTO fileDto) {
     	this.setFileName	(fileDto.getFileName());
-    	this.setUploader	(fileDto.getUploader());
+    	this.setOwnerPostId	(fileDto.getOwnerPostId());
     	
     	return this;
     }
@@ -28,11 +28,11 @@ public class CreateFileResponse {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public UUID getUploader() {
-		return uploader;
+	public UUID getOwnerPostId() {
+		return ownerPostId;
 	}
-	public void setUploader(UUID uploader) {
-		this.uploader = uploader;
+	public void setOwnerPostId(UUID ownerPostId) {
+		this.ownerPostId = ownerPostId;
 	}
 	
 }

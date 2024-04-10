@@ -5,8 +5,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import com.metrica.vibely.data.entity.Post;
-import com.metrica.vibely.data.entity.User;
 import com.metrica.vibely.data.model.enumerator.PostStatus;
 import com.metrica.vibely.data.model.enumerator.PostVisibility;
 
@@ -30,7 +28,8 @@ public class PostDTO {
     private Set<UUID> savedBy;
 
 
-    // <<-CONSTRUCTORS->>
+
+	// <<-CONSTRUCTORS->>
     public PostDTO() {
     }
 
@@ -73,7 +72,6 @@ public class PostDTO {
     public LocalDateTime getPostDate() {
         return this.postDate;
     }
-
 
     public void setPostDate(final LocalDateTime postDate) {
         this.postDate = postDate;

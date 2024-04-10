@@ -1,22 +1,5 @@
 package com.metrica.vibely.controller;
 
-import com.metrica.vibely.controller.util.ResponseManager;
-import com.metrica.vibely.data.model.dto.UserDTO;
-import com.metrica.vibely.data.model.enumerator.PrivacyType;
-import com.metrica.vibely.data.model.enumerator.UserState;
-import com.metrica.vibely.model.request.CreateUserRequest;
-import com.metrica.vibely.model.request.FollowUserRequest;
-import com.metrica.vibely.model.request.UpdateUserRequest;
-import com.metrica.vibely.model.response.create.CreateUserResponse;
-import com.metrica.vibely.model.response.get.BasicInfoResponse;
-import com.metrica.vibely.model.response.get.GetPostResponse;
-import com.metrica.vibely.model.response.update.FollowUserResponse;
-import com.metrica.vibely.model.response.update.UnfollowUserResponse;
-import com.metrica.vibely.model.response.update.UpdateUserResponse;
-import com.metrica.vibely.service.UserService;
-
-import jakarta.validation.Valid;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,6 +15,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.metrica.vibely.controller.util.ResponseManager;
+import com.metrica.vibely.data.model.dto.UserDTO;
+import com.metrica.vibely.data.model.enumerator.PrivacyType;
+import com.metrica.vibely.data.model.enumerator.UserState;
+import com.metrica.vibely.model.request.CreateUserRequest;
+import com.metrica.vibely.model.request.FollowUserRequest;
+import com.metrica.vibely.model.request.UpdateUserRequest;
+import com.metrica.vibely.model.response.create.CreateUserResponse;
+import com.metrica.vibely.model.response.get.BasicInfoResponse;
+import com.metrica.vibely.model.response.update.FollowUserResponse;
+import com.metrica.vibely.model.response.update.UnfollowUserResponse;
+import com.metrica.vibely.model.response.update.UpdateUserResponse;
+import com.metrica.vibely.service.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/users")

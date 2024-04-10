@@ -27,7 +27,7 @@ public interface FileService{
      * @return Set<FileDTO>
      * @throws NoSuchElementException
      */
-	List<FileDTO> getAllByUserName(UUID id);
+	List<FileDTO> getAllByOwnerPostId(UUID id);
 	
 	/**
      * Gets all files of an user by its userId

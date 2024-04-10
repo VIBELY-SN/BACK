@@ -1,5 +1,13 @@
 package com.metrica.vibely.controller.util;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
 import com.metrica.vibely.data.model.dto.AdminDTO;
 import com.metrica.vibely.data.model.dto.ChatDTO;
 import com.metrica.vibely.data.model.dto.FileDTO;
@@ -14,7 +22,7 @@ import com.metrica.vibely.model.response.create.CreatePostResponse;
 import com.metrica.vibely.model.response.create.CreateUserResponse;
 import com.metrica.vibely.model.response.get.BasicInfoResponse;
 import com.metrica.vibely.model.response.get.GetAdminResponse;
-import com.metrica.vibely.model.response.get.GetAllFilesByUserResponse;
+import com.metrica.vibely.model.response.get.GetAllFilesByOwnerResponse;
 import com.metrica.vibely.model.response.get.GetChatResponse;
 import com.metrica.vibely.model.response.get.GetFileResponse;
 import com.metrica.vibely.model.response.get.GetFriendNetworkResponse;
@@ -29,14 +37,6 @@ import com.metrica.vibely.model.response.update.UpdateMessageResponse;
 import com.metrica.vibely.model.response.update.UpdatePostResponse;
 import com.metrica.vibely.model.response.update.UpdateSavedByPostResponse;
 import com.metrica.vibely.model.response.update.UpdateUserResponse;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseManager {
@@ -57,8 +57,8 @@ public class ResponseManager {
     	 return ResponseEntity.ok().body(fileResponse.generateResponse(fileDto));
     }
     
-    public ResponseEntity<GetAllFilesByUserResponse> generateGetResponse(List<FileDTO> userFiles){
-    	GetAllFilesByUserResponse allfilesByUserResponse = new GetAllFilesByUserResponse();
+    public ResponseEntity<GetAllFilesByOwnerResponse> generateGetResponse(List<FileDTO> userFiles){
+    	GetAllFilesByOwnerResponse allfilesByUserResponse = new GetAllFilesByOwnerResponse();
     	 return ResponseEntity.ok().body(allfilesByUserResponse.generateResponse(userFiles));
     }
     

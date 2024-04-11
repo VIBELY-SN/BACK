@@ -23,6 +23,7 @@ public class PostDTO {
 
     // Relations
     private UUID owner;
+    private String ownerNickname;
     private Set<UUID> comments;
     private Set<UUID> likedBy;
     private Set<UUID> savedBy;
@@ -53,6 +54,7 @@ public class PostDTO {
         this.likes = likes;
         this.timesSaved = timesSaved;
         this.owner = owner;
+        this.ownerNickname="";
         this.comments = comments;
         this.likedBy = likedBy;
         this.savedBy = savedBy;
@@ -135,6 +137,15 @@ public class PostDTO {
 
     public void setOwner(final UUID owner) {
         this.owner = owner;
+    }
+    
+    public String getOwnerNickname() {
+        return this.ownerNickname;
+    }
+
+
+    public void setOwnerNickname(final String ownerNickname) {
+        this.ownerNickname = ownerNickname;
     }
 
 

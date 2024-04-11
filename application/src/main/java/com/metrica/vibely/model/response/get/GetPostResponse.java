@@ -4,12 +4,21 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.metrica.vibely.data.model.dto.PostDTO;
+import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.data.model.enumerator.PostStatus;
 import com.metrica.vibely.data.model.enumerator.PostVisibility;
+import com.metrica.vibely.data.repository.UserRepository;
+import com.metrica.vibely.service.UserService;
+import com.metrica.vibely.service.impl.UserServiceImpl;
 
+@Component
 public class GetPostResponse {
 	
+    private UserService userService;
 //	<<--ATRIBUTES-->>
     private UUID           postId;
     private LocalDateTime  postDate;
@@ -22,6 +31,7 @@ public class GetPostResponse {
     private Integer        timesSaved;
     
     private UUID           owner;
+    private String 		   ownerNickname;
     
     private Set<UUID>      comments;
     private Set<UUID>      likedBy;
@@ -29,6 +39,7 @@ public class GetPostResponse {
 	
     
 //	<<-CONSTRUCTORS->>
+    @Autowired
     public GetPostResponse() {
 	}
 
@@ -43,6 +54,7 @@ public class GetPostResponse {
     	this.setLikes(postDto.getLikes());
     	this.setTimesSaved(postDto.getTimesSaved());
     	this.setOwner(postDto.getOwner());
+    	this.ownerNickname=postDto.getOwnerNickname();
     	this.setComments(postDto.getComments());
     	this.setLikedBy(postDto.getLikedBy());
     	this.setSavedBy(postDto.getSavedBy());
@@ -114,9 +126,8 @@ public class GetPostResponse {
 	public void setOwner(UUID owner) {
 		this.owner = owner;
 	}
-
-	public Set<UUID> getComments() {
-		return comments;
+	public String getOwnerNickname() {
+		return ownerNickname;
 	}
 
 	public void setComments(Set<UUID> comments) {

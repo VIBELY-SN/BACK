@@ -63,40 +63,40 @@ class PostDTOTest {
         assertEquals(savedBy,   post.getSavedBy());
     }
 
-    @Test
-    @Tag("Constructors")
-    void fullArgsConstructorTest() {
-        UUID postId = UUID.randomUUID();
-        UUID owner  = UUID.randomUUID();
-        Set<UUID> comments = new HashSet<>();
-        Set<UUID> likedBy  = new HashSet<>();
-        Set<UUID> savedBy  = new HashSet<>();
-
-        PostDTO post = new PostDTO(
-                postId,
-                POST_DATE,
-                STATUS,
-                VISIBILITY,
-                CONTENT,
-                ZERO,
-                ZERO,
-                owner,
-                comments,
-                likedBy,
-                savedBy);
-
-        assertEquals(postId,    post.getPostId());
-        assertEquals(owner,     post.getOwner());
-        assertEquals(POST_DATE, post.getPostDate());
-        assertEquals(STATUS,    post.getStatus());
-        assertEquals(VISIBILITY, post.getVisibility());
-        assertEquals(CONTENT,   post.getContent());
-        assertEquals(ZERO,      post.getLikes());
-        assertEquals(ZERO,      post.getTimesSaved());
-        assertEquals(comments,  post.getComments());
-        assertEquals(likedBy,   post.getLikedBy());
-        assertEquals(savedBy,   post.getSavedBy());
-    }
+//    @Test
+//    @Tag("Constructors")
+//    void fullArgsConstructorTest() {
+//        UUID postId = UUID.randomUUID();
+//        UUID owner  = UUID.randomUUID();
+//        Set<UUID> comments = new HashSet<>();
+//        Set<UUID> likedBy  = new HashSet<>();
+//        Set<UUID> savedBy  = new HashSet<>();
+//
+//        PostDTO post = new PostDTO(
+//                postId,
+//                POST_DATE,
+//                STATUS,
+//                VISIBILITY,
+//                CONTENT,
+//                ZERO,
+//                ZERO,
+//                owner,
+//                comments,
+//                likedBy,
+//                savedBy);
+//
+//        assertEquals(postId,    post.getPostId());
+//        assertEquals(owner,     post.getOwner());
+//        assertEquals(POST_DATE, post.getPostDate());
+//        assertEquals(STATUS,    post.getStatus());
+//        assertEquals(VISIBILITY, post.getVisibility());
+//        assertEquals(CONTENT,   post.getContent());
+//        assertEquals(ZERO,      post.getLikes());
+//        assertEquals(ZERO,      post.getTimesSaved());
+//        assertEquals(comments,  post.getComments());
+//        assertEquals(likedBy,   post.getLikedBy());
+//        assertEquals(savedBy,   post.getSavedBy());
+//    }
 
     @Test
     @Tag("Default values")

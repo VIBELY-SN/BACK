@@ -2,6 +2,7 @@ package com.metrica.vibely.controller;
 
 import com.metrica.vibely.controller.util.ResponseManager;
 import com.metrica.vibely.data.model.dto.PostDTO;
+import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.model.request.CreatePostRequest;
 import com.metrica.vibely.model.request.UpdateLikedByPostRequest;
 import com.metrica.vibely.model.request.UpdatePostRequest;
@@ -12,6 +13,7 @@ import com.metrica.vibely.model.response.update.UpdateLikedByPostResponse;
 import com.metrica.vibely.model.response.update.UpdatePostResponse;
 import com.metrica.vibely.model.response.update.UpdateSavedByPostResponse;
 import com.metrica.vibely.service.PostService;
+import com.metrica.vibely.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -38,18 +40,22 @@ public class PostController {
     // <<-FIELDS->>
 	private ResponseManager responseManager;
     private PostService postService;
+    private UserService userService;
 
     // <<-CONSTRUCTOR->>
     @Autowired
-    public PostController(final PostService postService, final ResponseManager responseManager) {
+    public PostController(final PostService postService,final UserService userService, final ResponseManager responseManager) {
     	this.responseManager = responseManager;
         this.postService = postService;
+        this.userService = userService;
     }
 
     // <<-METHODS->>
     @GetMapping("/{id}")
     public ResponseEntity<GetPostResponse> getById(@PathVariable UUID id) {
         PostDTO postDTO = this.postService.getById(id);
+        UserDTO userDTO= userService.getById(postDTO.getOwner());
+        postDTO.setOwnerNickname(userDTO.getNickname());
         return this.responseManager.generateGetResponse(postDTO);
     }
     
@@ -57,6 +63,10 @@ public class PostController {
     public List<ResponseEntity<GetPostResponse>> getAll(){
     	return this.postService.getAll()
     						.stream()
+    						.peek(post -> {
+    			                UserDTO userDTO = userService.getById(post.getOwner());
+    			                post.setOwnerNickname(userDTO.getNickname());
+    			            })
     						.map(m-> this.responseManager.generateGetResponse(m))
     						.collect(Collectors.toList());
     	

@@ -2,12 +2,14 @@ package com.metrica.vibely.controller;
 
 import com.metrica.vibely.controller.util.ResponseManager;
 import com.metrica.vibely.data.model.dto.MessageDTO;
+import com.metrica.vibely.data.model.dto.UserDTO;
 import com.metrica.vibely.data.model.enumerator.MessageState;
 import com.metrica.vibely.model.request.CreateMessageRequest;
 import com.metrica.vibely.model.response.create.CreateMessageResponse;
 import com.metrica.vibely.model.response.get.GetMessageResponse;
 import com.metrica.vibely.model.response.update.UpdateMessageResponse;
 import com.metrica.vibely.service.MessageService;
+import com.metrica.vibely.service.UserService;
 
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -31,12 +33,14 @@ public class MessageController {
     // <<-FIELDS->>
 	private ResponseManager responseManager;
     private MessageService messageService;
+    private UserService userService;
 
     // <<-CONSTRUCTOR->>
     @Autowired
-    public MessageController(MessageService messageService, ResponseManager responseManager) {
+    public MessageController(MessageService messageService,UserService userService, ResponseManager responseManager) {
     	this.responseManager = responseManager;
         this.messageService = messageService;
+        this.userService = userService;
     }
 
     // <<-METHODS->>
@@ -44,6 +48,8 @@ public class MessageController {
     public ResponseEntity<GetMessageResponse> getById(@PathVariable UUID id) {
     	MessageDTO messageDto = this.messageService.getById(id);
     	if(messageDto.getState()== MessageState.DISABLED) throw new NoSuchElementException();
+    	UserDTO userDTO= userService.getById(messageDto.getSender());
+        messageDto.setSenderNickname(userDTO.getNickname());
     	return this.responseManager.generateGetResponse(messageDto);
     }
     

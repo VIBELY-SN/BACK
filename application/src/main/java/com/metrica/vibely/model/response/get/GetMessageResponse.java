@@ -18,6 +18,7 @@ public class GetMessageResponse {
 
 	private UUID chat;
 	private UUID sender;
+	private String senderNickname;
 	 
 //	<<--CONSTRUCTOR-->>
 	public GetMessageResponse() {
@@ -33,6 +34,7 @@ public class GetMessageResponse {
 		this.setContent(messageDto.getContent());
 		this.setChat(messageDto.getChat());
 		this.setSender(messageDto.getSender());
+		this.senderNickname = messageDto.getSenderNickname();
 		
 		return this;
 	}
@@ -92,5 +94,12 @@ public class GetMessageResponse {
 
 	public void setSender(UUID sender) {
 		this.sender = sender;
+	}
+	public String getSenderNickname() {
+		return senderNickname;
+	}
+
+	public void setSenderNickname(String senderNickname) {
+		this.senderNickname = senderNickname;
 	}
 }

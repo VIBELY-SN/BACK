@@ -22,6 +22,7 @@ import com.metrica.vibely.data.model.enumerator.MessageStatus;
         // Relations
         private UUID chat;
         private UUID sender;
+        private String senderNickname;
 
         // <<-CONSTRUCTORS->>
         public MessageDTO() {
@@ -42,6 +43,7 @@ import com.metrica.vibely.data.model.enumerator.MessageStatus;
             this.setContent(content);
             this.setChat(chat);
             this.setSender(sender);
+            this.senderNickname="";
         }
         //<<-METHODS->>
 
@@ -117,6 +119,13 @@ import com.metrica.vibely.data.model.enumerator.MessageStatus;
 
         public void setSender(final UUID sender) {
             this.sender = sender;
+        }
+        public String getSenderNickname() {
+            return this.senderNickname;
+        }
+
+        public void setSenderNickname(final String senderNickname) {
+            this.senderNickname = senderNickname;
         }
     }
 
